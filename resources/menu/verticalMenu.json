@@ -1,0 +1,113 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Home",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "slug": "pages-home",
+      "roles": "admin"
+    },
+    {
+      "name": "User Profile",
+      "slug": "pages-profile",
+      "icon": "menu-icon tf-icons mdi mdi-account-outline",
+      "submenu": [
+        {
+          "url": "pages/profile-user",
+          "name": "Profile",
+          "slug": "pages-profile-user"
+        },
+        {
+          "url": "pages/profile-teams",
+          "name": "Teams",
+          "slug": "pages-profile-teams"
+        }
+      ]
+    },
+    {
+      "name": "Roles & Permissions",
+      "icon": "menu-icon tf-icons mdi mdi-shield-outline",
+      "slug": "app-access",
+      "submenu": [
+        {
+          "url": "app/access-roles",
+          "name": "Roles",
+          "slug": "app-access-roles"
+        },
+        {
+          "url": "app/access-permission",
+          "name": "Permission",
+          "slug": "app-access-permission"
+        }
+      ]
+    },
+    {
+      "url": "/",
+      "name": "Create Layanan",
+      "icon": "menu-icon tf-icons mdi mdi-rename-outline",
+      "slug": "pages-home",
+      "submenu": [
+        {
+          "url": "app/create-admin",
+          "name": "Create Admin",
+          "slug": "app-create-admin"
+        },
+        {
+          "url": "app/create-layanan",
+          "name": "Create Layanan",
+          "slug": "app-create-layanan"
+        }
+      ]
+    },
+    {
+      "name": "Submit Request",
+      "icon": "menu-icon tf-icons mdi mdi-receipt-text-edit-outline",
+      "slug": "app-submit-request",
+      "submenu": [
+        {
+          "url": "app/access-roles",
+          "name": "Roles",
+          "slug": "app-access-roles"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "layouts/content-navbar",
+          "name": "Isi Permintaan",
+          "slug": "layouts-content-navbar"
+        },
+        {
+          "name": "Cek Permintaan",
+          "slug": "layouts-collapsed-menu",
+          "submenu": [
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Selesai",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Di Proses",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Belum Di Proses",
+              "slug": "layouts-collapsed-menu"
+            }
+          ]
+        },
+        {
+          "url": "layouts/content-navbar",
+          "name": "Cek Nomor Tiket",
+          "slug": "layouts-content-navbar"
+        }
+      ]
+    }
+  ]
+}

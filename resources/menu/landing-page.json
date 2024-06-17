@@ -1,0 +1,171 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Home",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "slug": "pages-home",
+      "roles": "admin"
+    },
+    {
+      "name": "User Profile",
+      "slug": "pages-profile",
+      "icon": "menu-icon tf-icons mdi mdi-account-outline",
+      "submenu": [
+        {
+          "url": "pages/profile-user",
+          "name": "Profile",
+          "slug": "pages-profile-user"
+        },
+        {
+          "url": "pages/profile-teams",
+          "name": "Teams",
+          "slug": "pages-profile-teams"
+        }
+      ]
+    },
+    {
+      "name": "Super Admin",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "pages/profile-teams",
+          "name": "Teams",
+          "slug": "pages-profile-teams"
+        }
+      ]
+    },
+    {
+      "name": "Admin Utama",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "/pages/list-permintaan",
+          "name": "List Permintaan",
+          "slug": "pages-list-permintaan"
+        },
+        {
+          "name": "Status Permintaan",
+          "slug": "layouts-collapsed-menu",
+          "submenu": [
+            {
+              "url": "/pages/list-permintaan-selesai",
+              "name": "Selesai",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "/pages/list-permintaan-proses",
+              "name": "Sedang Di Proses",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "/pages/list-permintaan-belum-proses",
+              "name": "Belum Di Proses",
+              "slug": "layouts-collapsed-menu"
+            }
+          ]
+        },
+        {
+          "url": "/pages/page-pergantian-layanan",
+          "name": "Pergantian Layanan",
+          "slug": "layouts-content-navbar"
+        },
+        {
+          "url": "layouts/content-navbar",
+          "name": "laporan Permintaan",
+          "slug": "layouts-content-navbar"
+        }
+      ]
+    },
+    {
+      "name": "Admin Layanan",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "/pages/page-permintaan",
+          "name": "Permintaan",
+          "slug": "layouts-content-navbar"
+        }
+      ]
+    },
+    {
+      "name": "Admin Laporan",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "name": "Laporan",
+          "slug": "layouts-collapsed-menu",
+          "submenu": [
+            {
+              "url": "layouts/collapsed-menu",
+              "name": "All",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": "Selesai",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": "Proses",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": "Belum Proses",
+              "slug": "layouts-collapsed-menu"
+            }
+          ]
+        },
+        {
+          "url": "layouts/content-navbar",
+          "name": "Laporan Jumlah Permintaan",
+          "slug": "layouts-content-navbar"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "icon": "menu-icon tf-icons mdi mdi-window-maximize",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "layouts/content-navbar",
+          "name": "Isi Permintaan",
+          "slug": "layouts-content-navbar"
+        },
+        {
+          "name": "Cek Permintaan",
+          "slug": "layouts-collapsed-menu",
+          "submenu": [
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Selesai",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Di Proses",
+              "slug": "layouts-collapsed-menu"
+            },
+            {
+              "url": "layouts/collapsed-menu",
+              "name": " Belum Di Proses",
+              "slug": "layouts-collapsed-menu"
+            }
+          ]
+        },
+        {
+          "url": "layouts/content-navbar",
+          "name": "Cek Nomor Tiket",
+          "slug": "layouts-content-navbar"
+        }
+      ]
+    }
+  ]
+}

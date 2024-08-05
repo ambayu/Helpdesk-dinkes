@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 
 class MenuServiceProvider extends ServiceProvider
@@ -19,7 +20,52 @@ class MenuServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
-    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu.json'));
+    //manipulation
+
+
+    $filePath = base_path('resources/menu/verticalMenu.json');
+    $verticalMenuJson2 = file_get_contents($filePath);
+    $data = json_decode($verticalMenuJson2, true); // Decodes JSON into associative array
+
+    $menuName = "Kirim Permintaan";
+
+    $menu = Menu::all(); // Assuming $menu is the collection of Menu objects
+
+    $newSubmenu = [];
+
+    // Transform Menu items into desired format
+    foreach ($menu as $item) {
+      $newSubmenu[] = [
+        "url" => 'app/layanan/' . $item->slug,        // Assuming $item->slug is the slug attribute of Menu
+        "name" => $item->nama_layanan,                // Assuming $item->nama_layanan is the name attribute of Menu
+        "slug" => 'kirim-permintaan.' . $item->slug,
+        "permissions" => 'submit-request'                    // Assuming $item->slug is the slug attribute of Menu
+      ];
+    }
+
+    // Find menu with specific name and add new submenu
+    foreach ($data['menu'] as &$menu) {  // Using reference '&' to modify array directly
+      if (isset($menu['name']) && $menu['name'] == $menuName) {
+        if (!isset($menu['submenu'])) {
+          $menu['submenu'] = [];
+        }
+        // Append $newSubmenu to existing submenu
+        $menu['submenu'] = array_merge($menu['submenu'], $newSubmenu);
+        break; // Exit loop after updating submenu
+      }
+    }
+
+    // Write updated data to a new file
+    $newFilePath = base_path('resources/menu/verticalMenu2.json');
+    file_put_contents($newFilePath, json_encode($data, JSON_PRETTY_PRINT));
+
+
+    //end
+
+
+
+    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu2.json'));
+
     $verticalMenuData = json_decode($verticalMenuJson);
     $horizontalMenuJson = file_get_contents(base_path('resources/menu/horizontalMenu.json'));
     $horizontalMenuData = json_decode($horizontalMenuJson);

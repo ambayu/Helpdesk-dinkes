@@ -8,7 +8,7 @@
                     <h3 class="mb-2 pb-1">Add New Permission</h3>
                     <p>Permissions you may use and assign to your users.</p>
                 </div>
-                <form id="" class="row" action="/app/access-permission" method="post">
+              <form id="" class="row" action="/app/access-permission" method="post">
                     @csrf
                     <div class="col-12 mb-3">
                         <div class="form-floating form-floating-outline">

@@ -31,9 +31,10 @@
             </button>
             <ul class="navbar-nav me-auto p-3 p-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link fw-medium" aria-current="page" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link fw-medium {{ $title == 'home' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('/') }}">Home</a>
                 </li>
-                <li class="nav-item mega-dropdown {{ $activeClass }}">
+                <li class="nav-item mega-dropdown ">
                     <a href="javascript:void(0);"
                         class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium"
                         aria-expanded="false" data-bs-toggle="mega-dropdown" data-trigger="hover">
@@ -51,38 +52,16 @@
                                 </div>
                                 <!-- add page slug in $activeRoutes array, defined Beginning of the page to add active class to the nav item -->
                                 <ul class="nav flex-column">
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-pricing' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('layanan/request_server') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Pricing">Request Server</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-payment' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/payment') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Payment">Request Website</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-checkout' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/checkout') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Checkout">Request Penyaluran PKL</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-help-center' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/help-center') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Help Center">Lainnya</span>
-                                        </a>
-                                    </li>
+                                    @foreach ($menus as $menu)
+                                        <li class="nav-item ">
+                                            <a class="nav-link mega-dropdown-link d-flex align-items-center"
+                                                href="{{ url('layanan/' . $menu->slug) }}">
+                                                <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
+                                                <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
 
@@ -96,38 +75,15 @@
                                 </div>
                                 <!-- add page slug in $activeRoutes array, defined Beginning of the page to add active class to the nav item -->
                                 <ul class="nav flex-column">
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-pricing' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/pricing') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Pricing">Request Server</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-payment' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/payment') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Payment">Request Website</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-checkout' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/checkout') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Checkout">Request Penyaluran PKL</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-help-center' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/help-center') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Help Center">Lainnya</span>
-                                        </a>
-                                    </li>
+                                    @foreach ($menus as $menu)
+                                        <li class="nav-item {{ $currentRouteName === $menu->slug ? 'active' : '' }}">
+                                            <a class="nav-link mega-dropdown-link d-flex align-items-center"
+                                                href="{{ url('layanan/' . $menu->slug) }}">
+                                                <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
+                                                <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="col-12 col-lg">
@@ -140,38 +96,15 @@
                                 </div>
                                 <!-- add page slug in $activeRoutes array, defined Beginning of the page to add active class to the nav item -->
                                 <ul class="nav flex-column">
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-pricing' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/pricing') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Pricing">Request Server</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-payment' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/payment') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Payment">Request Website</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-checkout' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/checkout') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Checkout">Request Penyaluran PKL</span>
-                                        </a>
-                                    </li>
-                                    <li
-                                        class="nav-item {{ $currentRouteName === 'front-pages-help-center' ? 'active' : '' }}">
-                                        <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                            href="{{ url('front-pages/help-center') }}">
-                                            <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                            <span data-i18n="Help Center">Lainnya</span>
-                                        </a>
-                                    </li>
+                                    @foreach ($menus as $menu)
+                                        <li class="nav-item {{ $currentRouteName === $menu->slug ? 'active' : '' }}">
+                                            <a class="nav-link mega-dropdown-link d-flex align-items-center"
+                                                href="{{ url('layanan/' . $menu->slug) }}">
+                                                <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
+                                                <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 
@@ -182,8 +115,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium" aria-current="page"
-                        href="{{ url('front-pages/help-center') }}">Cek Status Permintaan</a>
+                    <a class="nav-link fw-medium {{ $title == 'tiket' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('front-pages/help-center') }}">Cek
+                        Status Permintaan</a>
                 </li>
             </ul>
         </div>
@@ -194,8 +128,7 @@
             @if ($configData['hasCustomizer'] == true)
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                        data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <i class='mdi mdi-24px'></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
@@ -221,7 +154,7 @@
 
             <!-- navbar button: Start -->
             <li>
-                <a href="/auth/login-basic" class="btn btn-primary px-2 px-sm-4 px-lg-2 px-xl-4"><span
+                <a href="/login" class="btn btn-primary px-2 px-sm-4 px-lg-2 px-xl-4"><span
                         class="tf-icons mdi mdi-account me-md-1"></span><span
                         class="d-none d-md-block">Login/Register</span></a>
             </li>

@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Bidang;
+use App\Models\RoleBidang;
 use Spatie\Permission\Models\Permission;
 
 class CreateAdmin extends Controller
@@ -14,31 +16,58 @@ class CreateAdmin extends Controller
   {
     $roles = Role::all();
     $permissions = Permission::all();
+    $bidangs = Bidang::all();
 
-    return view('content.apps.create-admin', compact('roles', 'permissions'));
+    return view('content.apps.create-admin', compact('roles', 'permissions', 'bidangs'));
   }
 
   public function store(Request $request)
   {
-    $validatedData = $request->validate([
+    $validationRules = [
       'name' => 'required|string|max:255',
       'email' => 'required|email|unique:users|max:255',
+      'no_hp' => 'required|max:255',
       'username' => 'required|unique:users,username|max:255|min:6',
       'password' => 'required|string|min:6',
+      'role' => 'required|integer',
+      'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi untuk foto
+    ];
+    // Simpan foto jika ada
+    if ($request->hasFile('photo')) {
+      $photoPath = $request->file('photo')->store('photos', 'public');
+    } else {
+      $photoPath = null;
+    }
 
-    ]);
+    // Tambahkan aturan validasi untuk bidang jika role adalah 4
+    if ($request->role == 4) {
+      $validationRules['bidang'] = 'required|integer|max:255';
+    }
+    $validatedData = $request->validate($validationRules);
 
 
     $user = new User();
     $user->name = $request->name;
     $user->email = $request->email;
+    $user->no_hp = $request->no_hp;
     $user->username = $request->username;
     $user->status = '2';
+    $user->profile_photo_path = $photoPath;
     $user->password = bcrypt($request->password);
-    $user->save();
-    $user->assignRole('User');
 
-    return redirect()->route('create-admin.index')->with('success', 'Admin created successfully.');
+    if ($user->save()) {
+      $nama_role = Role::findById($request->role);
+      $user->assignRole($nama_role);
+
+      if ($request->role == 4) {
+        $role_bidang = new RoleBidang();
+        $role_bidang->id_user = $user->id;
+        $role_bidang->id_bidang = $request->bidang;
+        $role_bidang->save();
+      }
+    }
+
+    return redirect()->route('app-admin-tambah.index')->with('success', 'Admin created successfully.');
   }
 
   public function assigned(Request $request, Permission $permission)
@@ -103,8 +132,8 @@ class CreateAdmin extends Controller
 
   public function adminList()
   {
-    $user = User::all();
-
+    $user = User::with('roleBidang.bidang')->get();
+    // return User::with('roleBidang.bidang')->get();
     $userArray = $user->map(function ($user) {
       return [
         'id' => $user->id,
@@ -113,7 +142,8 @@ class CreateAdmin extends Controller
         "username" => $user->username,
         "email" => $user->email,
         "status" => $user->status,
-        "avatar" => "",
+        "avatar" => $user->profile_photo_path,
+        "bidang" => $user->roleBidang->bidang['nama_bidang'] ?? '',
 
         // 'created_date' => $user->created_at->format('Y-m-d')
 
@@ -141,9 +171,19 @@ class CreateAdmin extends Controller
 
   public function changeRole(Request $request, User $user)
   {
-    $request->validate([
-      'role' => 'required',
-    ]);
+
+    $validationRules = [
+      'role' => 'required|string|max:255',
+
+    ];
+
+    // Tambahkan aturan validasi untuk bidang jika role adalah 4
+    if ($request->role == 'Admin Layanan') {
+      $validationRules['bidang'] = 'required|max:255';
+    }
+    $validatedData = $request->validate($validationRules);
+
+
 
     // Pastikan role yang diminta valid
     $role = Role::where('name', $request->role)->first();
@@ -156,6 +196,19 @@ class CreateAdmin extends Controller
 
     // Assign role baru ke pengguna
     if ($user->assignRole($role)) {
+
+      //ubah bidang
+      if ($request->role == 'Admin Layanan') {
+        $role_bidang = RoleBidang::where('id_user', $user->id)->first();
+        if (!$role_bidang) {
+          $role_bidang = new RoleBidang();
+          $role_bidang->id_user = $user->id;
+        }
+        $role_bidang->id_bidang = $request->bidang;
+        $role_bidang->save();
+      } else {
+        RoleBidang::where('id_user', $user->id)->delete();
+      }
       return response()->json(['success' => true]);
     } else {
       return response()->json(['success' => false, 'message' => 'Failed to assign role'], 500);

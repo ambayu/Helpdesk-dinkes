@@ -31,13 +31,14 @@ class AccessPermission extends Controller
 
   public function assigned(Request $request, Permission $permission)
   {
+    // return $request;
     $validatedData = $request->validate([
-      'permission_name' => 'required|unique:permissions,name|max:255',
+      'permission_name' => 'required|max:255',
       'assigments' => 'required|array',
     ]);
 
     $permission->update(['name' => $request->permission_name]);
-    
+
     $permissions = $permission->name;
 
 
@@ -88,7 +89,8 @@ class AccessPermission extends Controller
 
   public function permissionList()
   {
-    $permissions = Permission::with('roles')->get();
+    $permissions = Permission::with('roles')->orderBy('name', 'ASC')->get();
+
     $permissionsArray = $permissions->map(function ($permission) {
       return [
         'id' => $permission->id,

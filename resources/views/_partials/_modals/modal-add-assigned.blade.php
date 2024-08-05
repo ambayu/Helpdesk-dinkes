@@ -1,5 +1,6 @@
 <!-- Add Permission Modal -->
-<div class="modal fade" id="addAssignedModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="addAssignedModal" tabindex="-1" aria-
+="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3 p-md-5">
             <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -49,24 +50,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function deletePermission(roleId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            customClass: {
-                confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
-                cancelButton: 'btn btn-outline-secondary waves-effect'
-            },
-            buttonsStyling: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-role-form-' + roleId).submit();
-            }
-        });
-    }
-</script>

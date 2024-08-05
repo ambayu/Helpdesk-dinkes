@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
-    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/b-3.0.2/date-1.5.2/r-3.0.2/datatables.min.css"
-        rel="stylesheet">a
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 @endsection
 
@@ -74,20 +73,7 @@
     <!--/ Permission Table -->
 
 
-    <!-- Toast with Animation -->
-    <div class="bs-toast toast toast-ex animate__animated my-2" role="alert" aria-live="assertive" aria-atomic="true"
-        data-bs-delay="2000">
-        <div class="toast-header">
-            <i class="mdi mdi-home me-2"></i>
-            <div class="me-auto fw-medium">Bootstrap</div>
-            <small class="text-muted">11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-    <!--/ Toast with Animation -->
+
 
     <!-- Modal -->
     @include('_partials/_modals/modal-add-permission')

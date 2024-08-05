@@ -46,6 +46,11 @@
 
                     <div class="card-body mt-2">
                         <h4 class="mb-2">Welcome to {{ config('variables.templateName') }}! 👋</h4>
+                        @error('status')
+                            <div class="mb-2 font-medium text-sm text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ route('auth-login-masuk') }}"

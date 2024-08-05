@@ -22,7 +22,7 @@
 @endsection
 
 @section('content')
-    <h4 class="py-3 mb-2">Create Layanan </h4>
+    <h4 class="py-3 mb-2">Tambah Layanan </h4>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -48,7 +48,7 @@
                         <div class="col-md-7 mb-md-0 mb-4 ps-0">
                             <div class="d-flex svg-illustration align-items-center gap-2 mb-4">
 
-                                <span class="h4 mb-0 app-brand-text fw-bold">Create Form</span>
+                                <span class="h4 mb-0 app-brand-text fw-bold"> Layanan</span>
                             </div>
                             {{-- <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
                             <p class="mb-1">San Diego County, CA 91905, USA</p>
@@ -62,8 +62,10 @@
                 <hr class="my-0" />
 
                 <div class="card-body">
-                    <form class="source-item pt-1" action="{{ route('create-layanan.store') }}" method="POST">
+                    <form class="source-item pt-1" action="{{ route('create-layanan.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+
                         <div class="mb-3" data-repeater-list="inputan">
                             <div class="form-floating form-floating-outline">
                                 <input type="text" id="name_layanan" name="nama_layanan" class="form-control"
@@ -74,24 +76,16 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-floating form-floating-outline mt-2">
-                                <input type="text" id="slug" name="slug"
-                                    class="form-control @error('slug') is-invalid @enderror"
-                                    placeholder="app.pembuatan.aplikasi">
-                                <label for="slug">Slug</label>
-                                @error('name_label')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-
+                            <h4 class="mt-4">
+                                Tambahkan Input Yang diinginkan
+                            </h4>
                             <div class="repeater-wrapper pt-0 pt-md-1" data-repeater-item>
                                 <hr class="my-0 mt-2 mb-2 ">
 
                                 <div class="form-floating form-floating-outline">
                                     <input type="text" id="collapsible-label_name" name="name_label" class="form-control"
-                                        placeholder="Input Deskripsi">
-                                    <label for="collapsible-label_name">Nama Label</label>
+                                        placeholder="Deskripsi">
+                                    <label for="collapsible-label_name">Nama Inputan</label>
                                 </div>
 
 

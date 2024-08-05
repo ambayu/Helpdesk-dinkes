@@ -74,21 +74,26 @@
 
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
+
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                <div class="avatar avatar-online">
-                    <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}"
-                        alt class="w-px-40 h-auto rounded-circle">
+                <div class="d-flex align-items-center">
+                    <div class="avatar avatar-online me-3">
+                        <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/2.png') }}"
+                            alt="Profile Photo" class="w-40 h-40 rounded-circle">
+                    </div>
+                    <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                 </div>
             </a>
+
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                     <a class="dropdown-item"
-                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                        href="{{ Route::has('profile.show') ? route('pages-profile-user') : 'javascript:void(0);' }}">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}"
-                                        alt class="w-px-40 h-auto rounded-circle">
+                                    <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/2.png') }}"
+                                        alt class="w-px-40 sd h-auto rounded-circle">
                                 </div>
                             </div>
                             <div class="flex-grow-1">
@@ -99,7 +104,11 @@
                                         John Doe
                                     @endif
                                 </span>
-                                <small class="text-muted">Admin</small>
+                                <small class="text-muted">
+                                    {{ Auth::user()->roles->first()->name }}
+
+                                    {{ Auth::user()->roleBidang ? '(' . Auth::user()->roleBidang->bidang->nama_bidang . ')' : '' }}</small>
+
                             </div>
                         </div>
                     </a>
@@ -109,9 +118,9 @@
                 </li>
                 <li>
                     <a class="dropdown-item"
-                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                        href="{{ Route::has('profile.show') ? route('pages-profile-user') : 'javascript:void(0);' }}">
                         <i class="mdi mdi-account-outline me-2"></i>
-                        <span class="align-middle">My Profile</span>
+                        <span class="align-middle">My Profiles</span>
                     </a>
                 </li>
                 @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -122,12 +131,7 @@
                         </a>
                     </li>
                 @endif
-                <li>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="mdi mdi-credit-card-outline me-2"></i>
-                        <span class="align-middle">Billing</span>
-                    </a>
-                </li>
+
                 @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <li>
                         <div class="dropdown-divider"></div>
@@ -188,8 +192,7 @@
                     </form>
                 @else
                     <li>
-                        <a class="dropdown-item"
-                            href="{{ Route::has('login') ? route('login') : url('auth/login-basic') }}">
+                        <a class="dropdown-item" href="{{ Route::has('login') ? route('login') : url('/login') }}">
                             <i class='mdi mdi-login me-2'></i>
                             <span class="align-middle">Logout</span>
                         </a>

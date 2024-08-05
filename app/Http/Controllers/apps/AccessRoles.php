@@ -5,6 +5,7 @@ namespace App\Http\Controllers\apps;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Bidang;
 use Spatie\Permission\Models\Permission;
 
 class AccessRoles extends Controller
@@ -12,10 +13,11 @@ class AccessRoles extends Controller
 
   public function index()
   {
-
-    $roles = Role::all();
+    $bidangs = Bidang::all();
+    $roles = Role::withCount('users')->with('users')->get();
+    // return $roles;
     $permissions = Permission::all();
-    return view('content.apps.app-access-roles', compact('roles', 'permissions'));
+    return view('content.apps.app-access-roles', compact('roles', 'permissions', 'bidangs'));
   }
 
   public function store(Request $request)

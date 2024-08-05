@@ -37,7 +37,8 @@
                 <div class="card-body">
                     <div class="user-avatar-section">
                         <div class=" d-flex align-items-center flex-column">
-                            <img class="img-fluid rounded mb-3 mt-4" src="{{ asset('assets/img/avatars/10.png') }}"
+                            <img class="img-fluid rounded mb-3 mt-4"
+                                src="{{ $user->profile_photo_path ? Storage::url($user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                 height="120" width="120" alt="User avatar" />
                             <div class="user-info text-center">
                                 <h4>{{ $user->name }}</h4>
@@ -79,6 +80,10 @@
                             <li class="mb-3">
                                 <span class="fw-medium text-heading me-2">Email:</span>
                                 <span>{{ $user->email }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-medium text-heading me-2">Nomor Hp:</span>
+                                <span>{{ $user->no_hp }}</span>
                             </li>
                             <li class="mb-3">
                                 <span class="fw-medium text-heading me-2">Status:</span>

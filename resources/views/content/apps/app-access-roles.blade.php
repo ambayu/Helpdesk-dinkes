@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
-    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/b-3.0.2/date-1.5.2/r-3.0.2/datatables.min.css"
-        rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 @endsection
 
@@ -35,7 +34,7 @@
 @endsection
 
 @section('content')
-    <h4 class="mb-1">Roles List</h4>
+    <h4 class="mb-1">Daftar Peran</h4>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -50,8 +49,9 @@
             </ul>
         </div>
     @endif
-    <p class="mb-4">A role provided access to predefined menus and features so that depending on assigned role an
-        administrator can have access to what user needs.</p>
+    <p class="mb-4">Peran memberikan akses ke menu dan fitur yang telah ditentukan sebelumnya sehingga bergantung pada
+        peran yang ditetapkan
+        administrator dapat memiliki akses terhadap apa yang dibutuhkan pengguna.</p>
     <!-- Role cards -->
 
     <div class="row g-4">
@@ -60,37 +60,30 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-2">
-                            <p>total 2</p>
+                            <p>total {{ $role->users_count }} orang</p>
                             <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                    title="Kim Merchent" class="avatar pull-up">
-                                    <img class="rounded-circle" src="{{ asset('assets/img/avatars/10.png') }}"
-                                        alt="Avatar">
-                                </li>
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                    title="Sam D'souza" class="avatar pull-up">
-                                    <img class="rounded-circle" src="{{ asset('assets/img/avatars/13.png') }}"
-                                        alt="Avatar">
-                                </li>
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                    title="Nurvi Karlos" class="avatar pull-up">
-                                    <img class="rounded-circle" src="{{ asset('assets/img/avatars/20.png') }}"
-                                        alt="Avatar">
-                                </li>
-                                <li class="avatar">
-                                    <span class="avatar-initial rounded-circle pull-up bg-lighter text-body"
-                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="3 more">+3</span>
-                                </li>
+
+                                @foreach ($role->users as $user)
+                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                        title="{{ $user->name }}" class="avatar pull-up">
+                                        <img class="rounded-circle"
+                                            src="{{ $user->profile_photo_path ? Storage::url($user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
+                                            alt="Avatar">
+                                    </li>
+                                @endforeach
+
+
+
                             </ul>
                         </div>
                         <div class="d-flex justify-content-between align-items-end">
                             <div class="role-heading">
                                 <h4 class="mb-1 text-body">{{ $role->name }}</h4>
                                 <a href="javascript:void(0);" data-bs-toggle="modal"
-                                    data-bs-target="#editdRoleModal{{ $role->id }}" class="role-edit-modal"><span>Edit
-                                        Role</span></a> |
+                                    data-bs-target="#editdRoleModal{{ $role->id }}" class="role-edit-modal"><span>Ubah
+                                        Peran</span></a> |
 
-                                <a href="javascript:void(0);" onclick="deleteRole('{{ $role->id }}')">Delete</a>
+                                <a href="javascript:void(0);" onclick="deleteRole('{{ $role->id }}')">Hapus</a>
                                 <form id="delete-role-form-{{ $role->id }}"
                                     action="{{ route('app-access-roles.destroy', $role) }}" method="POST"
                                     style="display: none;">
@@ -119,16 +112,16 @@
                     <div class="col-7">
                         <div class="card-body text-sm-end text-center ps-sm-0">
                             <button data-bs-target="#addRoleModal" data-bs-toggle="modal"
-                                class="btn btn-primary mb-3 text-nowrap add-new-role">Add Role</button>
-                            <p class="mb-0">Add role, if it does not exist</p>
+                                class="btn btn-primary mb-3 text-nowrap add-new-role">Tambah Peran</button>
+                            <p class="mb-0">Tambah Peran, jika peran belum ada</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h4 class="fw-medium mb-1 mt-5">Total users with their roles</h4>
-        <p class="mb-0 mt-1">Find all of your company’s administrator accounts and their associate roles.</p>
+        <h4 class="fw-medium mb-1 mt-5">Total pengguna di setiap Role</h4>
+        <p class="mb-0 mt-1">Temukan semua izin dan peran pengguna yang diakses di persusahaanmu.</p>
 
         <div class="col-12">
             <!-- Role Table -->
@@ -139,9 +132,10 @@
                             <tr>
 
                                 <th></th>
-                                <th>User</th>
-                                <th>Username</th>
-                                <th>Role</th>
+                                <th>Nama Lenkap</th>
+                                <th>Nama Pengguna</th>
+                                <th>Peran</th>
+                                <th>Bidang</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -165,12 +159,11 @@
         <div class="modal fade" id="editdRoleModal{{ $role->id }}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-add-new-role">
                 <div class="modal-content p-3 p-md-5">
-                    <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body p-md-0">
                         <div class="text-center mb-4">
-                            <h3 class="role-title mb-2 pb-0">Edit Role</h3>
-                            <p>Set role permissions</p>
+                            <h3 class="role-title mb-2 pb-0">Ubah Peran</h3>
+                            <p>Atur peran permission</p>
                         </div>
                         <!-- Add role form -->
                         <form id="" action="{{ route('app-access-roles.update', $role->id) }}" method="POST"
@@ -191,9 +184,9 @@
                                 <!-- Permission table -->
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                                <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">Cancel</button>
+                                    aria-label="Close">Batal</button>
                             </div>
                         </form>
                         <!--/ Add role form -->
@@ -221,11 +214,28 @@
                     <div class="col-12 mb-4">
                         <div class="form-floating form-floating-outline">
                             <select id="roleSelect" name="role_id" class="form-select" aria-label="Choose Plan">
-                                <option selected>Choose Role</option>
+                                <option value="" selected>Pilih Peran</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->name }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
+                            <label for="roleSelect">Pilih Peran</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <div id="bidangSelectContainer" style="display: none;"
+                            class="form-floating form-floating-outline mb-4">
+                            <select id="bidangSelect" name="bidang" class="select2 form-select"
+                                data-allow-clear="true">
+                                <option value="" selected>Pilih Bidang</option>
+                                <!-- Tambahkan opsi bidang di sini -->
+                                @foreach ($bidangs as $bidang)
+                                    <option value="{{ $bidang->id }}">{{ $bidang->nama_bidang }}</option>
+                                @endforeach
+                            </select>
+                            <label for="bidangSelect">Pilih Bidang</label>
                         </div>
                     </div>
 
@@ -244,6 +254,7 @@
     {{-- end change role --}}
     <script>
         function deleteRole(roleId) {
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

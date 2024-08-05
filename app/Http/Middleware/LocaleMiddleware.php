@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class LocaleMiddleware
@@ -13,7 +14,7 @@ class LocaleMiddleware
    *
    * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
    */
-  public function handle(Request $request, Closure $next): Response
+  public function handle(Request $request, Closure $next, $guard = null): Response
   {
     // Locale is enabled and allowed to be change
     if (session()->has('locale') && in_array(session()->get('locale'), ['en', 'fr', 'de', 'pt'])) {
@@ -21,6 +22,9 @@ class LocaleMiddleware
     } else {
       app()->setLocale('en');
     }
+
+
+
 
     return $next($request);
   }

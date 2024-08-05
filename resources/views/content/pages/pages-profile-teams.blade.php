@@ -75,7 +75,7 @@
 
     <!-- Teams Cards -->
     <div class="row g-4">
-        @foreach ($user->all_role as $all_role)
+        @foreach ($roles as $role)
             <div class="col-xl-4 col-lg-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -86,7 +86,7 @@
                                         class="rounded-circle">
                                 </div>
                                 <div class="me-2 text-heading h5 mb-0">
-                                    {{ $all_role->name }}
+                                    {{ $role->name }}
                                 </div>
                             </a>
 
@@ -97,32 +97,36 @@
                         <div class="d-flex align-items-center">
                             <div class="d-flex align-items-center">
                                 <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-                                    @foreach ($all_role->users as $users)
+                                    @foreach ($role->users as $user)
                                         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            title="{{ $users->name }}" class="avatar avatar-sm pull-up">
+                                            title="{{ $user->name }}" class="avatar avatar-sm pull-up">
                                             <img class="rounded-circle"
-                                                src="{{ asset('assets/img/avatars/' . $users->id . '.png') }}"
+                                                src="{{ $user->profile_photo_path ? Storage::url($user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                                 alt="Avatar">
+
                                         </li>
-                                    @endforeach
-                                    @if ($all_role->users_count > 3)
-                                        <li class="avatar avatar-sm">
-                                            <span class="avatar-initial rounded-circle pull-up bg-lighter text-body"
-                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="{{ $all_role->users_count - 3 }} more">+{{ $all_role->users_count - 3 }}</span>
-                                        </li>
+                                        @if ($loop->iteration > 3)
+                                        @break
                                     @endif
+                                @endforeach
 
-                                </ul>
-                            </div>
-
+                                @if ($role->users_count > 3)
+                                    <li class="avatar avatar-sm">
+                                        <span class="avatar-initial rounded-circle pull-up bg-lighter text-body"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="{{ $role->users_count - 3 }}">+{{ $role->users_count - 3 }}</span>
+                                    </li>
+                                @endif
+                            </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
+    @endforeach
 
-    </div>
+</div>
 
-    <!--/ Teams Cards -->
+<!--/ Teams Cards -->
 @endsection

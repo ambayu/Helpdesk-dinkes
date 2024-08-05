@@ -5,24 +5,126 @@
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/front-page-help-center.css') }}" />
 @endsection
+@section('vendor-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/spinkit/spinkit.css') }}" />
+@endsection
+
+@section('page-script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#basic-addon1').on('click', function() {
+                var ticketNumber = $('#ticketNumber').val();
+
+                // Tampilkan loading bar
+                $('#ticketDetailsCard').hide();
+
+                $('#loadingBar').show();
+
+                // Lakukan fetch data dari route menggunakan AJAX
+                $.ajax({
+                    url: '/cari-tiket/' + ticketNumber, // Ganti dengan URL rute yang sesuai
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Sembunyikan loading bar setelah selesai fetching
+                        setTimeout(function() {
+                            $('#loadingBar').hide();
+
+                            var ticketDetails = $('.ticket-details');
+                            ticketDetails.empty(); // Kosongkan data sebelumnya
+                            $('#ticketDetailsCard').show();
+
+                            if (data) {
+                                ticketDetails.append('<h6>Nomor Tiket: ' +
+                                    data.nomor_tiket +
+                                    '</h6>');
+
+                                ticketDetails.append('<h6>Status: ' + data.status +
+                                    '</h6>');
+                                ticketDetails.append('<h6>Deskripsi: ' + data
+                                    .answer_status +
+                                    '</h6>');
+                                // Tambahkan data lain yang ingin ditampilkan
+                            } else {
+
+                                ticketDetails.append(
+                                    '<h4>Data tiket tidak ditemukan </h4>' +
+                                    ' <p class="text-warning">Nomor tiket yang anda masukkan salah atau belum lengkap, silahkan coba lagi </p> '
+                                );
+                            }
+                        }, 1000);
+                        // Tampilkan data hasil fetch di sini
+                        // Contoh: Tampilkan data ke konsol
+                        // Lengkapi dengan logika untuk menampilkan data ke halaman
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error jika terjadi
+                        console.error(xhr.responseText);
+                        // Sembunyikan loading bar jika ada error
+                        $('#loadingBar').hide();
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
 
 @section('content')
+
     <!-- Help Center Header: Start -->
     <section class="section-py first-section-pt help-center-header">
         <h1 class="text-center text-primary display-6 fw-semibold">Nomor Tiket Pengajuan</h1>
         <div class="input-wrapper my-3 input-group input-group-lg input-group-merge position-relative mx-auto">
-            <span class="input-group-text" id="basic-addon1"><i class="tf-icons mdi mdi-magnify"></i></span>
-            <input type="text" class="form-control" placeholder="Nomor tiket pengajuan" aria-label="Search"
-                aria-describedby="basic-addon1" />
+            <span class="btn btn-primary  input-group-text" id="basic-addon1"><i class="tf-icons  mdi mdi-magnify"></i></span>
+            <input type="text" id="ticketNumber" class="form-control mr-2" style="padding-left:7px !important;"
+                placeholder=" Nomor tiket pengajuan" aria-label="Search" aria-describedby="basic-addon1" />
         </div>
-        <p class="text-center px-3 mb-0">silahkan masukan nomor tiket pengajuan anda</p>
+        <p class="text-center px-3 mb-0">Silahkan masukan nomor tiket pengajuan anda</p>
+
+
+
+        <div id="loadingBar" style="display: none;" class="sk-swing sk-primary   mx-auto">
+            <div class="sk-swing-dot"></div>
+            <div class="sk-swing-dot"></div>
+        </div>
+
+
+        <div class="col-md-4 mt-2 mx-auto " style="display: none" id="ticketDetailsCard">
+            <div class="card border shadow-none">
+                <div class="card-body text-center">
+                    <svg width='58' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+                        aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path data-name="layer2"
+                            d="M55 18.7A6.9 6.9 0 0 1 45.3 9l-7-7L2 38.3l7 7a6.9 6.9 0 0 1 9.7 9.7l7 7L62 25.7z"
+                            fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round"
+                            stroke-linecap="round"></path>
+                        <path data-name="layer1"
+                            d="M30.6 46a3 3 0 0 1-4.2 0L18 37.6a3 3 0 0 1 0-4.2L33.4 18a3 3 0 0 1 4.2 0l8.4 8.4a3 3 0 0 1 0 4.2z"
+                            fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round"
+                            stroke-linecap="round"></path>
+                    </svg>
+
+                    <h5 class="my-3">Progres Permintaan</h5>
+
+                    <div class="ticket-details">
+                        <!-- Placeholder for ticket details from AJAX -->
+                    </div>
+
+
+                    <p> untuk melihat lebih detail silahkan login</p>
+                    <a class="btn btn-outline-primary" href="{{ url('/login') }}">Login</a>
+                </div>
+            </div>
+        </div>
     </section>
+
     <!-- Help Center Header: End -->
 
     <!-- Popular Articles: Start -->
     <section class="section-py">
         <div class="container">
-            <h4 class="display-6 text-center mb-4 pb-md-2">Paling sering dicari</h4>
+            <h4 class="display-6 text-center mb-4 pb-md-2">Paling Sering Dicari</h4>
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="row gy-4 gy-md-0">
@@ -119,7 +221,7 @@
     <!-- Knowledge Base: Start -->
     <section class="section-py bg-body">
         <div class="container">
-            <h4 class="display-6 text-center mb-4 pb-md-2">Yang perlu kamu ketahui</h4>
+            <h4 class="display-6 text-center mb-4 pb-md-2">Yang Perlu Kamu Ketahui</h4>
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="row">
@@ -326,7 +428,8 @@
                                             <a href="{{ url('front-pages/help-center-article') }}"
                                                 class="text-heading d-flex justify-content-between align-items-center">
                                                 <span class="text-truncate me-1">
-                                                    I’m making a test site - it’s not for a client. Which license do I need?
+                                                    I’m making a test site - it’s not for a client. Which license do I
+                                                    need?
                                                 </span>
                                                 <i
                                                     class="tf-icons mdi mdi-chevron-right mdi-24px scaleX-n1-rtl text-muted"></i>

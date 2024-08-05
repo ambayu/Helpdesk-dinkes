@@ -36,8 +36,8 @@
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt="user image"
-                            class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+                        <img src="{{ $user->profile_photo_path ? Storage::url($user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
+                            alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                     </div>
                     <div class="flex-grow-1 mt-3 mt-sm-5">
                         <div
@@ -77,8 +77,11 @@
             <ul class="nav nav-pills flex-column flex-sm-row mb-4">
                 <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i
                             class='mdi mdi-account-outline me-1 mdi-20px'></i>Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-teams') }}"><i
-                            class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Teams</a></li>
+                @if ($user->role != 'User')
+                    <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-teams') }}"><i
+                                class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Teams</a></li>
+                @endif
+
                 {{--  <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-projects') }}"><i
                             class='mdi mdi-view-grid-outline me-1 mdi-20px'></i>Projects</a></li> --}}
                 {{-- <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-connections') }}"><i
@@ -90,7 +93,7 @@
 
     <!-- User Profile Content -->
     <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class=" {{ $user->role != 'User' ? 'col-xl-6 col-lg-6 col-md-6' : 'col-xl-12 col-lg-12 col-md-12' }}">
             <!-- About User -->
             <div class="card mb-4">
                 <div class="card-body">
@@ -116,6 +119,7 @@
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-email-outline mdi-24px"></i><span
                                 class="fw-medium mx-2">Email:</span> <span>{{ $user->email }}</span></li>
                     </ul>
+
                     <small class="card-text text-uppercase">Teams </small>
                     <ul class="list-unstyled mb-0 mt-3 pt-1">
                         <li class="d-flex align-items-center mb-3"><i
@@ -151,48 +155,51 @@
 
             <!--/ Profile Overview -->
         </div>
-        <div class="col-lg-6 col-xl-6">
-            <div class="card card-action mb-4">
-                <div class="card-header align-items-center">
-                    <h5 class="card-action-title mb-0">Teams ({{ $user->role }})</h5>
-                    <div class="card-action-element">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i class="mdi mdi-dots-vertical mdi-24px text-muted"></i></button>
+        @if ($user->role != 'User')
 
+            <div class="col-lg-6 col-xl-6">
+                <div class="card card-action mb-4">
+                    <div class="card-header align-items-center">
+                        <h5 class="card-action-title mb-0">Teams ({{ $user->role }})</h5>
+                        <div class="card-action-element">
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle hide-arrow p-0"
+                                    data-bs-toggle="dropdown" aria-expanded="false"><i
+                                        class="mdi mdi-dots-vertical mdi-24px text-muted"></i></button>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled mb-0">
-                        @foreach ($user->user_role as $role_user)
-                            <li class="mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="d-flex align-items-start">
-                                        <div class="avatar me-3">
-                                            <img src="{{ $role_user ? $role_user->profile_photo_url : asset('assets/img/avatars/1.png') }}"
-                                                alt="Avatar" class="rounded-circle">
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            @foreach ($user->user_role as $role_user)
+                                <li class="mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                            <div class="avatar me-3">
+                                                <img src="{{ $role_user->profile_photo_path ? Storage::url($role_user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
+                                                    alt="Avatar" class="rounded-circle">
+                                            </div>
+                                            <div class="me-2">
+                                                <h6 class="mb-0">{{ $role_user->name }}</h6>
+                                                <small>{{ $role_user->email }}</small>
+                                            </div>
                                         </div>
-                                        <div class="me-2">
-                                            <h6 class="mb-0">{{ $role_user->name }}</h6>
-                                            <small>{{ $role_user->email }}</small>
+                                        <div class="ms-auto">
+                                            <a href="javascript:;"><span
+                                                    class="badge bg-label-danger rounded-pill"></span></a>
                                         </div>
                                     </div>
-                                    <div class="ms-auto">
-                                        <a href="javascript:;"><span
-                                                class="badge bg-label-danger rounded-pill"></span></a>
-                                    </div>
-                                </div>
+                                </li>
+                            @endforeach
+                            <li class="text-center">
+                                {{-- <a href="javascript:;">View all teams</a> --}}
                             </li>
-                        @endforeach
-                        <li class="text-center">
-                            {{-- <a href="javascript:;">View all teams</a> --}}
-                        </li>
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        @endif
     </div>
     <!--/ User Profile Content -->
 @endsection

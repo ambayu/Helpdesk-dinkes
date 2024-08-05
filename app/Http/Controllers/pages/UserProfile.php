@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\RoleBidang;
 use Illuminate\Support\Facades\Auth;
 
 class UserProfile extends Controller
@@ -19,6 +20,10 @@ class UserProfile extends Controller
       // Mengambil objek pengguna yang login
       $user = Auth::user();
       $user->role = $user->getRoleNames()[0];
+      if ($user->role == 'Admin Layanan') {
+        $role_bidang = RoleBidang::where('id_user', $user->id);
+        $user->role_bidang = $role_bidang->first()->bidang;
+      }
       $user->date = Carbon::parse($user->created_at)->format('Y-m-d');
       $roleCount = Role::where('name', $user->role)->first()->users->count();
       $user->roleCount = $roleCount;

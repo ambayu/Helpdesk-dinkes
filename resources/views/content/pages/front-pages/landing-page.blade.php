@@ -272,18 +272,18 @@
                                 <h2 class="accordion-header" id="head-One">
                                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                                         data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
-                                        Do you charge for each upgrade?
+                                        Apa itu aplikasi help desk Dinas Komunikasi dan Informatika Pemerintah Kota Medan?
                                     </button>
                                 </h2>
 
                                 <div id="accordionOne" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFront" aria-labelledby="accordionOne">
                                     <div class="accordion-body">
-                                        Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame
-                                        snaps icing
-                                        marzipan gummi bears macaroon dragée danish caramels powder. Bear claw dragée pastry
-                                        topping
-                                        soufflé. Wafer gummi bears marshmallow pastry pie.
+                                        Aplikasi help desk adalah sistem yang digunakan untuk menangani dan menyelesaikan
+                                        permintaan atau masalah yang dilaporkan oleh warga atau pegawai. Di Dinas Komunikasi
+                                        dan Informatika Pemerintah Kota Medan, aplikasi ini digunakan untuk mengelola
+                                        laporan, permintaan layanan, dan isu teknis terkait dengan infrastruktur TI dan
+                                        komunikasi.
                                     </div>
                                 </div>
                             </div>

@@ -78,7 +78,7 @@
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="d-flex align-items-center">
                     <div class="avatar avatar-online me-3">
-                        <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/2.png') }}"
+                        <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/2.png') }}"
                             alt="Profile Photo" class="w-40 h-40 rounded-circle">
                     </div>
                     <h6 class="mb-0">{{ Auth::user()->name }}</h6>
@@ -92,7 +92,7 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/2.png') }}"
+                                    <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/2.png') }}"
                                         alt class="w-px-40 sd h-auto rounded-circle">
                                 </div>
                             </div>

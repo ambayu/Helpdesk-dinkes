@@ -21,6 +21,31 @@ class Landing extends Controller
       'proses' => $tickets->whereBetween('status', [4, 7])->count(),
       'finish' => $tickets->where('status', '>', 7)->count(),
       'total' => $tickets->count(),
+      'average' => number_format($ratings->avg('star'), 2),
+    ];
+    $totalRatings = $ratings->count();
+
+    $starCounts = [
+      '1_star' => [
+        'count' => $ratings->where('star', 1)->count(),
+        'percentage' => $totalRatings > 0 ? ($ratings->where('star', 1)->count() / $totalRatings) * 100 : 0
+      ],
+      '2_star' => [
+        'count' => $ratings->where('star', 2)->count(),
+        'percentage' => $totalRatings > 0 ? ($ratings->where('star', 2)->count() / $totalRatings) * 100 : 0
+      ],
+      '3_star' => [
+        'count' => $ratings->where('star', 3)->count(),
+        'percentage' => $totalRatings > 0 ? ($ratings->where('star', 3)->count() / $totalRatings) * 100 : 0
+      ],
+      '4_star' => [
+        'count' => $ratings->where('star', 4)->count(),
+        'percentage' => $totalRatings > 0 ? ($ratings->where('star', 4)->count() / $totalRatings) * 100 : 0
+      ],
+      '5_star' => [
+        'count' => $ratings->where('star', 5)->count(),
+        'percentage' => $totalRatings > 0 ? ($ratings->where('star', 5)->count() / $totalRatings) * 100 : 0
+      ],
     ];
 
 
@@ -32,6 +57,8 @@ class Landing extends Controller
       'tickets' => $tickets,
       'ticketCounts' => $ticketCounts,
       'ratings' => $ratings,
+      'starCounts' => $starCounts,
+      'totalRatings' => $totalRatings,
     ]);
   }
 }

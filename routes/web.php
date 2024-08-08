@@ -22,6 +22,7 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\apps\BidangManageController;
 use App\Http\Controllers\apps\CekPermintaanController;
 use App\Http\Controllers\apps\LayananManageController;
+use App\Http\Controllers\authentications\LoginSSO;
 use App\Http\Controllers\pages\front_pages\HelpCenter;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\DashboardController;
@@ -49,9 +50,11 @@ Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
 Route::get('/cari-tiket/{tiket}', [HelpCenter::class, 'tiket'])->name('cari-tiket');
 
 
-Route::get('/login', [LoginBasic::class, 'index'])->name('login');
+Route::get('/login', [LoginSSO::class, 'index'])->name('login');
+Route::get('/login-admin', [LoginBasic::class, 'index'])->name('login');
 Route::post('/auth/login-masuk', [LoginBasic::class, 'loginMasuk'])->name('auth-login-masuk');
-Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+Route::get('/auth/login-masuk-sso', [LoginBasic::class, 'loginMasukSSO'])->name('auth-login-masuk-sso');
+// Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 
 //layanan
 Route::get('/layanan/{slug}', [Layanan::class, 'index'])->name('layanan.index');

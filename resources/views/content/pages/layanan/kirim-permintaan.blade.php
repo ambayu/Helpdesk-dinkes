@@ -47,6 +47,7 @@
                     <div class="card-body mt-2">
                         <h4 class="mb-2">Welcome to {{ config('variables.templateName') }}! 👋</h4>
                         <p class="mb-4">Silahkan isi persyaratan berikut</p>
+
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -110,7 +111,7 @@
                             @if ($inputs->file == '1')
                                 <div class="form-floating form-floating-outline mb-3">
                                     <p><small class="text-center text-danger">Jika file lebih besar dari 2mb silahkan simpan
-                                            di google drive dan linknya disematkan di dalam description</small></p>
+                                            di google drive dan linknya disematkan di dalam deskrisi</small></p>
                                 </div>
 
                                 <div class="form-floating form-floating-outline mb-3">
@@ -125,14 +126,14 @@
 
                             <!-- Tombol Submit -->
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Kirim / Masuk SSO</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Kirim </button>
                             </div>
                         </form>
 
 
                         <p class="text-center">
                             <span>Belum punya akun SSO?</span>
-                            <a href="{{ url('auth/register-basic') }}">
+                            <a href="https://sso.pemkomedan.go.id/login-users">
                                 <span>Daftar akun SSO sekarang</span>
                             </a>
                         </p>

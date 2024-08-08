@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Validator;
 class Layanan extends Controller
 {
   //
-  public function index($slug)
+  public function index($slug, Request $request)
   {
+    //sementara langsung redirect ke login dulu
+    return redirect()->route('auth-login-masuk-sso');
 
     $menu = Menu::with('formulir.inputan')->where('slug', $slug)->first();
 
@@ -30,8 +32,15 @@ class Layanan extends Controller
       ]
     );
   }
+
+
   public function store(Request $request)
   {
+
+    //sementara langsung redirect ke login dulu
+    return redirect()->route('auth-login-masuk-sso');
+
+
     // Validasi data dari $request
     $validator = Validator::make(
       $request->all(),
@@ -56,16 +65,16 @@ class Layanan extends Controller
 
     $tiket = new Ticket;
     $tiket->nomor_tiket = $nomor_tiket;
-    $tiket->id_user = '4';
+    $tiket->id_user = '4';  // cari id_user dari login
 
     if ($tiket->save()) {
       $answer = new Answer();
       $answer->id_menu = $id_menu->id_menu;
-
+      $answer->judul = $request->judul;
       $answer->id_ticket = $tiket->id;
       $answer->tanggal_kirim = now();
       $answer->deskripsi = $request->deskripsi;
-      $answer->status_answer = '4';
+
       $formulirData = [];
       foreach ($request->type as $data) {
         $id_formulir = $data['id_formulir'];
@@ -75,24 +84,28 @@ class Layanan extends Controller
           'respon' => $respon,
         ];
       }
-
+      $answer->status_answer = '0';
       $answer->formulir = $formulirData;
 
-      $answer->save();
       // Jika ada file yang diunggah, simpan file ke server
       if ($request->hasFile('file')) {
         $file = $request->file('file');
         $extension = $file->getClientOriginalExtension();
         $filename = $nomor_tiket . '.' . $extension;
         $filePath = $file->storeAs('public/assets/file', $filename);
+        $answer->file = $filePath;
       }
+
+      $answer->save();
     } else {
       return redirect()->route('layanan.index', ['slug' => $id_menu->menu->slug])->with('error', 'Tiket gagal dibuat');
     }
 
     return redirect()->route('layanan.index', ['slug' => $id_menu->menu->slug])->with(
-      'success',
-      'Permintaan berhasil disimpan.',
+      [
+        'success' => 'Permintaan berhasil disimpan.',
+        'tiket' =>  $tiket->nomor_tiket
+      ]
     );
   }
 }

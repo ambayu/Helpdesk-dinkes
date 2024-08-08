@@ -43,9 +43,13 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="card-body mt-2">
-                        <h4 class="mb-2">Welcome to {{ config('variables.templateName') }}! 👋</h4>
+                        <h4 class="mb-2">Selamat Datang {{ config('variables.templateName') }}! 👋</h4>
                         @error('status')
                             <div class="mb-2 font-medium text-sm text-danger">
                                 {{ $message }}
@@ -98,34 +102,18 @@
                             </div>
                         </form>
 
-                        <p class="text-center">
-                            <span>New on our platform?</span>
-                            <a href="{{ url('auth/register-basic') }}">
-                                <span>Create an account</span>
-                            </a>
-                        </p>
+
 
                         <div class="divider my-4">
-                            <div class="divider-text">or</div>
+                            <div class="divider-text">Atau</div>
                         </div>
 
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="javascript:;" class="btn btn-icon btn-lg rounded-pill btn-text-facebook">
-                                <i class="tf-icons mdi mdi-24px mdi-facebook"></i>
+                        <p class="text-center">
+                            <span>Pengguna Lainnya ?</span>
+                            <a href="{{ url('/login') }}">
+                                <span>Masuk Sebagai Pengguna</span>
                             </a>
-
-                            <a href="javascript:;" class="btn btn-icon btn-lg rounded-pill btn-text-twitter">
-                                <i class="tf-icons mdi mdi-24px mdi-twitter"></i>
-                            </a>
-
-                            <a href="javascript:;" class="btn btn-icon btn-lg rounded-pill btn-text-github">
-                                <i class="tf-icons mdi mdi-24px mdi-github"></i>
-                            </a>
-
-                            <a href="javascript:;" class="btn btn-icon btn-lg rounded-pill btn-text-google-plus">
-                                <i class="tf-icons mdi mdi-24px mdi-google"></i>
-                            </a>
-                        </div>
+                        </p>
                     </div>
                 </div>
                 <!-- /Login -->

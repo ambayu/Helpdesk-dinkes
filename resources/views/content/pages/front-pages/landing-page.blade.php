@@ -40,19 +40,32 @@
                     <a href="{{ url('/login') }}" class="btn btn-primary">MASUK</a>
                 </div>
                 <div class="position-relative hero-animation-img">
-                    <a href="{{ url('/app/ecommerce/dashboard') }}" target="_blank">
+                    <a href="{{ url('/login') }}" target="_blank">
                         <div class="hero-dashboard-img text-center">
                             <img src="{{ asset('assets/img/front-pages/landing-page/hero-dashboard-' . $configData['style'] . '.png') }}"
                                 alt="hero dashboard" class="animation-img" style="height: 700px; width:auto;" data-speed="2"
                                 data-app-light-img="front-pages/landing-page/hero-dashboard-light.png"
-                                data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
+                                data-app-dark-img="front-pages/landing-page/hero-dashboard-light.png" />
                         </div>
                         <div class="position-absolute hero-elements-img">
                             <img src="{{ asset('assets/img/front-pages/landing-page/hero-elements-' . $configData['style'] . '.png') }}"
                                 alt="hero elements" class="animation-img" data-speed="4"
                                 data-app-light-img="front-pages/landing-page/hero-elements-ligh2t.png"
-                                data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
+                                data-app-dark-img="front-pages/landing-page/hero-elements-ligh2t.png" />
                         </div>
+
+                        {{-- <div class="hero-dashboard-img text-center">
+                          <img src="{{ asset('assets/img/front-pages/landing-page/hero-dashboard-' . $configData['style'] . '.png') }}"
+                              alt="hero dashboard" class="animation-img" style="height: 700px; width:auto;" data-speed="2"
+                              data-app-light-img="front-pages/landing-page/hero-dashboard-light.png"
+                              data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
+                      </div>
+                      <div class="position-absolute hero-elements-img">
+                          <img src="{{ asset('assets/img/front-pages/landing-page/hero-elements-' . $configData['style'] . '.png') }}"
+                              alt="hero elements" class="animation-img" data-speed="4"
+                              data-app-light-img="front-pages/landing-page/hero-elements-ligh2t.png"
+                              data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
+                      </div> --}}
                     </a>
                 </div>
             </div>
@@ -79,55 +92,62 @@
                         <div class="card-body row widget-separator">
                             <div class="col-sm-5 border-shift border-end">
                                 <div class="d-flex align-items-center mb-3">
-                                    <span class="text-primary display-5 fw-normal">4.89</span>
+                                    <span class="text-primary display-5 fw-normal">{{ $ticketCounts['average'] }}</span>
                                     <span class='mdi mdi-star mdi-24px ms-1 text-primary'></span>
                                 </div>
-                                <h6>Total 187 reviews</h6>
-                                <p>All reviews are from genuine customers</p>
+                                <h6>Total {{ $totalRatings }} ulasan</h6>
+                                <p>Ulasan ini adalah 100% nyata dan berasal dari pelanggan yang benar-benar telah merasakan
+                                    pengalaman dengan pelayanan kami</p>
                                 <span class="badge bg-label-primary rounded-pill p-2 mb-3 mb-sm-0"></span>
                                 <hr class="d-sm-none">
                             </div>
 
                             <div class="col-sm-7 g-2 text-nowrap d-flex flex-column justify-content-between px-4 gap-3">
                                 <div class="d-flex align-items-center gap-3">
-                                    <small>5 Star</small>
+                                    <small>5 Star </small>
                                     <div class="progress w-100 rounded" style="height:10px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 61.50%"
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            style="width: {{ $starCounts['5_star']['percentage'] }}%;"
                                             aria-valuenow="61.50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="w-px-20 text-end">124</small>
+                                    <small class="w-px-20 text-end">{{ $starCounts['5_star']['count'] }}</small>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <small>4 Star</small>
                                     <div class="progress w-100 rounded" style="height:10px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 24%"
-                                            aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            style="width: {{ $starCounts['4_star']['percentage'] }}%;" aria-valuenow="24"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="w-px-20 text-end">40</small>
+                                    <small class="w-px-20 text-end">{{ $starCounts['4_star']['count'] }}</small>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <small>3 Star</small>
                                     <div class="progress w-100 rounded" style="height:10px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 12%"
-                                            aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            style="width: {{ $starCounts['3_star']['percentage'] }}%;" aria-valuenow="12"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="w-px-20 text-end">12</small>
+                                    <small class="w-px-20 text-end">{{ $starCounts['3_star']['count'] }}</small>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <small>2 Star</small>
                                     <div class="progress w-100 rounded" style="height:10px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 7%"
-                                            aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            style="width: {{ $starCounts['2_star']['percentage'] }}%;" aria-valuenow="7"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="w-px-20 text-end">7</small>
+                                    <small class="w-px-20 text-end">{{ $starCounts['2_star']['count'] }}</small>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <small>1 Star</small>
                                     <div class="progress w-100 rounded" style="height:10px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 2%"
-                                            aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            style="width: {{ $starCounts['1_star']['percentage'] }}%;" aria-valuenow="2"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="w-px-20 text-end">2</small>
+                                    <small class="w-px-20 text-end">{{ $starCounts['1_star']['count'] }}
+                                    </small>
                                 </div>
 
                             </div>

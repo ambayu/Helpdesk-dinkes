@@ -59,8 +59,7 @@
                         @endif
                         <div class="text-center">
                             <a href="https://sso.pemkomedan.go.id/app-client/196460166873175833251781722932643/redirect">
-                                <img class="" style="width:75%; "
-                                    src="https://e-brida.pemkomedan.go.id/s-ketbrida/assets/images/login/sso-an.gif"
+                                <img class="" style="width:75%; " src="{{ asset('assets/img/branding/login.gif') }}"
                                     alt="">
                             </a>
                         </div>

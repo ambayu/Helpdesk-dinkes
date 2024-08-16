@@ -123,6 +123,12 @@
             "permissions": "submit-request",
             "submenu": [
                 {
+                    "url": "\/front-pages\/help-center",
+                    "name": "lihat Semua ",
+                    "slug": "",
+                    "permissions": "submit-request"
+                },
+                {
                     "url": "app\/layanan\/Request-Website",
                     "name": "Request Website",
                     "slug": "kirim-permintaan.Request-Website",

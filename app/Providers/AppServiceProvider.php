@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
+    
     //
     Paginator::useBootstrap();
     Blade::component('content.authentications.auth-login-basic', 'guest-layout');

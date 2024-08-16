@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Menu;
+use App\Models\Notifikasi;
 use Illuminate\Support\ServiceProvider;
 
 class MenuServiceProvider extends ServiceProvider
@@ -31,7 +32,15 @@ class MenuServiceProvider extends ServiceProvider
 
     $menu = Menu::all(); // Assuming $menu is the collection of Menu objects
 
+
     $newSubmenu = [];
+
+    $newSubmenu[] = [
+      "url" => '/front-pages/help-center',
+      "name" => 'lihat Semua ',
+      "slug" => '',
+      "permissions" => 'submit-request'
+    ];
 
     // Transform Menu items into desired format
     foreach ($menu as $item) {
@@ -62,6 +71,19 @@ class MenuServiceProvider extends ServiceProvider
 
     //end
 
+    view()->composer('*', function ($view) {
+
+      if (isset(auth()->user()->id)) {
+        $notif = Notifikasi::with('user')->where('status', '1')->where('id_user', auth()->user()->id)->take(8)->get()->map(function ($notification) {
+          $notification->time_ago = $notification->created_at->diffForHumans();
+          return $notification;
+        });
+
+        $notif_count = Notifikasi::where('status', 1)->where('id_user', auth()->user()->id)->count();
+        $view->with('notif', $notif);
+        $view->with('notif_count', $notif_count);
+      }
+    });
 
 
     $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu2.json'));

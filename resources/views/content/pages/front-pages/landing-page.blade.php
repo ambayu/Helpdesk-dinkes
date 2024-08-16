@@ -292,87 +292,88 @@
                                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                                         data-bs-target="#accordionTwo" aria-expanded="false"
                                         aria-controls="accordionTwo">
-                                        Do I need to purchase a license for each website?
+                                        Bagaimana cara mendaftar atau membuat akun di aplikasi help desk?
                                     </button>
                                 </h2>
                                 <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="accordionTwo"
                                     data-bs-parent="#accordionFront">
                                     <div class="accordion-body">
-                                        Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée
-                                        oat cake
-                                        dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut
-                                        gummies. Jelly
-                                        beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                        Untuk mendaftar atau membuat akun, kunjungi halaman pendaftaran di aplikasi sso dan
+                                        isi formulir pendaftaran dengan informasi yang diperlukan seperti nama,
+                                        email, dan nomor telepon dan anda bisa juga login dengan menggunakan google. Setelah
+                                        itu anda bisa langsung login di menu login aplikasi Help Desk
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item active">
-                                <h2 class="accordion-header" id="head-Three">
-                                    <button type="button" class="accordion-button" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionThree" aria-expanded="true"
-                                        aria-controls="accordionThree">
-                                        What is regular license?
-                                    </button>
-                                </h2>
-                                <div id="accordionThree" class="accordion-collapse collapse show"
-                                    aria-labelledby="accordionThree" data-bs-parent="#accordionFront">
-                                    <div class="accordion-body">
-                                        Regular license can be used for end products that do not charge users for access or
-                                        service(access
-                                        is free and there will be no monthly subscription fee). Single regular license can
-                                        be used for
-                                        single end product and end product can be used by you or your client. If you want to
-                                        sell end
-                                        product to multiple clients then you will need to purchase separate license for each
-                                        client. The
-                                        same rule applies if you want to use the same end product on multiple domains(unique
-                                        setup). For
-                                        more info on regular license you can check official description.
+                                <div class="accordion-item active">
+                                    <h2 class="accordion-header" id="head-Three">
+                                        <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                            data-bs-target="#accordionThree" aria-expanded="true"
+                                            aria-controls="accordionThree">
+                                            Bagaimana cara melacak status laporan atau permintaan saya?
+                                        </button>
+                                    </h2>
+                                    <div id="accordionThree" class="accordion-collapse collapse show"
+                                        aria-labelledby="accordionThree" data-bs-parent="#accordionFront">
+                                        <div class="accordion-body">
+                                            Masuk ke aplikasi dan buka bagian "Cek Status Permintaan". Di sini,
+                                            Anda dapat melihat daftar tiket yang telah diajukan beserta statusnya. Gunakan
+                                            nomor tiket untuk memeriksa pembaruan atau detail lebih lanjut tentang laporan
+                                            Anda.
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="head-Four">
-                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionFour" aria-expanded="false"
-                                        aria-controls="accordionFour">
-                                        What is extended license?
-                                    </button>
-                                </h2>
-                                <div id="accordionFour" class="accordion-collapse collapse"
-                                    aria-labelledby="accordionFour" data-bs-parent="#accordionFront">
-                                    <div class="accordion-body">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis et aliquid quaerat
-                                        possimus maxime!
-                                        Mollitia reprehenderit neque repellat deleniti delectus architecto dolorum maxime,
-                                        blanditiis
-                                        earum ea, incidunt quam possimus cumque.
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="head-Four">
+                                        <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionFour"
+                                            aria-expanded="false" aria-controls="accordionFour">
+                                            Apa yang harus dilakukan jika saya lupa kata sandi akun saya?
+                                        </button>
+                                    </h2>
+                                    <div id="accordionFour" class="accordion-collapse collapse"
+                                        aria-labelledby="accordionFour" data-bs-parent="#accordionFront">
+                                        <div class="accordion-body">
+                                            Anda hanya perlu melakukan reset password di aplikasi SSO
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="head-Five">
-                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionFive" aria-expanded="false"
-                                        aria-controls="accordionFive">
-                                        Which license is applicable for SASS application?
-                                    </button>
-                                </h2>
-                                <div id="accordionFive" class="accordion-collapse collapse"
-                                    aria-labelledby="accordionFive" data-bs-parent="#accordionFront">
-                                    <div class="accordion-body">
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi molestias
-                                        exercitationem ab cum
-                                        nemo facere voluptates veritatis quia, eveniet veniam at et repudiandae mollitia
-                                        ipsam quasi
-                                        labore enim architecto non!
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="head-Five">
+                                        <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionFive"
+                                            aria-expanded="false" aria-controls="accordionFive">
+                                            Bagaimana cara mengupdate informasi akun saya?
+                                        </button>
+                                    </h2>
+                                    <div id="accordionFive" class="accordion-collapse collapse"
+                                        aria-labelledby="accordionFive" data-bs-parent="#accordionFront">
+                                        <div class="accordion-body">
+                                            Anda bisa langsung mengupdate data anda pada aplikasi sso
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="head-Six">
+                                        <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionSix"
+                                            aria-expanded="false" aria-controls="accordionSix">
+                                            Apakah ada biaya untuk menggunakan aplikasi help desk?
+                                        </button>
+                                    </h2>
+                                    <div id="accordionSix" class="accordion-collapse collapse"
+                                        aria-labelledby="accordionSix" data-bs-parent="#accordionFront">
+                                        <div class="accordion-body">
+                                            Penggunaan aplikasi help desk biasanya gratis untuk pengguna, terutama jika
+                                            aplikasi ini dikelola oleh instansi pemerintah. Namun, pastikan untuk memeriksa
+                                            informasi resmi dari Dinas Komunikasi dan Informatika untuk detail lebih lanjut
+                                            mengenai biaya atau layanan tambahan.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
         <!-- FAQ: End -->
 

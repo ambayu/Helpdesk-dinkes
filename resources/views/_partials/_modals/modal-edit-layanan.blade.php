@@ -41,7 +41,14 @@
                             </div>
 
 
-
+                            <div style="width: 100%; height:150px; border:solid 3px;" class="text-danger mb-3 p-2">
+                                Perhatian!! <br>
+                                Jika memilih opsi <strong>PILIHAN</strong> pada Nama inputan untuk Nama
+                                pilihan pisahkan dengan ":" dan pilihan pisahkan
+                                dengan " , " <br>
+                                <strong>Contoh =</strong> Warna: Merah, Biru, Kuning, Coklat <br>
+                                Ini akan membuat opsi Warna dengan pilihan Merah, Biru, Kuning, Coklat
+                            </div>
                             @foreach ($menu->formulir as $formulir)
                                 <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item="">
                                     <div class="d-flex border rounded position-relative pe-0">
@@ -68,7 +75,12 @@
                                                         {{ $formulir->type_formulir == 2 ? 'checked' : '' }}>
                                                     <label class="form-check-label" for="textarea">Textarea</label>
                                                 </div>
-
+                                                <div class="form-check form-check-inline">
+                                                    <input name="input_type" class="form-check-input" type="radio"
+                                                        value="3" id="pilihan"
+                                                        {{ $formulir->type_formulir == 3 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="textarea">Pilihan</label>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -95,8 +107,6 @@
                                 aria-label="Close">Close</button>
                         </div>
                     </form>
-
-
 
                 </div>
             </div>

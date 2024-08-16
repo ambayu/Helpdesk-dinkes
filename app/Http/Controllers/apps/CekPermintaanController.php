@@ -50,6 +50,7 @@ class CekPermintaanController extends Controller
           $formulirData[] = [
             'id_formulir' => $item['id_formulir'],
             'pertanyaan' => $formulir->formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
+            'type_formulir' => $formulir->type_formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
             'respon' => $item['respon'],
           ];
         }
@@ -129,6 +130,8 @@ class CekPermintaanController extends Controller
             'id_formulir' => $item['id_formulir'],
             'pertanyaan' => $formulir->formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
             'respon' => $item['respon'],
+            'type_formulir' => $formulir->type_formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
+
           ];
         }
       }
@@ -176,6 +179,7 @@ class CekPermintaanController extends Controller
 
     $search = $request->search;
 
+
     if ($search) {
       $query->where(function ($q) use ($search) {
         $q->where('judul', 'like', '%' . $search . '%')
@@ -209,6 +213,8 @@ class CekPermintaanController extends Controller
             'id_formulir' => $item['id_formulir'],
             'pertanyaan' => $formulir->formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
             'respon' => $item['respon'],
+            'type_formulir' => $formulir->type_formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
+
           ];
         }
       }
@@ -241,6 +247,83 @@ class CekPermintaanController extends Controller
 
     return view('content.pages.pages-cek-permintaan', compact('dataObject', 'answers', 'role', 'menu'));
   }
+
+
+  public function cari($tiket)
+  {
+    $menu = Menu::all();
+
+    $user = Auth::user();
+    $user->load('roleBidang.bidang.menuBidang', 'roles');
+    $role = $user->roles[0]->name;
+    $menuBidangIds =  $user->roleBidang ?  $user->roleBidang->bidang->menuBidang->pluck('id_menu')->toArray() : '';
+
+    $query = Answer::filteredAnswers($user, $role, $menuBidangIds);
+
+    $search = $tiket;
+
+
+    if ($search) {
+      $query->where(function ($q) use ($search) {
+        $q->where('judul', 'like', '%' . $search . '%')
+          ->orWhereHas('ticket', function ($q) use ($search) {
+            $q->where('nomor_tiket', 'like', '%' . $search . '%');
+          });
+      });
+    }
+
+
+
+    $answers = $query->orderBy('updated_at', 'DESC')->paginate(10);
+    $data = [];
+    foreach ($answers as $answer) {
+      $formulirData = [];
+
+      foreach ($answer->formulir as $item) {
+        // Cari formulir berdasarkan id_formulir
+        $formulir = Formulir::find($item['id_formulir']);
+
+        // Jika formulir ditemukan, tambahkan ke $formulirData
+        if ($formulir) {
+          $formulirData[] = [
+            'id_formulir' => $item['id_formulir'],
+            'pertanyaan' => $formulir->formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
+            'respon' => $item['respon'],
+            'type_formulir' => $formulir->type_formulir, // Asumsi formulir adalah nama kolom dalam model Formulir
+
+          ];
+        }
+      }
+
+
+      $data[] = [
+        'id' => $answer->id,
+        'judul' => $answer->judul,
+        'layanan' => $answer->menu->nama_layanan,
+        'bidang' => $answer->menu->menuBidang->pluck('bidang')->pluck('nama_bidang'),
+        'menu' => $answer->menu,
+        'tanggal_kirim' => $answer->tanggal_kirim,
+        'nomor_tiket' => $answer->ticket->nomor_tiket,
+        'status' => $answer->ticket->statuses,
+        'nama' => $answer->ticket->user->name,
+        'email' => $answer->ticket->user->email,
+        'respon_answer' => $answer->respon_answer,
+        'status_answer' => $answer->status,
+        'id_status_answer' => $answer->status_answer,
+        'pindah_layanan' => $answer->pindah_layanan,
+        'file' => $answer->file,
+        'formulir' => $formulirData,
+        'deskripsi' => $answer->deskripsi,
+
+      ];
+    }
+
+    $dataObject = json_decode(json_encode($data), false);
+
+
+    return view('content.pages.pages-cek-permintaan', compact('dataObject', 'answers', 'role', 'menu'));
+  }
+
 
   public function answer($answer)
   {

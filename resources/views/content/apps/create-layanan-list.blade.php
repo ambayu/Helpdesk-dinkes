@@ -82,15 +82,46 @@
 
                     <!-- Loop untuk input formulir -->
                     @foreach ($inputs->formulir as $formulir)
+                        {{-- {{ $formulir }} --}}
                         <div class="form-floating form-floating-outline mb-3">
                             <input type="hidden" name="type[{{ $loop->index }}][id_formulir]"
                                 value="{{ $formulir->id }}">
-                            <input type="{{ $formulir->inputan->nama_type }}"
-                                class="form-control @error('type.' . $loop->index . '.respon') is-invalid @enderror"
-                                id="{{ $formulir->formulir }}" name="type[{{ $loop->index }}][respon]"
-                                placeholder="Masukkan {{ $formulir->formulir }}" autofocus
-                                value="{{ old('type.' . $loop->index . '.respon') }}">
-                            <label for="{{ $formulir->formulir }}">{{ $formulir->formulir }}</label>
+                            @php
+                                $isPilihan = $formulir->inputan->nama_type == 'pilihan';
+                                // Extract options from the 'formulir' value
+                                $options = [];
+                                $label = '';
+                                if ($isPilihan) {
+                                    // Remove the label part and split options by comma
+                                    $formulirOptions = explode(':', $formulir->formulir);
+                                    if (isset($formulirOptions[1])) {
+                                        $label = trim($formulirOptions[0]); // Get the label, e.g., 'Warna'
+                                        $options = array_map('trim', explode(',', $formulirOptions[1]));
+                                    }
+                                }
+                            @endphp
+
+                            @if ($formulir->inputan->nama_type == 'pilihan')
+                                <select class="form-control @error('type.' . $loop->index . '.respon') is-invalid @enderror"
+                                    id="{{ $formulir->formulir }}" name="type[{{ $loop->index }}][respon]" autofocus>
+                                    <option value="">Pilih {{ $label }} </option>
+                                    @foreach ($options as $option)
+                                        <option value="{{ $option }}"
+                                            {{ old('type.' . $loop->index . '.respon') == $option ? 'selected' : '' }}>
+                                            {{ $option }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <label for="{{ $label }}">{{ $label }}</label>
+                            @else
+                                <input type="{{ $formulir->inputan->nama_type }}"
+                                    class="form-control @error('type.' . $loop->index . '.respon') is-invalid @enderror"
+                                    id="{{ $formulir->formulir }}" name="type[{{ $loop->index }}][respon]"
+                                    placeholder="Masukkan {{ $formulir->formulir }}" autofocus
+                                    value="{{ old('type.' . $loop->index . '.respon') }}">
+                                <label for="{{ $formulir->formulir }}">{{ $formulir->formulir }}</label>
+                            @endif
+
                             @error('type.' . $loop->index . '.respon')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -134,7 +165,7 @@
 
                     <!-- Tombol Submit -->
                     <div class="mb-3">
-                        <button class="btn btn-primary d-grid w-100" type="submit">Kirim / Masuk SSO</button>
+                        <button class="btn btn-primary d-grid w-100" type="submit">Kirim </button>
                     </div>
                 </form>
             </div>

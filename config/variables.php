@@ -1,10 +1,10 @@
 <?php
 // Variables
 return [
-  "creatorName" => "Bayu",
-  "creatorUrl" => "",
+  "creatorName" => "Dinas Komunikasi dan Informatika Pemerintah Kota Medan",
+  "creatorUrl" => "https://diskominfo.pemkomedan.go.id/",
   "templateName" => "",
-  "templateSuffix" => "",
+  "templateSuffix" => "DISKOMINFO",
   "templateVersion" => "1.3.0",
   "templateFree" => false,
   "templateDescription" => "Aplikasi Help Desk Diskominfo Pemerintah Kota Medan",

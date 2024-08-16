@@ -74,6 +74,7 @@
     <div class="accordion mt-3" id="answer">
 
         @foreach ($dataObject as $answer)
+
             <div class="accordion-item">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
@@ -100,6 +101,7 @@
                             @if ($answer->id_status_answer >= 8)
                                 <div class="alert alert-success m-2 pl-1" role="alert">
                                     Selesai
+
                                 </div>
                             @else
                                 <button class="btn btn-danger m-4" type="button"
@@ -107,18 +109,39 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     Aksi
                                 </button>
+
+                                <div class="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="organicSessionsDropdown-{{ $answer->id }}">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                        onclick="showResponModal({{ $answer->id }})">Respon</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                        onclick="showPindahModal({{ $answer->id }})"
+                                        data-bs-target="#pindahCekPermintaanModal">Pindahkan Kelayanan Lain</a>
+                                    <a class="dropdown-item text-success" href="javascript:void(0);"
+                                        onclick="showSelesaiModal({{ $answer->id }})">Permintaan Selesai</a>
+                                </div>
+                            @endif
+                        @else
+                            @if ($answer->id_status_answer == 0)
+                                <button class="btn btn-danger m-4" type="button" id="editPermintaan-{{ $answer->id }}"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Aksi
+                                </button>
+
+                                <div class="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="editPermintaan-{{ $answer->id }}">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                        onclick="showEditPermintaanModal('{{ $answer->id }}')">Edit </a>
+
+                                    <a class="dropdown-item text-success" href="javascript:void(0);"
+                                        onclick="deleteAnswer({{ $answer->id }})">Hapus</a>
+                                </div>
                             @endif
                         @endif
-                        <div class="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="organicSessionsDropdown-{{ $answer->id }}">
-                            <a class="dropdown-item" href="javascript:void(0);"
-                                onclick="showResponModal({{ $answer->id }})">Respon</a>
-                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                onclick="showPindahModal({{ $answer->id }})"
-                                data-bs-target="#pindahCekPermintaanModal">Pindahkan Kelayanan Lain</a>
-                            <a class="dropdown-item text-success" href="javascript:void(0);"
-                                onclick="showSelesaiModal({{ $answer->id }})">Permintaan Selesai</a>
-                        </div>
+
+
+
+
                     </button>
 
 
@@ -141,7 +164,8 @@
                                                 <small class="text-muted">{{ $answer->tanggal_kirim }}</small>
                                             </div>
                                             <p class="m-0"><strong>Judul :</strong> {{ $answer->judul }}</p>
-                                            <p class="m-0"><strong>Nomor Tiket :</strong> {{ $answer->nomor_tiket }}</p>
+                                            <p class="m-0"><strong>Nomor Tiket :</strong> {{ $answer->nomor_tiket }}
+                                            </p>
                                             <p class="m-0"><strong>Bidang :</strong>
                                                 @foreach ($answer->bidang as $index => $bidang)
                                                     {{ $bidang }}
@@ -178,10 +202,15 @@
                                                 <h6 class="mb-0">Data data yang diperlukan</h6>
 
                                             </div>
+
                                             @foreach ($answer->formulir as $formulir)
                                                 <div>
                                                     <strong>
-                                                        {{ $formulir->pertanyaan }}
+                                                        @if ($formulir->type_formulir == 3)
+                                                            {{ Str::before($formulir->pertanyaan, ':') }}
+                                                        @else
+                                                            {{ $formulir->pertanyaan }}
+                                                        @endif
                                                     </strong>
                                                 </div>
                                                 <div>
@@ -302,6 +331,7 @@
     </div>
 
     @include('_partials/_modals/modal-respon-cek-permintaan-admin')
+    @include('_partials/_modals/modal-edit-permintaan')
     @include('_partials/_modals/modal-penilaian-cek-permintaan')
     @include('_partials/_modals/modal-pindah-cek-permintaan-admin')
     @include('_partials/_modals/modal-selesai-cek-permintaan-admin')

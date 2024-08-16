@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
-use App\Models\PermintaanUbahBidang;
 use App\Models\Rating;
-use App\Models\ResponAnswer;
 use App\Models\Ticket;
+use App\Models\Notifikasi;
+use App\Models\ResponAnswer;
 use Illuminate\Http\Request;
+use App\Models\PermintaanUbahBidang;
 use Illuminate\Support\Facades\Auth;
 
 class ResponController extends Controller
@@ -92,7 +93,18 @@ class ResponController extends Controller
     $respon->id_answer = $answer->id;
     $respon->id_user = $user->id;
     $respon->description = $validatedData['respon'];
+
     $respon->save();
+
+    //notif
+    $notif = new Notifikasi();
+    $notif->nomor_tiket = $ticket->nomor_tiket;
+    $notif->status = '1';
+    $notif->judul = 'Permintaan  Selesai';
+    $notif->deskripsi = 'Permintaan Telah Selesai Silahkan Berikan Feed-Back';
+    $notif->id_user = $ticket->id_user;
+    $notif->save();
+
     return redirect()->route('cek-permintaan.index')->with('success', 'Permintaan Selesai');
   }
 
@@ -116,7 +128,10 @@ class ResponController extends Controller
       $path = $file->store('responses/' . $ticket->nomor_tiket, 'public');
     }
 
+    //jika admin yang mengirim
     $status_answer = '7';
+
+    //jika user yang mengirim
     if ($ticket->id_user == $user->id) {
       $status_answer = '4';
     }
@@ -129,7 +144,19 @@ class ResponController extends Controller
     $respon->save();
 
     $answer->status_answer =  $status_answer;
+
     $answer->save();
+
+    if ($status_answer == '7') {
+      //notifikasi status
+      $notif = new Notifikasi();
+      $notif->nomor_tiket = $ticket->nomor_tiket;
+      $notif->status = '1';
+      $notif->judul = 'Admin Telah Merespon Permintaan';
+      $notif->deskripsi = 'Permintaan Telah Direspon Silahkan Melakukan Revisi';
+      $notif->id_user = $ticket->id_user;
+      $notif->save();
+    }
 
     return redirect()->route('cek-permintaan.index')->with('success', 'Respon Berhasil Terkirim');
   }

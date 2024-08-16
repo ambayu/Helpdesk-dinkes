@@ -10,6 +10,7 @@ use App\Models\Inputan;
 use App\Models\Formulir;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Notifikasi;
 use Illuminate\Support\Facades\Validator;
 
 class Layanan extends Controller
@@ -33,6 +34,37 @@ class Layanan extends Controller
     );
   }
 
+  public function syarat_layanan($slug)
+  {
+
+    $menu = Menu::with('syarat')->where('slug', $slug)->first();
+    // return $menu;
+
+    $pageConfigs = ['myLayout' => 'blank'];
+    return view(
+      'content.pages.layanan.syarat-permintaan',
+      [
+        'pageConfigs' => $pageConfigs,
+        'menu' => $menu,
+      ]
+    );
+  }
+
+  public function bantuan_layanan($slug)
+  {
+
+    $menu = Menu::with('syarat')->where('slug', $slug)->first();
+    // return $menu;
+
+    $pageConfigs = ['myLayout' => 'blank'];
+    return view(
+      'content.pages.layanan.bantuan-permintaan',
+      [
+        'pageConfigs' => $pageConfigs,
+        'menu' => $menu,
+      ]
+    );
+  }
 
   public function store(Request $request)
   {

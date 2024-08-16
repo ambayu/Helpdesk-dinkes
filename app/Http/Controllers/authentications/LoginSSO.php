@@ -15,7 +15,7 @@ class LoginSSO extends Controller
   public function index()
   {
     if (Auth::check()) {
-      return redirect('/pages/profile-user');
+      return redirect('/dashboard');
     }
 
     $pageConfigs = ['myLayout' => 'blank'];

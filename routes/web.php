@@ -26,6 +26,7 @@ use App\Http\Controllers\authentications\LoginSSO;
 use App\Http\Controllers\pages\front_pages\HelpCenter;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\pages\front_pages\ListPermintaan;
 use App\Http\Controllers\pages\front_pages\HelpCenterArticle;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -51,13 +52,15 @@ Route::get('/cari-tiket/{tiket}', [HelpCenter::class, 'tiket'])->name('cari-tike
 
 
 Route::get('/login', [LoginSSO::class, 'index'])->name('login');
-Route::get('/login-admin', [LoginBasic::class, 'index'])->name('login');
+Route::get('/login-admin', [LoginBasic::class, 'index'])->name('login-admin');
 Route::post('/auth/login-masuk', [LoginBasic::class, 'loginMasuk'])->name('auth-login-masuk');
 Route::get('/auth/login-masuk-sso', [LoginBasic::class, 'loginMasukSSO'])->name('auth-login-masuk-sso');
 // Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 
 //layanan
 Route::get('/layanan/{slug}', [Layanan::class, 'index'])->name('layanan.index');
+Route::get('/syarat-layanan/{slug}', [Layanan::class, 'syarat_layanan'])->name('layanan.syarat_layanan');
+Route::get('/bantuan-layanan/{slug}', [Layanan::class, 'bantuan_layanan'])->name('layanan.bantuan_layanan');
 Route::post('/layanan', [Layanan::class, 'store'])->name('layanan.store');
 
 Route::get('/front-pages/help-center', [HelpCenter::class, 'index'])->name('front-pages-help-center');
@@ -107,7 +110,10 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/app/create-layanan', [CreateLayanan::class, 'store'])->name('create-layanan.store')->middleware(['permission:create-service']);
   //Create layanan list
   Route::get('/app/layanan/{slug}', [CreateLayanan::class, 'list'])->name('kirim-permintaan.list');
+  Route::get('/app/layanan-api/{slug}', [CreateLayanan::class, 'list_api'])->name('kirim-permintaan.list-api');
   Route::post('/app/layanan/list', [CreateLayanan::class, 'list_store'])->name('create-layanan.list-store');
+  Route::post('/app/layanan/list-edit/{id}', [CreateLayanan::class, 'list_edit_store'])->name('create-layanan.list-edit-store');
+  Route::get('/app/layanan/list-hapus/{id}', [CreateLayanan::class, 'list_hapus_store'])->name('create-layanan.list-hapus-store');
 
 
 
@@ -170,6 +176,7 @@ Route::middleware(['auth'])->group(function () {
   //permintaan
   Route::get('/app/cek-permintaan/', [CekPermintaanController::class, 'index'])->name('cek-permintaan.index');
   Route::get('/app/cek-permintaan/{status}', [CekPermintaanController::class, 'status'])->name('cek-permintaan.status');
+  Route::get('/app/cek-permintaan/cari/{tiket}', [CekPermintaanController::class, 'cari'])->name('cek-permintaan.cari');
   Route::post('/app/cek-permintaan/', [CekPermintaanController::class, 'search'])->name('cek-permintaan.search');
   Route::get('/app/cek-permintaan/search/{answer}', [CekPermintaanController::class, 'answer'])->name('cek-permintaan.answer');
 
@@ -178,6 +185,9 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/app/cek-permintaan/penilaian/{answer}', [ResponController::class, 'penilaian'])->name('cek-permintaan-penilaian.store');
   Route::post('/app/cek-permintaan/respon/{answer}', [ResponController::class, 'store'])->name('cek-permintaan-respon.store');
   Route::post('/app/cek-permintaan/pindah/{answer}', [ResponController::class, 'pindah'])->name('cek-permintaan-pindah.store');
+
+  //notifikasi
+  Route::get('/notifikasi/{notif}', [NotifikasiController::class, 'view'])->name('notifikasi.view');
 });
 
 //wajib login
@@ -185,5 +195,4 @@ Route::middleware([
   'auth:sanctum',
   config('jetstream.auth_session'),
   'verified',
-])->group(function () {
-});
+])->group(function () {});

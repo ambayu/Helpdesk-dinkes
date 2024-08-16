@@ -12,7 +12,7 @@ class Landing extends Controller
 {
   public function index()
   {
-    $menu = Menu::all();
+    $menu = Menu::take(8)->get();
     $tickets = Ticket::all();
 
     $ratings = Rating::with('user')->where('status', 1)->get();

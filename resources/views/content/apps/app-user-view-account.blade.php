@@ -54,8 +54,8 @@
                                 </div>
                             </div>
                             <div>
-                                <h4 class="mb-0">1.23k</h4>
-                                <span>Tasks Done</span>
+                                <h4 class="mb-0">{{ $ticketCounts['finish'] }}</h4>
+                                <span>Permintaan Selesai</span>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mt-3 gap-3">
@@ -65,8 +65,9 @@
                                 </div>
                             </div>
                             <div>
-                                <h4 class="mb-0">568</h4>
-                                <span>Projects On Proses</span>
+                                <h4 class="mb-0">
+                                    {{ $ticketCounts['pending'] + $ticketCounts['proses'] + $ticketCounts['finish'] }}</h4>
+                                <span>Total Permintaan</span>
                             </div>
                         </div>
                     </div>
@@ -135,7 +136,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Change Password</h5>
                 <div class="card-body">
-                    <form id="formChangePassword" method="POST" onsubmit="return false">
+                    <form id="formChangePassword" method="POST" onsubmit="submitChangePasswordForm(event)">
                         <div class="alert alert-warning" role="alert">
                             <h6 class="alert-heading mb-1">Ensure that these requirements are met</h6>
                             <span>Minimum 8 characters long, uppercase & symbol</span>
@@ -170,6 +171,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
             <!--/ Change Password -->

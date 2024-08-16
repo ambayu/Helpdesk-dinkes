@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Answer;
 use App\Models\Ticket;
 use App\Models\Formulir;
+use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -31,6 +32,16 @@ class CreateLayanan extends Controller
     $inputs = Menu::with('formulir.inputan')->where('slug', $slug)->first();
 
     return view('content.apps.create-layanan-list', compact('inputs'));
+  }
+
+  public function list_api($id)
+  {
+    $answer = Answer::with('menu', 'menu.formulir.inputan')->where('id', $id)->first();
+    // return $answer;
+    // $inputs = Menu::with('formulir.inputan')->where('slug', $answer->menu->slug)->first();
+    // return $inputs;
+
+    return response()->json(['data' => $answer]);
   }
 
   public function list_store(Request $request)
@@ -94,6 +105,14 @@ class CreateLayanan extends Controller
       }
 
       $answer->save();
+      //notifikasi status
+      $notif = new Notifikasi();
+      $notif->nomor_tiket = $nomor_tiket;
+      $notif->status = '1';
+      $notif->judul = 'Permintaan Layanan';
+      $notif->deskripsi = 'Permintaan Berhasil Dikirim';
+      $notif->id_user = auth()->user()->id;
+      $notif->save();
     } else {
       return redirect()->route('kirim-permintaan.list', ['slug' => $id_menu->menu->slug])->with('error', 'Tiket gagal dibuat');
     }
@@ -106,20 +125,92 @@ class CreateLayanan extends Controller
     );
   }
 
+
+  public function list_edit_store(Request $request, $id)
+  {
+
+    // Validasi data dari $request
+    $validator = Validator::make(
+      $request->all(),
+      [
+        'judul' => 'required|string|max:255', // Contoh validasi untuk email-username
+        'type.*.id_formulir' => 'required|integer', // Validasi untuk semua id_formulir dalam array type
+        'type.*.respon' => 'required|string', // Validasi untuk semua respon dalam array type      'file' => 'nullable|file|max:2048', // Contoh validasi untuk file (opsional, maksimum 2MB)
+      ],
+      [
+        'type.*.id_formulir.required' => 'Id formulir pada elemen diatas harus diisi.',
+        'type.*.respon.required' => 'Respon pada colom ini harus diisi.',
+      ]
+    );
+
+
+    if ($validator->fails()) {
+      return redirect()->back()
+        ->withErrors($validator)
+        ->withInput();
+    }
+    $tickets = Answer::with('ticket')->where('id', $id)->first();
+    // return $tickets->ticket->nomor_tiket;
+    $answer = Answer::find($id);
+    $answer->judul = $request->judul;
+    $answer->deskripsi = $request->deskripsi;
+
+    $formulirData = [];
+    foreach ($request->type as $data) {
+      $id_formulir = $data['id_formulir'];
+      $respon = $data['respon'];
+      $formulirData[] = [
+        'id_formulir' => $id_formulir,
+        'respon' => $respon,
+      ];
+    }
+
+    $answer->formulir = $formulirData;
+    // Jika ada file yang diunggah, simpan file ke server
+    if ($request->hasFile('file')) {
+      $file = $request->file('file');
+      $extension = $file->getClientOriginalExtension();
+      $filename = $tickets->ticket->nomor_tiket . '.' . $extension;
+      $filePath = $file->storeAs('public/assets/file', $filename);
+
+      $answer->file = $filePath;
+    }
+    $answer->save();
+
+
+
+    return redirect()->route('cek-permintaan.cari', ['tiket' => $tickets->ticket->nomor_tiket])->with([
+      'success' => 'Permintaan berhasil diubah.',
+    ]);
+  }
+
+
+  public function list_hapus_store($id)
+  {
+
+    // return $tickets->ticket->nomor_tiket;
+    $answer = Answer::find($id);
+    $tickets = Ticket::find($answer->id_ticket);
+
+    $tickets->delete();
+    $answer->delete();
+
+    return redirect()->route('cek-permintaan.index')->with([
+      'success' => 'Permintaan berhasil dihapus.',
+    ]);
+  }
+
   public function store(Request $request)
   {
 
+
     $validatedData = $request->validate([
       'nama_layanan' => 'required|string|max:255|unique:menu,nama_layanan',
-
-
     ]);
-
-
     $menu = new Menu();
     $menu->nama_layanan = $request->nama_layanan;
     $menu->slug = str_replace(' ', '-', $request->nama_layanan);
-    $menu->id_user = '1';
+    $menu->id_user = auth()->user()->id;
 
     if (isset($request->file)) {
       $menu->file = '1';
@@ -145,7 +236,8 @@ class CreateLayanan extends Controller
     }
 
 
-    return redirect()->route('create-layanan.index')->with('success', 'Layanan Telah Berhasil Dibuat');
+
+    return redirect()->route('app-layanan-create-layanan.index')->with('success', 'Layanan Telah Berhasil Dibuat');
   }
 
   public function update(Request $request, Permission $role)

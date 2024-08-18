@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserViewAccount extends Controller
 {
@@ -44,9 +45,6 @@ class UserViewAccount extends Controller
         'total' => $countPending + $countOnProses + $countSelesai,
       ];
 
-
-
-
       $user->role = $user->getRoleNames()[0];
       $user->date = Carbon::parse($user->created_at)->format('Y-m-d');
 
@@ -60,5 +58,24 @@ class UserViewAccount extends Controller
       }
       return view('content.apps.app-user-view-account', compact('user', 'ticketCounts'));
     }
+  }
+  public function update(Request $request, $user)
+  {
+    // return $request;
+    // Validate the input
+    $request->validate([
+      'newPassword' => ['required', 'string', 'min:6'],
+      'confirmPassword' => ['required', 'same:newPassword'],
+    ]);
+
+    // Get the currently authenticated user
+    $user = User::find($user);
+
+    // Update the user's password
+    $user->password = Hash::make($request->newPassword);
+    $user->save();
+
+    // Return a success message
+    return redirect()->back()->with('success', 'Password has been updated successfully.');
   }
 }

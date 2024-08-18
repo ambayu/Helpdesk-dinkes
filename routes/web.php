@@ -105,6 +105,7 @@ Route::middleware(['auth'])->group(function () {
   //admin list
   Route::get('/app/create-admin/list', [CreateAdmin::class, 'adminList'])->name('create-admin.list');
   Route::get('/app/user/view/account/{user}', [UserViewAccount::class, 'index'])->name('app-user-view-account');
+  Route::post('/app/user/view/account/{user}', [UserViewAccount::class, 'update'])->name('app-user-view-account-update');
 
 
   //Create layanan

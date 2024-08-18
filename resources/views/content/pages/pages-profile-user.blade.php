@@ -98,18 +98,22 @@
             <!-- About User -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <small class="card-text text-uppercase">About</small>
+                    <small class="card-text text-uppercase">Biodata</small>
                     <ul class="list-unstyled my-3 py-1">
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-account-outline mdi-24px"></i><span
-                                class="fw-medium mx-2">Full Name:</span> <span>{{ $user->name }}</span></li>
+                                class="fw-medium mx-2">Nama Lengkap:</span> <span>{{ $user->name }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="mdi mdi-email-outline mdi-24px"></i><span
+                                class="fw-medium mx-2">Email:</span> <span>{{ $user->email }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="mdi mdi-phone-outline mdi-24px"></i><span
+                                class="fw-medium mx-2">Nomor Hp:</span> <span>{{ $user->no_hp }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-check mdi-24px"></i><span
                                 class="fw-medium mx-2">Status:</span> <span>{{ $user->status }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-star-outline mdi-24px"></i><span
-                                class="fw-medium mx-2">Role:</span> <span>{{ $user->role }}</span></li>
+                                class="fw-medium mx-2">Peran:</span> <span>{{ $user->role }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-flag-outline mdi-24px"></i><span
-                                class="fw-medium mx-2">Country:</span> <span>Indonesia</span></li>
+                                class="fw-medium mx-2">Negara:</span> <span>Indonesia</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="mdi mdi-translate mdi-24px"></i><span
-                                class="fw-medium mx-2">Languages:</span> <span>Indonesia</span></li>
+                                class="fw-medium mx-2">Bahasa:</span> <span>Indonesia</span></li>
                     </ul>
                     <small class="card-text text-uppercase">Contacts</small>
                     <ul class="list-unstyled my-3 py-1">

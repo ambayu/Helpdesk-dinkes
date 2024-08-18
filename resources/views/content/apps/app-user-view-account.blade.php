@@ -135,43 +135,70 @@
             <!-- Change Password -->
             <div class="card mb-4">
                 <h5 class="card-header">Change Password</h5>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
-                    <form id="formChangePassword" method="POST" onsubmit="submitChangePasswordForm(event)">
+                    {{-- <form id="formChangePassword" method="POST"> --}}
+                    @if ($user->role != 'User')
+                        <form id="" action="{{ url('/app/user/view/account/' . $user->id) }}" method="POST">
+                            @csrf
+                            <div class="alert alert-warning" role="alert">
+                                <h6 class="alert-heading mb-1">Ensure that these requirements are met</h6>
+                                <span>Minimum 8 characters long, uppercase & symbol</span>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                    <div class="input-group input-group-merge">
+                                        <div class="form-floating form-floating-outline">
+                                            <input class="form-control" type="password" id="newPassword" name="newPassword"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <label for="newPassword">New Password</label>
+                                        </div>
+                                        <span class="input-group-text cursor-pointer"><i
+                                                class="mdi mdi-eye-off-outline"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                    <div class="input-group input-group-merge">
+                                        <div class="form-floating form-floating-outline">
+                                            <input class="form-control" type="password" name="confirmPassword"
+                                                id="confirmPassword"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <label for="confirmPassword">Confirm New Password</label>
+                                        </div>
+                                        <span class="input-group-text cursor-pointer"><i
+                                                class="mdi mdi-eye-off-outline"></i></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary me-2">Change Password</button>
+                                </div>
+                            </div>
+                        </form>
+                    @else
                         <div class="alert alert-warning" role="alert">
-                            <h6 class="alert-heading mb-1">Ensure that these requirements are met</h6>
-                            <span>Minimum 8 characters long, uppercase & symbol</span>
+                            <h6 class="alert-heading mb-1">Tidak dapat Mengubah Password User</h6>
+                            <span>Super Admin Hanya dapat mengubah password sesama admin</span>
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                                <div class="input-group input-group-merge">
-                                    <div class="form-floating form-floating-outline">
-                                        <input class="form-control" type="password" id="newPassword" name="newPassword"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                        <label for="newPassword">New Password</label>
-                                    </div>
-                                    <span class="input-group-text cursor-pointer"><i
-                                            class="mdi mdi-eye-off-outline"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                                <div class="input-group input-group-merge">
-                                    <div class="form-floating form-floating-outline">
-                                        <input class="form-control" type="password" name="confirmPassword"
-                                            id="confirmPassword"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                        <label for="confirmPassword">Confirm New Password</label>
-                                    </div>
-                                    <span class="input-group-text cursor-pointer"><i
-                                            class="mdi mdi-eye-off-outline"></i></span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary me-2">Change Password</button>
-                            </div>
-                        </div>
-                    </form>
-
+                    @endif
                 </div>
             </div>
             <!--/ Change Password -->

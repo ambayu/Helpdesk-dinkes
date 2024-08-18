@@ -73,7 +73,7 @@ class CekPermintaanController extends Controller
         'id_status_answer' => $answer->status_answer,
         'pindah_layanan' => $answer->pindah_layanan,
         'file' => $answer->file,
-
+        'user' => $answer->ticket->user,
 
         'formulir' => $formulirData,
         'deskripsi' => $answer->deskripsi,

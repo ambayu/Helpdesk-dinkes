@@ -81,7 +81,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-teams') }}"><i
                                 class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Teams</a></li>
                 @endif
-
+                <li class="nav-item"><a class="nav-link " href="{{ url('pages/profile-edit') }}"><i
+                            class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Edit</a></li>
                 {{--  <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-projects') }}"><i
                             class='mdi mdi-view-grid-outline me-1 mdi-20px'></i>Projects</a></li> --}}
                 {{-- <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-connections') }}"><i

@@ -66,6 +66,8 @@
                             class='mdi mdi-account-outline me-1 mdi-20px'></i>Profile</a></li>
                 <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i
                             class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Teams</a></li>
+                <li class="nav-item"><a class="nav-link " href="{{ url('pages/profile-edit') }}"><i
+                            class='mdi mdi-account-multiple-outline me-1 mdi-20px'></i>Edit</a></li>
                 {{-- <li class="nav-item"><a class="nav-link" href="{{url('pages/profile-projects')}}"><i class='mdi mdi-view-grid-outline me-1 mdi-20px'></i>Projects</a></li>
       <li class="nav-item"><a class="nav-link" href="{{url('pages/profile-connections')}}"><i class='mdi mdi-link me-1 mdi-20px'></i>Connections</a></li> --}}
             </ul>

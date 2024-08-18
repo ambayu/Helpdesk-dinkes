@@ -76,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
   // Profil
   Route::get('/pages/profile-teams', [UserTeams::class, 'index'])->name('pages-profile-teams')->middleware(['permission:view-team-profile']);
   Route::get('/pages/profile-user', [UserProfile::class, 'index'])->name('pages-profile-user')->middleware(['permission:view-user-profile']);
+  Route::get('/pages/profile-edit', [UserProfile::class, 'edit'])->name('pages-profile-edit')->middleware(['permission:view-user-edit']);
+  Route::post('/pages/profile-edit', [UserProfile::class, 'update'])->name('pages-profile-update')->middleware(['permission:view-user-edit']);
 
   //access role
   Route::get('/app/access-roles', [AccessRoles::class, 'index'])->name('app-access-roles.index')->middleware(['permission:view-roles']);

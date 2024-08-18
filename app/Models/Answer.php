@@ -43,11 +43,16 @@ class Answer extends Model
   public function scopeFilteredAnswers($query, $user, $role, $menuBidangIds)
   {
     return $query->with([
-      'ticket.user', 'ticket.statuses', 'status', 'pindah_layanan.menu_baru',
+      'ticket.user',
+      'ticket.statuses',
+      'status',
+      'pindah_layanan.menu_baru',
       'menu' => function ($query) {
         $query->withTrashed();
       },
-      'respon_answer.user.roles', 'respon_answer.user.roleBidang.bidang', 'menu.menuBidang.bidang'
+      'respon_answer.user.roles',
+      'respon_answer.user.roleBidang.bidang',
+      'menu.menuBidang.bidang'
     ])
       ->when($role == 'Admin Layanan', function ($query) use ($menuBidangIds) {
         return $query->where(function ($query) use ($menuBidangIds) {

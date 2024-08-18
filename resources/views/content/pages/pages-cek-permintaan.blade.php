@@ -185,8 +185,9 @@
 
                                             <div class="d-flex flex-wrap">
                                                 <div class="avatar me-3">
-                                                    <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                                        class="rounded-circle" />
+
+                                                    <img src="{{ $answer->user->profile_photo_path ?? asset('assets/img/avatars/3.png') }}"
+                                                        alt="Avatar" class="rounded-circle" />
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-0">{{ $answer->nama }}</h6>
@@ -230,7 +231,8 @@
 
                                                 <div class="d-flex flex-wrap gap-2">
 
-                                                    <a href="{{ Storage::url($answer->file) }}" class="me-3">
+                                                    <a target="_blank" href="{{ Storage::url($answer->file) }}"
+                                                        class="me-3">
                                                         <img src="{{ asset('assets/img/icons/misc/doc.png') }}"
                                                             alt="Document image" width="15" class="me-2">
                                                         <span class="fw-medium text-body">Unduh</span>
@@ -277,7 +279,8 @@
                                                         <h6 class="mb-0">File Terlampir</h6>
                                                         <div class="d-flex flex-wrap gap-2">
 
-                                                            <a href="{{ asset('storage/' . $respon_answer->file) }}"
+                                                            <a target="_blank"
+                                                                href="{{ asset('storage/' . $respon_answer->file) }}"
                                                                 class="me-3">
                                                                 <img src="{{ asset('assets/img/icons/misc/doc.png') }}"
                                                                     alt="Document image" width="15" class="me-2">

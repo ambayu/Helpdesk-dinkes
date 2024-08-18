@@ -20,6 +20,12 @@
                     "permissions": "view-user-profile"
                 },
                 {
+                    "url": "pages\/profile-edit",
+                    "name": "Edit",
+                    "slug": "pages-profile-edit",
+                    "permissions": "view-user-edit"
+                },
+                {
                     "url": "pages\/profile-teams",
                     "name": "Team",
                     "slug": "pages-profile-teams",

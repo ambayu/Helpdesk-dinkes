@@ -76,7 +76,7 @@ class UserProfile extends Controller
     $validatedData = $request->validate([
 
       'name' => 'required|string',
-      'no_hp' => 'required|string',
+      // 'no_hp' => 'required|string',
 
     ]);
 

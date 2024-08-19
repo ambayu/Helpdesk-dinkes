@@ -158,13 +158,13 @@
                             <div class="mb-3 form-floating form-floating-outline">
                                 <input type="text" id="name" name="name" class="form-control"
                                     value="{{ auth()->user()->name }}" placeholder="Username" />
-                                <label for="name">Nama</label>
+                                <label for="name">Nama Alias</label>
                             </div>
-                            <div class="mb-3 form-floating form-floating-outline">
+                            {{-- <div class="mb-3 form-floating form-floating-outline">
                                 <input type="text" id="no_hp" name="no_hp" class="form-control"
                                     value="{{ auth()->user()->no_hp }}" placeholder="Nomor Hp" />
                                 <label for="no_hp">Nomor Hp</label>
-                            </div>
+                            </div> --}}
                         </div>
 
 

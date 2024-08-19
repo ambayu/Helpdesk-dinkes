@@ -37,7 +37,9 @@
                         masyarakat dan instansi pemerintahan di Kota Medan. Layanan ini bertujuan untuk memastikan bahwa
                         semua permasalahan teknis yang berhubungan dengan TIK dapat diatasi dengan cepat dan efisien.
                     </h2>
-                    <a href="{{ url('/login') }}" class="btn btn-primary">MASUK</a>
+                    <a href="{{ url('/login') }}" class="btn btn-primary">
+                        {{ auth() ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
+                    </a>
                 </div>
                 <div class="position-relative hero-animation-img">
                     <a href="{{ url('/login') }}" target="_blank">

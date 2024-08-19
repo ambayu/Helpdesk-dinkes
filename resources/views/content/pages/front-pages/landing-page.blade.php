@@ -38,7 +38,7 @@
                         semua permasalahan teknis yang berhubungan dengan TIK dapat diatasi dengan cepat dan efisien.
                     </h2>
                     <a href="{{ url('/login') }}" class="btn btn-primary">
-                        {{ auth()->user()->id ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
+                        {{ auth() ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
                     </a>
                 </div>
                 <div class="position-relative hero-animation-img">

@@ -186,7 +186,7 @@
             <li>
                 <a href="/login" class="btn btn-primary px-2 px-sm-4 px-lg-2 px-xl-4"><span
                         class="tf-icons mdi mdi-account me-md-1"></span><span class="d-none d-md-block">
-                        {{ auth()->user()->id ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
+                        {{ auth() ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
                     </span></a>
             </li>
             <!-- navbar button: End -->

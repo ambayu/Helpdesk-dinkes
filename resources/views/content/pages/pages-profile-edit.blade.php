@@ -170,9 +170,9 @@
 
 
                         <div class="col-12 text-center demo-vertical-spacing">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Ubah Profil</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan</button>
                             <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                aria-label="Close">Close</button>
+                                aria-label="Close">Batal</button>
                         </div>
                     </form>
                 </div>

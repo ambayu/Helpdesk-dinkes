@@ -86,7 +86,7 @@ class LoginBasic extends Controller
     $email = $authcallback['data']['user_sso']['email'];
     $jenis_kelamin = $authcallback['data']['user_sso']['jenis_kelamin'];
     $avatarUrl = $authcallback['data']['user_sso']['avatar'];
-    return $avatarUrl;
+
     $cek_username = User::where('username', $email)->first();
 
 
@@ -241,6 +241,7 @@ class LoginBasic extends Controller
 
   public function downloadAvatar($url)
   {
+    // Set opsi konteks SSL untuk menonaktifkan verifikasi
     $contextOptions = [
       "ssl" => [
         "verify_peer" => false,
@@ -249,7 +250,14 @@ class LoginBasic extends Controller
     ];
 
     $context = stream_context_create($contextOptions);
-    $contents = file_get_contents($url, false, $context);
+
+    // Coba unduh file, kembalikan null jika gagal
+    $contents = @file_get_contents($url, false, $context);
+
+    // Jika gagal mengunduh atau URL tidak valid, kembalikan null
+    if ($contents === false) {
+      return null;
+    }
 
     $pathInfo = pathinfo(parse_url($url, PHP_URL_PATH)); // Mendapatkan informasi path dari URL
     $extension = isset($pathInfo['extension']) ? $pathInfo['extension'] : 'jpg'; // Mendapatkan ekstensi file, default ke 'jpg' jika tidak ada ekstensi

@@ -99,7 +99,7 @@
                                     <div class="d-flex gap-2">
                                         <div class="flex-shrink-0">
                                             <div class="avatar me-1">
-                                                <img src="{{ $item->user->profile_photo_path ? Storage::url($item->user->profile_photo_path) : asset('assets/img/avatars/3.png') }}"
+                                                <img src="{{ $item->user->profile_photo_path ? Storage::url($item->user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                                     alt="Profile Image" class="w-px-40 h-auto rounded-circle">
                                             </div>
                                         </div>
@@ -131,7 +131,7 @@
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="d-flex align-items-center">
                     <div class="avatar avatar-online me-3">
-                        <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/3.png') }}"
+                        <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                             alt="Profile Photo" class="w-40 h-40 rounded-circle">
                     </div>
                     <h6 class="mb-0">{{ Auth::user()->name }}</h6>
@@ -145,7 +145,7 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/3.png') }}"
+                                    <img src="{{ Auth::user()->profile_photo_path ? Storage::url(Auth::user()->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                         alt class="w-px-40 sd h-auto rounded-circle">
                                 </div>
                             </div>

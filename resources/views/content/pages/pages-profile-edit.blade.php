@@ -129,7 +129,7 @@
                         <div class="col-2 md-3">
                             <div id="photo-preview-ubah" class=" d-flex align-items-center flex-column">
                                 <img class="img-fluid rounded mb-3 mt-4"
-                                    src="{{ auth()->user()->profile_photo_path ?? asset('assets/img/avatars/1.png') }}"
+                                    src="{{ auth()->user()->profile_photo_path ? Storage::url($user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                     height="220" width="220" alt="User avatar" />
 
                             </div>

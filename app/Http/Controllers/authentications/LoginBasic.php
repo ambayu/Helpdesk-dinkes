@@ -86,7 +86,7 @@ class LoginBasic extends Controller
     $email = $authcallback['data']['user_sso']['email'];
     $jenis_kelamin = $authcallback['data']['user_sso']['jenis_kelamin'];
     $avatarUrl = $authcallback['data']['user_sso']['avatar'];
-
+    return $avatarUrl;
     $cek_username = User::where('username', $email)->first();
 
 

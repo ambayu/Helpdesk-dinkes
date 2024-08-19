@@ -77,6 +77,7 @@ class UserProfile extends Controller
 
       'name' => 'required|string',
       // 'no_hp' => 'required|string',
+      'photo' => 'nullable|image|max:2048', // Validasi ukuran maksimal 2MB (2048 KB)
 
     ]);
 
@@ -88,7 +89,7 @@ class UserProfile extends Controller
       $user->profile_photo_path = $photoPath;
     }
     $user->name = $request->name;
-    $user->no_hp = $request->no_hp;
+    // $user->no_hp = $request->no_hp;
     $user->save();
     return redirect()->route('pages-profile-edit')->with('success', 'Data Berhasil Diubah');
   }

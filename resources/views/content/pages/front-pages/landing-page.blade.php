@@ -38,7 +38,7 @@
                         semua permasalahan teknis yang berhubungan dengan TIK dapat diatasi dengan cepat dan efisien.
                     </h2>
                     <a href="{{ url('/login') }}" class="btn btn-primary">
-                        {{ auth() ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
+                        {{ auth()->user()->id ? 'KEMBALI KE HALAMAN UTAMA' : 'MASUK' }}
                     </a>
                 </div>
                 <div class="position-relative hero-animation-img">
@@ -84,11 +84,11 @@
                 <h6 class="text-center fw-semibold d-flex justify-content-center align-items-center mb-4">
                     <img src="{{ asset('assets/img/front-pages/icons/section-tilte-icon.png') }}" alt="section title icon"
                         class="me-2" />
-                    <span class="text-uppercase">Ulasan Asli Masyarakat</span>
+                    <span class="text-uppercase">Ulasan pengguna</span>
                 </h6>
-                <h3 class="text-center mb-2"><span class="fw-bold">Ulasan</span> dari masyarakat dan pegawai</h3>
-                <p class="text-center fw-medium mb-3 mb-md-5">Lihat beberapa ulasan yang diberikan dari masyarakat dan
-                    pegawai atas pelayanan kami </p>
+                <h3 class="text-center mb-2"><span class="fw-bold">Ulasan</span> dari pengguna</h3>
+                <p class="text-center fw-medium mb-3 mb-md-5">Lihat beberapa ulasan yang diberikan dari pengguna atas
+                    pelayanan kami </p>
                 <div class="mb-4">
                     <div class="card h-100">
                         <div class="card-body row widget-separator">
@@ -98,8 +98,8 @@
                                     <span class='mdi mdi-star mdi-24px ms-1 text-primary'></span>
                                 </div>
                                 <h6>Total {{ $totalRatings }} ulasan</h6>
-                                <p>Ulasan ini adalah 100% nyata dan berasal dari pelanggan yang benar-benar telah merasakan
-                                    pengalaman dengan pelayanan kami</p>
+                                <p>Ulasan ini diberikan oleh pengguna yang benar-benar telah merasakan
+                                    pengalaman pelayanan kami</p>
                                 <span class="badge bg-label-primary rounded-pill p-2 mb-3 mb-sm-0"></span>
                                 <hr class="d-sm-none">
                             </div>

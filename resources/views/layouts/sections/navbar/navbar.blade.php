@@ -99,7 +99,7 @@
                                     <div class="d-flex gap-2">
                                         <div class="flex-shrink-0">
                                             <div class="avatar me-1">
-                                                <img src="{{ $item->user->profile_photo_path ? Storage::url($item->user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
+                                                <img src="{{ $item->user->profile_photo_path ? Storage::url($item->user->profile_photo_path) : asset('assets/img/avatars/3.png') }}"
                                                     alt="Profile Image" class="w-px-40 h-auto rounded-circle">
                                             </div>
                                         </div>

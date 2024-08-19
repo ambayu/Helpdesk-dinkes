@@ -241,7 +241,16 @@ class LoginBasic extends Controller
 
   public function downloadAvatar($url)
   {
-    $contents = file_get_contents($url);
+    $contextOptions = [
+      "ssl" => [
+        "verify_peer" => false,
+        "verify_peer_name" => false,
+      ],
+    ];
+
+    $context = stream_context_create($contextOptions);
+    $contents = file_get_contents($url, false, $context);
+
     $pathInfo = pathinfo(parse_url($url, PHP_URL_PATH)); // Mendapatkan informasi path dari URL
     $extension = isset($pathInfo['extension']) ? $pathInfo['extension'] : 'jpg'; // Mendapatkan ekstensi file, default ke 'jpg' jika tidak ada ekstensi
     $fileName = Str::random(10) . '.' . $extension; // Membuat nama file yang unik dengan ekstensi

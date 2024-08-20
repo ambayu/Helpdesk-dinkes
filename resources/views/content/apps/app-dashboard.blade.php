@@ -148,13 +148,13 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <p class="mb-0 text-success me-1">+22%</p>
+                            <p class="mb-0 text-success me-1">+{{ $ticketCounts['total_persen_bulan_ini'] }}</p>
                             <i class="mdi mdi-chevron-up text-success"></i>
                         </div>
                     </div>
                     <div class="card-info mt-4 pt-1 mt-lg-1 mt-xl-4">
-                        <h5 class="mb-4">{{ $total_tiket }}</h5>
-                        <p class="mb-lg-2 mb-xl-3">Total Permintaan</p>
+                        <h5 class="mb-4">{{ $ticketCounts['total_bulan_ini'] }}</h5>
+                        <p class="mb-lg-2 mb-xl-3">Total Permintaan bulan ini</p>
                         <div class="badge bg-label-secondary rounded-pill">Hingga saat ini</div>
                     </div>
                 </div>
@@ -167,10 +167,10 @@
             <div class="card h-100">
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-end mb-1 flex-wrap gap-2">
-                        <h4 class="mb-0 me-2">+1</h4>
-                        <p class="mb-0 text-success">+10%</p>
+                        <h4 class="mb-0 me-2">{{ $ticketCounts['today'] }}</h4>
+                        <p class="mb-0 text-success">+{{ $ticketCounts['todaypersen'] }}</p>
                     </div>
-                    <span class="d-block mb-2 text-body">Permintaan hari</span>
+                    <span class="d-block mb-2 text-body">Permintaan hari ini</span>
                 </div>
                 <div class="card-body pt-0">
                     <div id="sessions"></div>
@@ -180,7 +180,7 @@
         <!--/ Sessions line chart -->
 
         <!-- Dinas Kominfo Kota Medan with bg-->
-        <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             <div class="swiper-container swiper-container-horizontal swiper text-bg-primary"
                 id="swiper-weekly-sales-with-bg">
                 <div class="swiper-wrapper">
@@ -330,8 +330,8 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-        </div>
-        <div class="col-xl-6">
+        </div> --}}
+        <div class="col-xl-12">
             <div class="card h-100">
                 <div class="card-body text-nowrap">
                     <h4 class="card-title mb-1 d-flex gap-2 flex-wrap">Selamat Akun Berhasil Dibuat! 🎉</h4>
@@ -347,15 +347,35 @@
         {{-- end weekly --}}
 
         <div class="col-12 col-xl-12 col-md-6">
+
             <div class="card h-100">
                 <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="bg-label-info text-center mb-3 pt-2 rounded-3">
                         <img class="img-fluid"
-                            src="{{ asset('assets/img/illustrations/card-ratings-illustration.png') }}"
+                            src="  {{ $news->foto ? Storage::url($news->foto) : asset('assets/img/illustrations/card-ratings-illustration.png') }}"
                             alt="Boy card image" width="130" />
                     </div>
-                    <h5 class="mb-2 pb-1"> Webinar Yang Akan Datang</h5>
-                    <p>Pelatihan pengoperasian aplikasi Help-Desk Dinas Pemerintah Kota Medan.</p>
+                    <h5 class="mb-2 pb-1">{{ $news->judul }}</h5>
+                    <p>{{ $news->deskripsi }}</p>
                     <div class="row mb-3 g-3">
                         <div class="col-6">
                             <div class="d-flex">
@@ -364,7 +384,7 @@
                                             class="mdi mdi-calendar-blank mdi-24px"></i></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0 text-nowrap">17 Nov 24</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $news->tanggal }}</h6>
                                     <small>Tanggal</small>
                                 </div>
                             </div>
@@ -376,13 +396,17 @@
                                             class="mdi mdi-timer-outline mdi-24px"></i></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0 text-nowrap">32 menit</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $news->durasi }}</h6>
                                     <small>Durasi</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="javascript:void(0);" class="btn btn-primary w-100">Gabung Webminar</a>
+                    <a href="{{ $news->link }}" class="btn btn-primary w-100">Gabung Webminar</a>
+                    @if (auth()->user()->roles[0]->name != 'User')
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editNews"
+                            class="btn btn-danger w-100 mt-2 ">Edit</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -390,4 +414,7 @@
 
 
     </div>
+
+    @include('_partials/_modals/modal-edit-news')
+
 @endsection

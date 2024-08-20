@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
 
   //dashboard
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  Route::post('/news', [DashboardController::class, 'store'])->name('news.store');
 
   // Profil
   Route::get('/pages/profile-teams', [UserTeams::class, 'index'])->name('pages-profile-teams')->middleware(['permission:view-team-profile']);

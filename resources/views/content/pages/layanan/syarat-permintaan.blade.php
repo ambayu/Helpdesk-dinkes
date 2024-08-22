@@ -56,9 +56,8 @@
                             @endif
 
                         </div>
-
-
-                        @if (!auth())
+                        @if (auth())
+                        @else
                             <p class="text-center">
                                 <span>Belum punya akun SSO?</span>
                                 <a href="https://sso.pemkomedan.go.id/login-users">
@@ -66,7 +65,6 @@
                                 </a>
                             </p>
                         @endif
-
 
 
                     </div>

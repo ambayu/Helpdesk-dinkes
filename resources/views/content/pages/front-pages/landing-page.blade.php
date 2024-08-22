@@ -33,7 +33,7 @@
                     <h1 class="text-primary hero-title">LAYANAN HELP DESK</h1>
                     <h2 class="h6 mb-4 pb-1 lh-lg">
                         Dinas Komunikasi dan Informatika (Diskominfo) Pemerintah Kota Medan menyediakan layanan Help Desk
-                        untuk memberikan dukungan dan solusi terkait masalah teknologi informasi dan komunikasi (TIK) kepada
+                        untuk memberikan dukungan dan solusi terkait masalah Teknologi Informasi dan Komunikasi (TIK) kepada
                         masyarakat dan instansi pemerintahan di Kota Medan. Layanan ini bertujuan untuk memastikan bahwa
                         semua permasalahan teknis yang berhubungan dengan TIK dapat diatasi dengan cepat dan efisien.
                     </h2>
@@ -282,10 +282,11 @@
                                     data-bs-parent="#accordionFront" aria-labelledby="accordionOne">
                                     <div class="accordion-body">
                                         Aplikasi help desk adalah sistem yang digunakan untuk menangani dan menyelesaikan
-                                        permintaan atau masalah yang dilaporkan oleh warga atau pegawai. Di Dinas Komunikasi
-                                        dan Informatika Pemerintah Kota Medan, aplikasi ini digunakan untuk mengelola
-                                        laporan, permintaan layanan, dan isu teknis terkait dengan infrastruktur TI dan
-                                        komunikasi.
+                                        permintaan atau masalah yang dilaporkan oleh masyarakat. aplikasi ini digunakan
+                                        untuk mengelola
+                                        laporan, permintaan Layanan, dan isu teknis terkait dengan infrastruktur TI dan
+                                        Komunikasi Di Dinas Komunikasi
+                                        dan Informatika Kota Medan
                                     </div>
                                 </div>
                             </div>
@@ -368,7 +369,7 @@
                                             Penggunaan aplikasi help desk biasanya gratis untuk pengguna, terutama jika
                                             aplikasi ini dikelola oleh instansi pemerintah. Namun, pastikan untuk memeriksa
                                             informasi resmi dari Dinas Komunikasi dan Informatika untuk detail lebih lanjut
-                                            mengenai biaya atau layanan tambahan.
+                                            mengenai biaya atau Layanan tambahan.
                                         </div>
                                     </div>
                                 </div>

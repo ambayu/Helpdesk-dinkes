@@ -73,7 +73,7 @@
                     <script>
                         document.write(new Date().getFullYear());
                     </script>
-                    , Made with <i class="tf-icons mdi mdi-heart text-danger"></i> by Dinas Komunikasi dan Informasi
+                    , Made with <i class="tf-icons mdi mdi-heart text-danger"></i> by Dinas Komunikasi dan Informatika
                     Pemerintah
                     Kota Medan
                 </span>

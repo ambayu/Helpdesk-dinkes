@@ -89,7 +89,7 @@
                                     @foreach ($menus as $menu)
                                         <li class="nav-item {{ $currentRouteName === $menu->slug ? 'active' : '' }}">
                                             <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                                href="{{ url('layanan/' . $menu->slug) }}">
+                                                href="{{ url('/syarat-layanan/' . $menu->slug) }}">
                                                 <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
                                                 <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
                                             </a>
@@ -119,7 +119,7 @@
                                     @foreach ($menus as $menu)
                                         <li class="nav-item {{ $currentRouteName === $menu->slug ? 'active' : '' }}">
                                             <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                                href="{{ url('layanan/' . $menu->slug) }}">
+                                                href="{{ url('/bantuan-layanan/' . $menu->slug) }}">
                                                 <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
                                                 <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
                                             </a>

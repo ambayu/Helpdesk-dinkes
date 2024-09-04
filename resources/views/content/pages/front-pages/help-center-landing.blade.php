@@ -155,6 +155,7 @@
                                                     <i
                                                         class="tf-icons mdi mdi-chevron-right mdi-24px scaleX-n1-rtl text-muted"></i>
                                                 </a>
+                                                <hr>
                                             </li>
                                         @endforeach
 
@@ -176,12 +177,18 @@
                                             <li class="mb-2">
                                                 <a href="{{ url('/syarat-layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">
-                                                    <span class="text-truncate me-1">
+                                                    <span
+                                                        style="text-overflow: clip; word-wrap:normal;
+                                                    white-space: normal;
+                                                   "
+                                                        class="text-truncate me-1">
                                                         {{ $menu->nama_layanan }}
                                                     </span>
                                                     <i
                                                         class="tf-icons mdi mdi-chevron-right mdi-24px scaleX-n1-rtl text-muted"></i>
                                                 </a>
+                                                <hr>
+
                                             </li>
                                         @endforeach
 
@@ -203,12 +210,18 @@
                                             <li class="mb-2">
                                                 <a href="{{ url('/bantuan-layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">
-                                                    <span class="text-truncate me-1">
+                                                    <span
+                                                        style="text-overflow: clip; word-wrap:normal;
+                                                    white-space: normal;
+                                                   "
+                                                        class="text-truncate me-1">
                                                         {{ $menu->nama_layanan }}
                                                     </span>
                                                     <i
                                                         class="tf-icons mdi mdi-chevron-right mdi-24px scaleX-n1-rtl text-muted"></i>
                                                 </a>
+                                                <hr>
+
                                             </li>
                                         @endforeach
                                     </ul>

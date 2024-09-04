@@ -141,7 +141,7 @@
                                         <h5 class="mb-0 ms-1">Layanan</h5>
                                     </div>
                                     <ul class="list-unstyled my-4">
-                                        @foreach ($menus as $menu)
+                                        @foreach ($menus_list as $menu)
                                             <li class="mb-2">
                                                 <a href="{{ url('/app/layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">

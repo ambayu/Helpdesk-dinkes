@@ -14,6 +14,7 @@ class HelpCenter extends Controller
   {
     $pageConfigs = ['myLayout' => 'front'];
     $menu = Menu::take(8)->get();
+    $menus = Menu::all();
     $tickets = Ticket::all();
 
     $ratings = Rating::with('user')->get();
@@ -32,6 +33,7 @@ class HelpCenter extends Controller
       'tickets' => $tickets,
       'ticketCounts' => $ticketCounts,
       'ratings' => $ratings,
+      'menus_list' => $menus,
     ]);
   }
   public function tiket($tiket)

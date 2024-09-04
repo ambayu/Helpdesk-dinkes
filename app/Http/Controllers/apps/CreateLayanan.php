@@ -207,9 +207,45 @@ class CreateLayanan extends Controller
     $validatedData = $request->validate([
       'nama_layanan' => 'required|string|max:255|unique:menu,nama_layanan',
     ]);
+    // return $request;
+    $inputan = $request->input('inputan');
+
+    // Custom validation rules for 'inputan'
+    Validator::make($inputan, [
+      '*.input_type' => 'required|integer',
+      '*.name_label' => function ($attribute, $value, $fail) use ($inputan) {
+        $index = explode('.', $attribute)[0];  // Mendapatkan indeks dalam array
+
+        // Memastikan kunci 'input_type' ada sebelum memeriksa nilainya
+        if (!array_key_exists('input_type', $inputan[$index])) {
+          $fail('Tipe input tidak ditemukan.');
+          return;
+        }
+
+        // Jika input_type null, berikan pesan kesalahan
+        if (is_null($inputan[$index]['input_type'])) {
+          $fail('Tipe input tidak boleh null.');
+        }
+
+        // Jika input_type adalah 1 atau 2, name_label tidak boleh null
+        if (($inputan[$index]['input_type'] == 1 || $inputan[$index]['input_type'] == 2) && is_null($value)) {
+          $fail('Label tidak boleh kosong jika tipe input adalah text atau textarea.');
+        }
+
+        // Jika input_type adalah 3, name_label harus mengandung ":" dan ","
+        if ($inputan[$index]['input_type'] == 3) {
+          if (!str_contains($value, ':') || !str_contains($value, ',')) {
+            $fail('Label harus mengandung ":" dan "," jika tipe input adalah pilihan. Contoh: "Warna: merah,kuning,biru".');
+          }
+        }
+      },
+    ])->validate();
+
+    // return $request;
+
     $menu = new Menu();
     $menu->nama_layanan = $request->nama_layanan;
-    $menu->slug = str_replace(' ', '-', $request->nama_layanan);
+    $menu->slug = str_replace([' ', '/'], ['-', '--'], $request->nama_layanan);
     $menu->id_user = auth()->user()->id;
 
     if (isset($request->file)) {

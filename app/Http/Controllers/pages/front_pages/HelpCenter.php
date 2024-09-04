@@ -13,7 +13,7 @@ class HelpCenter extends Controller
   public function index()
   {
     $pageConfigs = ['myLayout' => 'front'];
-    $menu = Menu::all();
+    $menu = Menu::take(8)->get();
     $tickets = Ticket::all();
 
     $ratings = Rating::with('user')->get();

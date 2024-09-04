@@ -186,7 +186,7 @@
                                             <div class="d-flex flex-wrap">
                                                 <div class="avatar me-3">
 
-                                                    <img src="{{ $answer->user->profile_photo_path ?? asset('assets/img/avatars/3.png') }}"
+                                                    <img src="{{ isset($answer->user->profile_photo_path) ? Storage::url($answer->user->profile_photo_path) : asset('assets/img/avatars/1.png') }}"
                                                         alt="Avatar" class="rounded-circle" />
                                                 </div>
                                                 <div>

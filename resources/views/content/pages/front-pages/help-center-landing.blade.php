@@ -130,7 +130,7 @@
         <div class="container">
             <h4 class="display-6 text-center mb-4 pb-md-2">Daftar Layanan dan Bantuan</h4>
             <div class="row">
-                <div class="col-lg-10 mx-auto">
+                <div class="col-lg-12 mx-auto">
                     <div class="row">
                         <div class="col-md-4 col-ms-6 mb-4">
                             <div class="card">
@@ -145,7 +145,8 @@
                                             <li class="mb-2">
                                                 <a href="{{ url('/app/layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">
-                                                    <span class="text-truncate me-1">
+                                                    <span style="text-overflow: clip; word-wrap:normal;"
+                                                        class="text-truncate me-1 ">
                                                         {{ $menu->nama_layanan }}
                                                     </span>
                                                     <i

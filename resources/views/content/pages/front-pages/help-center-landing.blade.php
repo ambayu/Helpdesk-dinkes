@@ -145,7 +145,10 @@
                                             <li class="mb-2">
                                                 <a href="{{ url('/app/layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">
-                                                    <span style="text-overflow: clip; word-wrap:normal;"
+                                                    <span
+                                                        style="text-overflow: clip; word-wrap:normal;
+                                                     white-space: normal;
+                                                    "
                                                         class="text-truncate me-1 ">
                                                         {{ $menu->nama_layanan }}
                                                     </span>

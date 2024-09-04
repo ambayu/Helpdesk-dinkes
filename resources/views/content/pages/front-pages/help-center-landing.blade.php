@@ -173,7 +173,7 @@
                                         <h5 class="mb-0 ms-1">Syarat Layanan</h5>
                                     </div>
                                     <ul class="list-unstyled my-4">
-                                        @foreach ($menus as $menu)
+                                        @foreach ($menus_list as $menu)
                                             <li class="mb-2">
                                                 <a href="{{ url('/syarat-layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">
@@ -206,7 +206,7 @@
                                         <h5 class="mb-0 ms-1">Cara Penggunaan</h5>
                                     </div>
                                     <ul class="list-unstyled my-4">
-                                        @foreach ($menus as $menu)
+                                        @foreach ($menus_list as $menu)
                                             <li class="mb-2">
                                                 <a href="{{ url('/bantuan-layanan/' . $menu->slug) }}"
                                                     class="text-heading d-flex justify-content-between align-items-center">

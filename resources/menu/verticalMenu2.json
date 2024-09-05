@@ -151,12 +151,6 @@
                     "name": "Layanan Pembukaan Port Server",
                     "slug": "kirim-permintaan.Layanan-Pembukaan-Port-Server",
                     "permissions": "submit-request"
-                },
-                {
-                    "url": "app\/layanan\/a--bn",
-                    "name": "a\/bn",
-                    "slug": "kirim-permintaan.a--bn",
-                    "permissions": "submit-request"
                 }
             ]
         },

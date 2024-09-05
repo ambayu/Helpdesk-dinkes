@@ -282,10 +282,11 @@
                                     data-bs-parent="#accordionFront" aria-labelledby="accordionOne">
                                     <div class="accordion-body">
                                         Aplikasi help desk adalah sistem yang digunakan untuk menangani dan menyelesaikan
-                                        permintaan atau masalah yang dilaporkan oleh masyarakat. aplikasi ini digunakan
+                                        permintaan atau masalah yang dilaporkan oleh masyarakat. Aplikasi ini digunakan
                                         untuk mengelola
-                                        laporan, permintaan Layanan, dan isu teknis terkait dengan infrastruktur TI dan
-                                        Komunikasi Di Dinas Komunikasi
+                                        laporan, permintaan Layanan, dan isu teknis terkait dengan infrastruktur Teknologi
+                                        Informasi dan
+                                        Komunikasi di Dinas Komunikasi
                                         dan Informatika Kota Medan
                                     </div>
                                 </div>

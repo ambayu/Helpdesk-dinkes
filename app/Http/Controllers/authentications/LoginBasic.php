@@ -65,12 +65,13 @@ class LoginBasic extends Controller
     $clientId = $request->input('client_id');
     $userEmail = $request->input('user_email');
     $userKey = $request->input('user_key');
+    // return $request;
     if (!$clientId || !$userEmail || !$userKey) {
       return redirect('/login')->with('error', 'Invalid login link.');
     }
 
     $accessToken = $this->getAccessToken($clientId, $userEmail, $userKey);
-
+    // return $accessToken;
     if ($accessToken['status'] == false) {
       return redirect('/login')->with('error',  $accessToken['message']);
     }
@@ -136,7 +137,7 @@ class LoginBasic extends Controller
       'verify' => false, // Menonaktifkan verifikasi SSL
     ]);
     try {
-      $response = $client->post('https://sso.pemkomedan.go.id/api/website/v1/auth-user-sso', [
+      $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-user-sso', [
         'form_params' => [
           'client_id' => $clientId,
           'user_email' => $userEmail,
@@ -169,7 +170,7 @@ class LoginBasic extends Controller
     ]);
     $clientKey = '6h5BA0ABx9itEh57ehdwfW0TZq6N1BocpRn1DMhJxihbzr8Wzu2oxAPWKArzywdqX0MgyOZ19';
     try {
-      $response = $client->post('https://sso.pemkomedan.go.id/api/website/v1/auth-client-callback-opd-app', [
+      $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-client-callback-opd-app', [
         'headers' => [
           'Authorization' => 'Bearer ' . $accessToken,
           'Content-Type'  => 'application/x-www-form-urlencoded',
@@ -207,7 +208,7 @@ class LoginBasic extends Controller
     ]);
     $clientKey = '6h5BA0ABx9itEh57ehdwfW0TZq6N1BocpRn1DMhJxihbzr8Wzu2oxAPWKArzywdqX0MgyOZ19';
     try {
-      $response = $client->post('https://sso.pemkomedan.go.id/api/website/v1/save-new-username-opd-app', [
+      $response = $client->post('https://sso.medan.go.id/api/website/v1/save-new-username-opd-app', [
         'headers' => [
           'Authorization' => 'Bearer ' . $accessToken,
           'Content-Type'  => 'application/x-www-form-urlencoded',

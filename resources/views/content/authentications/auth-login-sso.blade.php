@@ -65,7 +65,7 @@
                             </a> --}}
 
 
-                            <a href="https://sso.medan.go.id/app-client/196460166873175833251781722932643/redirect">
+                            <a href="https://sso.pemkomedan.go.id/app-client/196460166873175833251781722932643/redirect">
                                 <img class="" style="width:75%; " src="{{ asset('assets/img/branding/login.gif') }}"
                                     alt="">
                             </a>

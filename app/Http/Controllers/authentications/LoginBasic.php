@@ -137,7 +137,7 @@ class LoginBasic extends Controller
       'verify' => false, // Menonaktifkan verifikasi SSL
     ]);
     try {
-      $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-user-sso', [
+      $response = $client->post('https://sso.pemkomedan.go.id/api/website/v1/auth-user-sso', [
         'form_params' => [
           'client_id' => $clientId,
           'user_email' => $userEmail,

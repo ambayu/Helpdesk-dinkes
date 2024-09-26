@@ -65,7 +65,7 @@ class LoginBasic extends Controller
     $clientId = $request->input('client_id');
     $userEmail = $request->input('user_email');
     $userKey = $request->input('user_key');
-    // return $request;
+    return $request;
     if (!$clientId || !$userEmail || !$userKey) {
       return redirect('/login')->with('error', 'Invalid login link.');
     }

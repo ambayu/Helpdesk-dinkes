@@ -70,7 +70,6 @@ class LoginBasic extends Controller
     }
 
     $accessToken = $this->getAccessToken($clientId, $userEmail, $userKey);
-    return $accessToken;
     // return $accessToken;
     if ($accessToken['status'] == false) {
       return redirect('/login')->with('error',  $accessToken['message']);

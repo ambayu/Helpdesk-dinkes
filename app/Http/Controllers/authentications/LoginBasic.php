@@ -208,7 +208,7 @@ class LoginBasic extends Controller
     ]);
     $clientKey = '6h5BA0ABx9itEh57ehdwfW0TZq6N1BocpRn1DMhJxihbzr8Wzu2oxAPWKArzywdqX0MgyOZ19';
     try {
-      $response = $client->post('https://sso.medan.go.id/api/website/v1/save-new-username-opd-app', [
+      $response = $client->post('https://sso.pemkomedan.go.id/api/website/v1/save-new-username-opd-app', [
         'headers' => [
           'Authorization' => 'Bearer ' . $accessToken,
           'Content-Type'  => 'application/x-www-form-urlencoded',

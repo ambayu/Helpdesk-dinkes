@@ -56,7 +56,7 @@ $(function () {
           targets: 3,
           render: function (data, type, full, meta) {
             var $name = full['nama_layanan'];
-            return '<span class="text-nowrap text-heading">' + $name + '</span>';
+            return '<span class="text-heading">' + $name + '</span>';
           }
         },
 

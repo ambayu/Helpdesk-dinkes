@@ -14,9 +14,10 @@ $(function () {
       ajax: '/app/bidang/list', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
+
         { data: '' },
         { data: 'id' },
+
         { data: 'nama_bidang' },
         { data: 'menu_bidang' },
         { data: 'created_at' },
@@ -24,24 +25,14 @@ $(function () {
       ],
       columnDefs: [
         {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
-        {
           targets: 1,
           searchable: false,
           visible: false
         },
+
         {
           // Nomor Urut
-          targets: 1,
+          targets: 0,
           orderable: false,
           searchable: false,
           render: function (data, type, full, meta) {
@@ -51,7 +42,7 @@ $(function () {
 
         {
           // Name
-          targets: 3,
+          targets: 2,
           render: function (data, type, full, meta) {
             var $name = full['nama_bidang'];
             return '<span class="text-nowrap text-heading">' + $name + '</span>';
@@ -59,7 +50,7 @@ $(function () {
         },
         {
           // User Role
-          targets: 4,
+          targets: 3,
           orderable: false,
           render: function (data, type, full, meta) {
             var $menu_bidang = full['menu_bidang'],
@@ -92,12 +83,12 @@ $(function () {
               $output = '<span class="badge rounded-pill bg-label-secondary m-1">Unknown Role</span>';
             }
 
-            return '<span class="text-nowrap">' + $output + '</span>';
+            return '<span class="">' + $output + '</span>';
           }
         },
         {
           // remove ordering from Name
-          targets: 5,
+          targets: 4,
           orderable: false,
           render: function (data, type, full, meta) {
             var $date = full['created_at'];

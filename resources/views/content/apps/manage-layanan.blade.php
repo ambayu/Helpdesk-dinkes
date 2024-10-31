@@ -6,14 +6,27 @@
 
 
 @section('vendor-style')
+
+    <style>
+        div.dt-container div.dt-length select {
+            width: auto;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        div.dt-container div.dt-search input {
+            margin-left: .5em;
+            display: inline-block;
+            margin: 10px;
+            width: auto;
+        }
+    </style>
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
-    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/b-3.0.2/date-1.5.2/r-3.0.2/datatables.min.css"
-        rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 @endsection
 
@@ -70,9 +83,9 @@
             <table class="datatables-permissions table">
                 <thead class="table-light">
                     <tr>
-                        <th></th>
-                        <th></th>
+                        <th>Edit</th>
                         <th width="10">No</th>
+                        <th></th>
                         <th>Nama Layanan</th>
                         <th>Inputan </th>
                         <th>File </th>

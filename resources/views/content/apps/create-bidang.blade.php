@@ -63,9 +63,9 @@
             <table class="datatables-permissions table">
                 <thead class="table-light">
                     <tr>
-                        <th></th>
-                        <th></th>
                         <th width="10">No</th>
+                        <th></th>
+
                         <th>Nama Bidang</th>
                         <th>Menu Bidang</th>
                         <th>Created Date</th>
@@ -86,3 +86,14 @@
 
     <!-- /Modal -->
 @endsection
+
+
+<div id="" class="col-sm-12 col-md-3">
+    <div class="dt-length"><label for="dt-length-0">Show </label><select name="DataTables_Table_0_length"
+            aria-controls="DataTables_Table_0" class="form-select form-select-sm" id="dt-length-0">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select></div>
+</div>

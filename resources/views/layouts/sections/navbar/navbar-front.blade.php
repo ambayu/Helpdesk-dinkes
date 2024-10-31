@@ -106,36 +106,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-12 col-lg">
-                                <div class="h6 d-flex align-items-center mb-2 mb-lg-3">
-                                    <div class="avatar avatar-sm flex-shrink-0 me-2">
-                                        <span class="avatar-initial rounded bg-label-primary"><i
-                                                class='mdi mdi-view-grid-outline'></i></span>
-                                    </div>
-                                    <span class="ps-1">Cara Penggunaan </span>
-                                </div>
-                                <!-- add page slug in $activeRoutes array, defined Beginning of the page to add active class to the nav item -->
-                                <ul class="nav flex-column">
-                                    @foreach ($menus as $menu)
-                                        <li class="nav-item {{ $currentRouteName === $menu->slug ? 'active' : '' }}">
-                                            <a class="nav-link mega-dropdown-link d-flex align-items-center"
-                                                href="{{ url('/bantuan-layanan/' . $menu->slug) }}">
-                                                <i class='mdi mdi-radiobox-blank mdi-14px me-2'></i>
-                                                <span data-i18n="Pricing">{{ $menu->nama_layanan }}</span>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                    <li class="nav-item">
-                                        <p class="mb-0 fw-medium mt-2">
-                                            <a href="{{ url('/front-pages/help-center') }}"
-                                                class="d-flex align-items-center">
-                                                <span class="me-2">Lihat Semua</span>
-                                                <i class="tf-icons mdi mdi-arrow-right scaleX-n1-rtl"></i>
-                                            </a>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+
 
                         </div>
 
@@ -145,8 +116,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-medium {{ $title == 'tiket' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('front-pages/help-center') }}">Cek
-                        Status Permintaan</a>
+                        href="{{ url('front-pages/help-center') }}">Cek Status Permintaan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium {{ $title == 'tiket' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('front-pages/help-center') }}">Cara Penggunaan</a>
                 </li>
             </ul>
         </div>
@@ -157,8 +131,7 @@
             @if ($configData['hasCustomizer'] == true)
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                        data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <i class='mdi mdi-24px'></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-styles">

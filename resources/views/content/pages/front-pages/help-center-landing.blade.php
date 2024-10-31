@@ -132,7 +132,7 @@
             <div class="row">
                 <div class="col-lg-12 mx-auto">
                     <div class="row">
-                        <div class="col-md-4 col-ms-6 mb-4">
+                        <div class="col-md-6 col-ms-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-ms-6 mb-4">
+                        <div class="col-md-6 col-ms-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-ms-6 mb-4">
+                        {{-- <div class="col-md-4 col-ms-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
@@ -228,7 +228,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- <div class="col-md-4 col-ms-6 mb-4">
                             <div class="card">
                                 <div class="card-body">

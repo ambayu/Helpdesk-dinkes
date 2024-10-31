@@ -30,14 +30,20 @@ $(function () {
           className: 'control',
           orderable: false,
           searchable: false,
-          responsivePriority: 2,
+          responsivePriority: 3,
           targets: 0,
           render: function (data, type, full, meta) {
-            return '';
+            return (
+              '<button class="btn btn-link" style="color: green; padding: 0; border: none; background: none;" onclick="viewFunction(' +
+              full.id +
+              ')">' +
+              '<i class="mdi mdi-account-cog-outline"></i>' +
+              '</button>'
+            );
           }
         },
         {
-          targets: 1,
+          targets: 2,
           searchable: false,
           visible: false
         },
@@ -158,7 +164,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['name'];
+              return 'Details of ' + data['nama_layanan'];
             }
           }),
           type: 'column',

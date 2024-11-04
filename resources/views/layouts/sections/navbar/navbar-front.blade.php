@@ -119,8 +119,8 @@
                         href="{{ url('front-pages/help-center') }}">Cek Status Permintaan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium {{ $title == 'tiket' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('front-pages/help-center') }}">Cara Penggunaan</a>
+                    <a class="nav-link fw-medium {{ $title == 'cara penggunaan' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('front-pages/cara-penggunaan') }}">Cara Penggunaan</a>
                 </li>
             </ul>
         </div>

@@ -11,25 +11,26 @@ use App\Http\Controllers\ResponController;
 use App\Http\Controllers\apps\ChangeBidang;
 use App\Http\Controllers\pages\UserProfile;
 use App\Http\Controllers\apps\CreateLayanan;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\apps\UserViewAccount;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PermintaanUbahBidang;
 use App\Http\Controllers\apps\AccessPermission;
 use App\Http\Controllers\apps\BidangController;
+use App\Http\Controllers\authentications\LoginSSO;
+use App\Http\Controllers\CaraPenggunaanController;
 use App\Http\Controllers\pages\front_pages\Landing;
 use App\Http\Controllers\pages\front_pages\Layanan;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\apps\BidangManageController;
 use App\Http\Controllers\apps\CekPermintaanController;
 use App\Http\Controllers\apps\LayananManageController;
-use App\Http\Controllers\authentications\LoginSSO;
 use App\Http\Controllers\pages\front_pages\HelpCenter;
 use App\Http\Controllers\authentications\RegisterBasic;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NotifikasiController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\pages\front_pages\ListPermintaan;
 use App\Http\Controllers\pages\front_pages\HelpCenterArticle;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,10 @@ Route::post('/layanan', [Layanan::class, 'store'])->name('layanan.store');
 
 Route::get('/front-pages/help-center', [HelpCenter::class, 'index'])->name('front-pages-help-center');
 // Route::get('/front-pages/help-center-article', [HelpCenterArticle::class, 'index'])->name('front-pages-help-center-article');
+
+
+Route::get('/front-pages/cara-penggunaan', [CaraPenggunaanController::class, 'index'])->name('front-pages-cara-penggunaan');
+
 
 
 // authentication

@@ -62,7 +62,7 @@ $(function () {
     halfStar.rateYo({
       rtl: isRtl,
 
-      rating: 2
+      rating: 5
     });
   }
 
@@ -73,7 +73,7 @@ $(function () {
       .rateYo({
         rtl: isRtl,
 
-        rating: 2
+        rating: 5
       })
       .on('rateyo.set', function (e, data) {
         var rating = data.rating;
@@ -86,7 +86,7 @@ $(function () {
   // --------------------------------------------------------------------
   if (readOnlyRatings) {
     readOnlyRatings.rateYo({
-      rating: 2,
+      rating: 5,
       rtl: isRtl
     });
   }

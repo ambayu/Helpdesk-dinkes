@@ -165,7 +165,8 @@ $(function () {
             header: function (row) {
               var data = row.data();
               return 'Details of ' + data['nama_layanan'];
-            }
+            },
+            classes: 'modal-xl'
           }),
           type: 'column',
           renderer: function (api, rowIdx, columns) {

@@ -20,7 +20,7 @@ return [
   "repository" => "https://helpdesk.medan.go.id/",
   "gitRepo" => "help-desk-diskominfo",
   "gitRepoAccess" => "https://helpdesk.medan.go.id/",
-  "facebookUrl" => "https://www.facebook.com/pixinvents/",
+  "facebookUrl" => "https://helpdesk.medan.go.id/",
   "twitterUrl" => "https://helpdesk.medan.go.id/",
   "githubUrl" => "https://helpdesk.medan.go.id/",
   "dribbbleUrl" => "https://helpdesk.medan.go.id/",

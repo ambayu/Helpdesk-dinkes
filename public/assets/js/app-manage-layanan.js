@@ -81,11 +81,7 @@ $(function () {
               .map(function (item) {
                 var randomColor = colors[Math.floor(Math.random() * colors.length)];
                 return (
-                  '<span class="badge rounded-pill ' +
-                  randomColor +
-                  '" text-capitalized="">' +
-                  item.formulir +
-                  '</span>'
+                  '<p class="badge rounded-pill ' + randomColor + '" text-capitalized="">' + item.formulir + '</p>'
                 );
               })
               .join(' '); // Gabungkan nilai formulir menjadi satu string, dipisahkan dengan koma

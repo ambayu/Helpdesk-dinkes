@@ -76,12 +76,13 @@
             <table class="datatables-permissions table">
                 <thead class="table-light">
                     <tr>
-                        <th></th>
-                        <th></th>
+
                         <th width="10">No</th>
+                        <th></th>
+
                         <th>Nama Layanan</th>
                         <th>Syarat </th>
-                        <th>Cata Penggunaan </th>
+                        {{-- <th>Cata Penggunaan </th> --}}
                         <th>Created Date</th>
                         <th>Actions</th>
                     </tr>

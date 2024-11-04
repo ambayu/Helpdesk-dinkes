@@ -15,27 +15,26 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: '' },
+
         { data: 'id' },
         { data: 'nama_layanan' },
-        { data: 'syarat.id' },
         { data: 'syarat.id' },
 
         { data: 'created_at' },
         { data: '' }
       ],
       columnDefs: [
-        {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
+        // {
+        //   // For Responsive
+        //   className: 'control',
+        //   orderable: false,
+        //   searchable: false,
+        //   responsivePriority: 2,
+        //   targets: 0,
+        //   render: function (data, type, full, meta) {
+        //     return '';
+        //   }
+        // },
         {
           targets: 1,
           searchable: false,
@@ -43,7 +42,7 @@ $(function () {
         },
         {
           // Nomor Urut
-          targets: 1,
+          targets: 0,
           orderable: false,
           searchable: false,
           render: function (data, type, full, meta) {
@@ -53,7 +52,7 @@ $(function () {
 
         {
           // Name
-          targets: 3,
+          targets: 2,
           render: function (data, type, full, meta) {
             var $name = full['nama_layanan'];
             return '<span class="text-heading">' + $name + '</span>';
@@ -62,7 +61,7 @@ $(function () {
 
         {
           //cara penggunaan
-          targets: 4,
+          targets: 3,
           render: function (data, type, full, meta) {
             var cek = full.syarat ? 'text-success' : 'text-secondary';
             return (
@@ -73,20 +72,20 @@ $(function () {
           }
         },
 
+        // {
+        //   //cara penggunaan
+        //   targets: 3,
+        //   render: function (data, type, full, meta) {
+        //     var cek = full.syarat ? 'text-success' : 'text-secondary';
+        //     return (
+        //       '<span class="text-nowrap text-heading"> <button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2 lihat-bantuan"><i class="mdi mdi-tag-search mdi-20px ' +
+        //       cek +
+        //       ' "></i></button></span>'
+        //     );
+        //   }
+        // },
         {
-          //cara penggunaan
-          targets: 5,
-          render: function (data, type, full, meta) {
-            var cek = full.syarat ? 'text-success' : 'text-secondary';
-            return (
-              '<span class="text-nowrap text-heading"> <button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2 lihat-bantuan"><i class="mdi mdi-tag-search mdi-20px ' +
-              cek +
-              ' "></i></button></span>'
-            );
-          }
-        },
-        {
-          targets: 6,
+          targets: 4,
           orderable: false,
           render: function (data, type, full, meta) {
             var date = new Date(full['created_at']);
@@ -136,38 +135,38 @@ $(function () {
       // Buttons with Dropdown
       buttons: [],
       // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['name'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
+      // responsive: {
+      //   details: {
+      //     display: $.fn.dataTable.Responsive.display.modal({
+      //       header: function (row) {
+      //         var data = row.data();
+      //         return 'Details of ' + data['name'];
+      //       }
+      //     }),
+      //     type: 'column',
+      //     renderer: function (api, rowIdx, columns) {
+      //       var data = $.map(columns, function (col, i) {
+      //         return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+      //           ? '<tr data-dt-row="' +
+      //               col.rowIndex +
+      //               '" data-dt-column="' +
+      //               col.columnIndex +
+      //               '">' +
+      //               '<td>' +
+      //               col.title +
+      //               ':' +
+      //               '</td> ' +
+      //               '<td>' +
+      //               col.data +
+      //               '</td>' +
+      //               '</tr>'
+      //           : '';
+      //       }).join('');
 
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
+      //       return data ? $('<table class="table"/><tbody />').append(data) : false;
+      //     }
+      //   }
+      // },
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()

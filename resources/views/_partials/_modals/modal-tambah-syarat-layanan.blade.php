@@ -15,14 +15,14 @@
                             <h5 class="card-header">Syarat</h5>
                             <div class="card-body">
                                 <div id="full-editor">
-                                  
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mt-4">
-                        <div class="card">
+                        <div class="card d-none">
                             <h5 class="card-header">Cara Penggunaan</h5>
                             <div class="card-body">
                                 <div id="full-editor2">

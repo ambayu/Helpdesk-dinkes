@@ -162,12 +162,12 @@ $(function () {
               var data = row.data();
               return 'Details of ' + data['nama_layanan'];
             },
-            classes: 'modal-xl'
+            classes: 'modal-xl' // Ubah ukuran modal di sini, misalnya 'modal-lg' atau 'modal-xl'
           }),
           type: 'column',
           renderer: function (api, rowIdx, columns) {
             var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+              return col.title !== '' // Menghindari tampilan row dalam modal jika title kosong (misalnya untuk checkbox)
                 ? '<tr data-dt-row="' +
                     col.rowIndex +
                     '" data-dt-column="' +
@@ -188,6 +188,7 @@ $(function () {
           }
         }
       },
+
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()

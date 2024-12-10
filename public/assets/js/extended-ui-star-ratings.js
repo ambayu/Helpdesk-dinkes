@@ -62,31 +62,25 @@ $(function () {
     halfStar.rateYo({
       rtl: isRtl,
 
-      rating: 5
+      rating: 2
     });
   }
 
   // Full Star Ratings
   // --------------------------------------------------------------------
   if (fullStar) {
-    fullStar
-      .rateYo({
-        rtl: isRtl,
+    fullStar.rateYo({
+      rtl: isRtl,
 
-        rating: 5
-      })
-      .on('rateyo.set', function (e, data) {
-        var rating = data.rating;
-        $('#ratingstar').val(rating);
-        // Di sini Anda dapat melakukan apa pun dengan nilai rating yang didapatkan
-      });
+      rating: 2
+    });
   }
 
   // Read Only Ratings
   // --------------------------------------------------------------------
   if (readOnlyRatings) {
     readOnlyRatings.rateYo({
-      rating: 5,
+      rating: 2,
       rtl: isRtl
     });
   }
@@ -107,6 +101,7 @@ $(function () {
 
   // onChange Event
   if (onChangeEvents) {
+    alert('asd');
     onChangeEvents
       .rateYo({
         rtl: isRtl

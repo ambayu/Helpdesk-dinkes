@@ -3,5 +3,5 @@
     $withbg = $withbg ?? '#666cff';
 @endphp
 <span>
-    <img width="170px" class="" src="{{ asset('assets/img/branding/logo diskominfo helpdesk.png') }}" alt="">
+    <img width="170px" class="" src="{{ asset('assets/img/branding') }}" alt="">
 </span>

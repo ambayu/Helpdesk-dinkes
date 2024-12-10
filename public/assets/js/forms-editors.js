@@ -90,13 +90,4 @@
     },
     theme: 'snow'
   });
-  const fullEditor2 = new Quill('#full-editor2', {
-    bounds: '#full-editor',
-    placeholder: 'Type Something...',
-    modules: {
-      formula: true,
-      toolbar: fullToolbar
-    },
-    theme: 'snow'
-  });
 })();

@@ -8,25 +8,25 @@
 $(function () {
   var dtUserTable = $('.datatables-users'),
     statusObj = {
-      2: { title: 'Pending', class: 'bg-label-warning' },
-      1: { title: 'Active', class: 'bg-label-success' },
-      0: { title: 'Inactive', class: 'bg-label-secondary' }
+      1: { title: 'Pending', class: 'bg-label-warning' },
+      2: { title: 'Active', class: 'bg-label-success' },
+      3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
-  var userView = '/app/user/view/account/';
+  var userView = baseUrl + 'app/user/view/account';
 
   // Users List datatable
   if (dtUserTable.length) {
     dtUserTable.DataTable({
-      ajax: '/app/create-admin/list', // JSON file to add data
+      ajax: assetsPath + 'json/user-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
         { data: '' },
         { data: 'full_name' },
-        { data: 'username' },
-
+        { data: 'full_name' },
         { data: 'role' },
-        { data: 'bidang' },
+        { data: 'current_plan' },
+        { data: 'billing' },
         { data: 'status' },
         { data: '' }
       ],
@@ -43,8 +43,19 @@ $(function () {
           }
         },
         {
-          // User full name and email
+          // For Checkboxes
           targets: 1,
+          orderable: false,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          // User full name and email
+          targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
             var $name = full['full_name'],
@@ -52,7 +63,8 @@ $(function () {
               $image = full['avatar'];
             if ($image) {
               // For Avatar image
-              var $output = '<img src="/storage/' + $image + '" alt="Avatar" class="rounded-circle">';
+              var $output =
+                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
             } else {
               // For Avatar badge
               var stateNum = Math.floor(Math.random() * 6) + 1;
@@ -74,7 +86,6 @@ $(function () {
               '<div class="d-flex flex-column">' +
               '<a href="' +
               userView +
-              full.id +
               '" class="text-truncate"><span class="text-heading fw-medium">' +
               $name +
               '</span></a>' +
@@ -86,68 +97,33 @@ $(function () {
             return $row_output;
           }
         },
-
-        {
-          // Username
-          targets: 2,
-          render: function (data, type, full, meta) {
-            var $username = full['username'];
-
-            return '<span class="text-heading">' + $username + '</span>';
-          }
-        },
         {
           // User Role
           targets: 3,
           render: function (data, type, full, meta) {
             var $role = full['role'];
             var roleBadgeObj = {
-              'Super Admin': '<i class="mdi mdi-account-outline mdi-20px text-primary me-2"></i>',
-              'Admin Layanan': '<i class="mdi mdi-cog-outline mdi-20px text-warning me-2"></i>',
-              'Admin Utama': '<i class="mdi mdi-chart-donut mdi-20px text-success me-2"></i>',
-              Administrator: '<i class="mdi mdi-pencil-outline mdi-20px text-info me-2"></i>',
-              User: '<i class="mdi mdi-laptop mdi-20px text-danger me-2"></i>'
+              Subscriber: '<i class="mdi mdi-account-outline mdi-20px text-primary me-2"></i>',
+              Author: '<i class="mdi mdi-cog-outline mdi-20px text-warning me-2"></i>',
+              Maintainer: '<i class="mdi mdi-chart-donut mdi-20px text-success me-2"></i>',
+              Editor: '<i class="mdi mdi-pencil-outline mdi-20px text-info me-2"></i>',
+              Admin: '<i class="mdi mdi-laptop mdi-20px text-danger me-2"></i>'
             };
-            if (roleBadgeObj.hasOwnProperty($role)) {
-              return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
-            } else {
-              return (
-                "<span class='text-truncate d-flex align-items-center'>" +
-                '<i class="mdi mdi-account-question-outline mdi-20px text-secondary me-2"></i>' +
-                $role +
-                '</span>'
-              );
-            }
+            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
           }
         },
         {
-          // User Bidang
+          // Plans
           targets: 4,
           render: function (data, type, full, meta) {
-            var $role = full['bidang'];
-            var roleBadgeObj = {
-              '': '<i class="mdi mdi-account-outline mdi-20px text-primary me-2"></i>',
-              IT: '<i class="mdi mdi-account-cog-outline mdi-20px text-warning me-2"></i>',
-              Server: '<i class="mdi mdi-account-tag mdi-20px text-success me-2"></i>',
-              Administrator: '<i class="mdi mdi-pencil-outline mdi-20px text-info me-2"></i>',
-              User: '<i class="mdi mdi-laptop mdi-20px text-danger me-2"></i>'
-            };
-            if (roleBadgeObj.hasOwnProperty($role)) {
-              return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
-            } else {
-              return (
-                "<span class='text-truncate d-flex align-items-center'>" +
-                '<i class="mdi mdi-account-settings-outline  mdi-20px text-secondary me-2"></i>' +
-                $role +
-                '</span>'
-              );
-            }
+            var $plan = full['current_plan'];
+
+            return '<span class="text-heading">' + $plan + '</span>';
           }
         },
-
         {
           // User Status
-          targets: 5,
+          targets: 6,
           render: function (data, type, full, meta) {
             var $status = full['status'];
 
@@ -167,23 +143,10 @@ $(function () {
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
-            var statusClass = full['status'] == 1 ? 'btn-text-success' : 'btn-text-secondary';
             return (
-              '<button class="btn btn-sm btn-icon toggle-status ' +
-              statusClass +
-              ' rounded-pill btn-icon" data-id="' +
-              full.id +
-              '" data-status="' +
-              full.status +
-              '"><i class="mdi mdi-check-circle mdi-20px"></i></button>' +
-              ' <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical mdi-24px text-muted"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="' +
+              '<a href="' +
               userView +
-              full.id +
-              '">View</a></li><li><a class="dropdown-item delete-record" data-id="' +
-              full.id +
-              '" href="javascript:void(0);">Delete</a></li> <li><a class="dropdown-item change-role" data-id="' +
-              full.id +
-              '" href="javascript:void(0);">Change Role</a></li> </ul>'
+              '" class="btn btn-sm btn-icon btn-text-secondary rounded-pill"><i class="mdi mdi-eye-outline mdi-20px"></i></a>'
             );
           }
         }
@@ -261,168 +224,6 @@ $(function () {
           });
       }
     });
-  }
-
-  // Event listener untuk tombol delete
-  $('.datatables-users').on('click', '.delete-record', function () {
-    var button = $(this);
-    var id = button.data('id');
-
-    // Tampilkan SweetAlert untuk konfirmasi
-    Swal.fire({
-      title: 'Apa kamu yakin?',
-      text: 'Kamu tidak dapat mengembalikan pengguna yang telah dihapus!',
-      icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yakin!'
-    }).then(result => {
-      if (result.isConfirmed) {
-        // Tutup SweetAlert konfirmasi sebelumnya
-        Swal.close();
-
-        // Kirim permintaan AJAX untuk menghapus user
-        $.ajax({
-          url: '/app/create-admin/delete/' + id, // Sesuaikan dengan endpoint yang benar di Laravel
-          method: 'DELETE',
-          data: {
-            _token: $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (response) {
-            if (response.success) {
-              // Berhasil menghapus, muat ulang DataTables
-              $('.datatables-users').DataTable().ajax.reload();
-
-              // Tampilkan SweetAlert bahwa user telah dihapus sebagai toast
-              Swal.fire({
-                icon: 'success',
-                title: 'Dihapus!',
-                text: 'Pengguna telah terhapus.',
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000 // Durasi tampilan toast dalam milidetik (opsional)
-              });
-            } else {
-              Swal.fire('Gagal!', 'pengguna gagal dihapus.', 'Gagal');
-            }
-          },
-          error: function () {
-            Swal.fire('Gagal!', 'Pengguna gagal dihapus. Silahkan coba lagi.', 'Gagal');
-          }
-        });
-      }
-    });
-  });
-
-  // Event listener untuk "Change Role"
-  $('.datatables-users').on('click', '.change-role', function () {
-    var button = $(this);
-
-    var id = button.data('id');
-
-    // Atur nilai awal modal roleSelect jika perlu
-    $('#changeRoleModal').data('userId', id);
-    // Tampilkan modal "Change Role"
-    $('#changeRoleModal').modal('show');
-  });
-
-  // Event listener untuk menyimpan perubahan role
-  $('#saveRoleBtn').on('click', function () {
-    var selectedRole = $('#roleSelect').val();
-    var selectedBidang = $('#bidangSelect').val();
-    var userId = $('#changeRoleModal').data('userId'); // Misalkan menyimpan ID user di data-attribute modal
-
-    // Kirim permintaan AJAX untuk menyimpan perubahan role
-    $.ajax({
-      url: '/app/create-admin/change-role/' + userId,
-      method: 'POST', // Ganti dengan metode yang sesuai di Laravel
-      data: {
-        role: selectedRole,
-        bidang: selectedBidang,
-        _token: $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response) {
-        if (response.success) {
-          // Tutup modal setelah berhasil
-          $('#changeRoleModal').modal('hide');
-
-          // Tampilkan pesan sukses jika perlu
-          Swal.fire({
-            icon: 'success',
-            title: 'Diubah!',
-            text: 'Peranmu berhasil diganti.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000 // Durasi tampilan toast dalam milidetik (opsional)
-          });
-
-          // Muat ulang DataTables jika perlu
-          $('.datatables-users').DataTable().ajax.reload();
-        } else {
-          // console.log(response);
-          Swal.fire('Gagal!', response.message + ' role tidak dapat diubah.', 'gagal');
-        }
-      },
-      error: function (xhr, status, error) {
-        // Logika untuk menangani kesalahan
-        Swal.fire('Gagal!', xhr.responseJSON.message + ' Pengguna gagal dihapus. Silahkan coba lagi.', 'Gagal');
-      }
-    });
-  });
-
-  // Event listener untuk tombol status
-  $('.datatables-users').on('click', '.toggle-status', function () {
-    var button = $(this);
-
-    var id = button.data('id');
-    var currentStatus = button.data('status');
-    var newStatus = currentStatus == 1 ? 0 : 1;
-
-    // Kirim permintaan AJAX untuk memperbarui status
-    $.ajax({
-      url: '/app/create-admin/update-status', // Ubah URL ini sesuai endpoint API Anda
-      method: 'POST',
-      data: {
-        id: id,
-        status: newStatus,
-        _token: $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response) {
-        if (response.success) {
-          // Perbarui data-status dan kelas CSS tombol
-          Swal.fire({
-            icon: 'success',
-            title: 'Diubah!',
-            text: 'Status berhasil diubah.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000 // Durasi tampilan toast dalam milidetik (opsional)
-          });
-          $('.datatables-users').DataTable().ajax.reload();
-        } else {
-          alert('Gagal untuk mengubah status');
-        }
-      },
-      error: function () {
-        alert('Gagal untuk mengubah status');
-      }
-    });
-  });
-});
-
-$('#roleSelect').on('change', function () {
-  var selectedRoleId = $(this).val();
-
-  var adminLayananRoleId = 'Admin Layanan'; // Ganti dengan ID yang sesuai untuk "Admin Layanan"
-
-  if (selectedRoleId == adminLayananRoleId) {
-    $('#bidangSelectContainer').show();
-  } else {
-    $('#bidangSelectContainer').hide();
   }
 });
 

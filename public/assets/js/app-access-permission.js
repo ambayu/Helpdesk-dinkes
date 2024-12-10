@@ -7,11 +7,11 @@
 $(function () {
   var dataTablePermissions = $('.datatables-permissions'),
     dt_permission,
-    userList = baseUrl + '/app/user/view/account/';
+    userList = baseUrl + 'app/user/list';
   // Users List datatable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
-      ajax: '/app/access-permission-list', // JSON file to add data
+      ajax: assetsPath + 'json/permissions-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
         { data: '' },
@@ -54,50 +54,25 @@ $(function () {
             var $assignedTo = full['assigned_to'],
               $output = '';
             var roleBadgeObj = {
-              'Super Admin':
+              Admin:
                 '<a href="' +
                 userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-primary m-1">Super Admin</span></a>',
-              'Admin Layanan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-warning m-1">Admin Layanan</span></a>',
+                '"><span class="badge rounded-pill bg-label-primary m-1">Administrator</span></a>',
+              Manager:
+                '<a href="' + userList + '"><span class="badge rounded-pill bg-label-warning m-1">Manager</span></a>',
               Users:
+                '<a href="' + userList + '"><span class="badge rounded-pill bg-label-success m-1">Users</span></a>',
+              Support:
+                '<a href="' + userList + '"><span class="badge rounded-pill bg-label-info m-1">Support</span></a>',
+              Restricted:
                 '<a href="' +
                 userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-success m-1">Users</span></a>',
-              'Admin Laporan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-info m-1">Admin Laporan</span></a>',
-              Administrator:
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-danger m-1">Administrator</span></a>'
+                '"><span class="badge rounded-pill bg-label-danger m-1">Restricted User</span></a>'
             };
-
-            if ($assignedTo && Array.isArray($assignedTo)) {
-              for (var i = 0; i < $assignedTo.length; i++) {
-                var val = $assignedTo[i];
-                // Use roleBadgeObj[val] if it exists, otherwise use a default message
-                $output +=
-                  roleBadgeObj[val] ||
-                  '<a href="' +
-                    userList +
-                    full.id +
-                    '"><span class="badge rounded-pill bg-label-secondary m-1">' +
-                    val +
-                    '</span></a>';
-              }
-            } else {
-              $output = '<span class="badge rounded-pill bg-label-secondary m-1">Unknown Role</span>';
+            for (var i = 0; i < $assignedTo.length; i++) {
+              var val = $assignedTo[i];
+              $output += roleBadgeObj[val];
             }
-
             return '<span class="text-nowrap">' + $output + '</span>';
           }
         },
@@ -118,7 +93,7 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<span class="text-nowrap"><button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2 edit-permission" ><i class="mdi mdi-pencil-outline mdi-20px"></i></button>' +
+              '<span class="text-nowrap"><button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="mdi mdi-pencil-outline mdi-20px"></i></button>' +
               '<button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon delete-record"><i class="mdi mdi-delete-outline mdi-20px"></i></button></span>'
             );
           }
@@ -215,86 +190,6 @@ $(function () {
 
   // Delete Record
   $('.datatables-permissions tbody').on('click', '.delete-record', function () {
-    var row = $(this).closest('tr');
-    var rowData = dt_permission.row(row).data();
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
-        cancelButton: 'btn btn-outline-secondary waves-effect'
-      },
-      buttonsStyling: false
-    }).then(result => {
-      if (result.isConfirmed) {
-        // Perform your AJAX request to delete the data from the server here
-        $.ajax({
-          url: '/app/access-permission-delete/' + rowData.id, // Adjust this to your needs
-          method: 'DELETE',
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (response) {
-            // Remove the row from the DataTable
-            dt_permission.row(row).remove().draw();
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              icon: 'success',
-              title: 'The row has been deleted',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              customClass: {
-                popup: 'colored-toast'
-              }
-            });
-          },
-          error: function (xhr, status, error) {
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              icon: 'error',
-              title: 'Failed to delete the row',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              customClass: {
-                popup: 'colored-toast'
-              }
-            });
-          }
-        });
-      }
-    });
-  });
-
-  $('.datatables-permissions tbody').on('click', '.edit-permission', function () {
-    var row = $(this).closest('tr');
-    var rowData = dt_permission.row(row).data();
-    $('#addAssignedModal').modal('show');
-
-    $.ajax({
-      url: '/app/access-permission-list/' + rowData.id,
-      type: 'GET',
-      dataType: 'json',
-      success: function (data) {
-        // Memproses data yang diterima
-        data.assigned_to.forEach(function (role) {
-          // Menetapkan tanda centang ke kotak centang yang sesuai
-          $('.form-check-input[value="' + role + '"]').prop('checked', true);
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error('AJAX request failed:', error);
-      }
-    });
-
-    $('#editPermissionName').val(rowData.name);
-
-    $('#addAssigned').attr('action', '/app/access-permission/assigned/' + rowData.id);
+    dt_permission.row($(this).parents('tr')).remove().draw();
   });
 });

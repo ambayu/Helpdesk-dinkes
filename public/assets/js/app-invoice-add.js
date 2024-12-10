@@ -1,3 +1,45 @@
+/**
+ * App Invoice - Add
+ */
+
+'use strict';
+
+(function () {
+  const invoiceItemPriceList = document.querySelectorAll('.invoice-item-price'),
+    invoiceItemQtyList = document.querySelectorAll('.invoice-item-qty'),
+    invoiceDateList = document.querySelectorAll('.date-picker');
+
+  // Price
+  if (invoiceItemPriceList) {
+    invoiceItemPriceList.forEach(function (invoiceItemPrice) {
+      new Cleave(invoiceItemPrice, {
+        delimiter: '',
+        numeral: true
+      });
+    });
+  }
+
+  // Qty
+  if (invoiceItemQtyList) {
+    invoiceItemQtyList.forEach(function (invoiceItemQty) {
+      new Cleave(invoiceItemQty, {
+        delimiter: '',
+        numeral: true
+      });
+    });
+  }
+
+  // Datepicker
+  if (invoiceDateList) {
+    invoiceDateList.forEach(function (invoiceDateEl) {
+      invoiceDateEl.flatpickr({
+        monthSelectorType: 'static'
+      });
+    });
+  }
+})();
+
+// repeater (jquery)
 $(function () {
   var applyChangesBtn = $('.btn-apply-changes'),
     discount,
@@ -14,51 +56,12 @@ $(function () {
       'App Development': 'Native App Development.'
     };
 
-  // Show add input button when "Pilihan" is selected
-
-  window.removeInputField = function (button) {
-    $(button).closest('.form-floating').remove();
-  };
-  // Function to add input fields
-  window.addInputField = function (repeaterWrapper) {
-    var inputContainer = $(repeaterWrapper).find('#input-container');
-    var newInputField = `
-      <div class="form-floating form-floating-outline mt-2">
-        <input type="text" name="additional_name_label[]" class="form-control" placeholder="Pilihan Baru">
-        <label for="additional_name_label">Pilihan Baru</label>
-         <!-- Tombol hapus untuk input field -->
-        <button type="button" class="btn btn-sm btn-danger position-absolute end-0 top-0 mt-2 me-2" onclick="removeInputField(this)">X</button>
-      </div>`;
-    inputContainer.append(newInputField);
-  };
-
-  // Event handler for "Tambah Pilihan" button
-  $(document).on('click', '#add-input-btn button', function () {
-    var $repeaterWrapper = $(this).closest('.repeater-wrapper');
-    addInputField($repeaterWrapper);
-  });
-
   // Prevent dropdown from closing on tax change
   $(document).on('click', '.tax-select', function (e) {
     e.stopPropagation();
   });
 
-  // Function to update IDs and 'for' attributes
-  function updateIdsAndFors(container) {
-    container.find('[id]').each(function () {
-      let originalId = $(this).attr('id');
-      let newId = originalId + '-' + Math.floor(Math.random() * 10000); // Generate a unique ID
-      $(this).attr('id', newId);
-
-      // Update corresponding label's `for` attribute
-      let label = container.find('label[for="' + originalId + '"]');
-      if (label.length) {
-        label.attr('for', newId);
-      }
-    });
-  }
-
-  // On tax change update its value
+  // On tax change update it's value value
   function updateValue(listener, el) {
     listener.closest('.repeater-wrapper').find(el).text(listener.val());
   }
@@ -93,10 +96,12 @@ $(function () {
 
   // Repeater init
   if (sourceItem.length) {
+    sourceItem.on('submit', function (e) {
+      e.preventDefault();
+    });
     sourceItem.repeater({
       show: function () {
         $(this).slideDown();
-        updateIdsAndFors($(this));
         // Initialize tooltip on load of each item
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -104,9 +109,7 @@ $(function () {
         });
       },
       hide: function (e) {
-        $(this).slideUp(function () {
-          $(this).remove();
-        });
+        $(this).slideUp();
       }
     });
   }

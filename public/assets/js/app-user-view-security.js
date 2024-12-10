@@ -2,11 +2,9 @@
 
 (function () {
   const formChangePass = document.querySelector('#formChangePassword');
-  console.log('Form submission triggered'); // Debugging statement to check if the function is called
 
   function submitChangePasswordForm(event) {
     event.preventDefault();
-
     console.log('Form submission triggered'); // Debugging statement to check if the function is called
 
     if (fv) {

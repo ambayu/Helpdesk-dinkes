@@ -30,9 +30,10 @@
         <section id="landingHero" class="section-py landing-hero">
             <div class="container">
                 <div class="hero-text-box text-center" style="max-width: 1000px">
-                    <h1 class="text-primary hero-title">LAYANAN HELP DESK</h1>
+                    <h1 class="text-primary hero-title">LAYANAN OH PEDE HELP DESK</h1>
                     <h2 class="h6 mb-4 pb-1 lh-lg">
-                        Dinas Komunikasi dan Informatika (Diskominfo) Pemerintah Kota Medan menyediakan layanan Help Desk
+                        Dinas Komunikasi dan Informatika (Diskominfo) Pemerintah Kota Medan menyediakan layanan OH PEDE Help
+                        Desk
                         untuk memberikan dukungan dan solusi terkait masalah Teknologi Informasi dan Komunikasi (TIK) kepada
                         masyarakat dan instansi pemerintahan di Kota Medan. Layanan ini bertujuan untuk memastikan bahwa
                         semua permasalahan teknis yang berhubungan dengan TIK dapat diatasi dengan cepat dan efisien.

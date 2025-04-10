@@ -96,9 +96,6 @@ $(function () {
 
   // Repeater init
   if (sourceItem.length) {
-    sourceItem.on('submit', function (e) {
-      e.preventDefault();
-    });
     sourceItem.repeater({
       show: function () {
         $(this).slideDown();
@@ -109,7 +106,9 @@ $(function () {
         });
       },
       hide: function (e) {
-        $(this).slideUp();
+        $(this).slideUp(function () {
+          $(this).remove();
+        });
       }
     });
   }

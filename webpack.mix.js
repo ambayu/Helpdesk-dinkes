@@ -136,11 +136,24 @@ mixAssetsDir('js/**/*.js', (src, dest) => mix.scripts(src, dest));
 mixAssetsDir('css/**/*.css', (src, dest) => mix.copy(src, dest));
 // laravel working crud app related js
 mix.js('resources/js/laravel-user-management.js', 'public/js/');
+mix
+  .js('node_modules/datatables.net/js/dataTables.js', 'public/assets/vendor/js/') // Diubah dari jquery.dataTables.js
+  .js('node_modules/datatables.net-bs5/js/dataTables.bootstrap5.js', 'public/assets/vendor/js/')
+  .js('node_modules/datatables.net-responsive/js/dataTables.responsive.js', 'public/assets/vendor/js/');
 
 mix.copy('node_modules/@mdi/font/fonts/*', 'public/assets/vendor/fonts/materialdesignicons');
 mix.copy('node_modules/flag-icons/flags/1x1/*', 'public/assets/vendor/fonts/flags/1x1');
 mix.copy('node_modules/flag-icons/flags/4x3/*', 'public/assets/vendor/fonts/flags/4x3');
 mix.copy('node_modules/katex/dist/fonts/*', 'public/assets/vendor/libs/quill/fonts');
+
+// Tambahkan CSS DataTables
+mix
+  .copy('node_modules/datatables.net-bs5/css/dataTables.bootstrap5.css', 'public/assets/vendor/libs/datatables-bs5/')
+  .copy(
+    'node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.css',
+    'public/assets/vendor/libs/datatables-bs5/'
+  );
+mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/assets/vendor/libs/bootstrap/');
 
 mix.version();
 

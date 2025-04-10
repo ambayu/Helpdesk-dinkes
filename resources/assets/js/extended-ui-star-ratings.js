@@ -101,7 +101,6 @@ $(function () {
 
   // onChange Event
   if (onChangeEvents) {
-    alert('asd');
     onChangeEvents
       .rateYo({
         rtl: isRtl

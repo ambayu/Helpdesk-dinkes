@@ -10,7 +10,6 @@
 
     <script>
         $('#photos').on('change', function() {
-            console.log('asd');
             var input = this; // Store the input element reference
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

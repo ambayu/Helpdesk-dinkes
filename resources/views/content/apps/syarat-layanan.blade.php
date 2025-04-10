@@ -77,12 +77,12 @@
                 <thead class="table-light">
                     <tr>
 
-                        <th width="10">No</th>
                         <th></th>
+                        <th width="10">No</th>
 
                         <th>Nama Layanan</th>
                         <th>Syarat </th>
-                        {{-- <th>Cata Penggunaan </th> --}}
+                        {{-- <th>Cara Penggunaan </th> --}}
                         <th>Created Date</th>
                         <th>Actions</th>
                     </tr>

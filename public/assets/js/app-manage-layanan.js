@@ -14,9 +14,9 @@ $(function () {
       ajax: '/app/kelola-layanan/list', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
-        { data: '' },
         { data: 'id' },
+
+        { data: '' },
         { data: 'nama_layanan' },
         { data: 'formulir' },
         { data: 'file' },
@@ -26,24 +26,7 @@ $(function () {
       ],
       columnDefs: [
         {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 3,
           targets: 0,
-          render: function (data, type, full, meta) {
-            return (
-              '<button class="btn btn-link" style="color: green; padding: 0; border: none; background: none;" onclick="viewFunction(' +
-              full.id +
-              ')">' +
-              '<i class="mdi mdi-account-cog-outline"></i>' +
-              '</button>'
-            );
-          }
-        },
-        {
-          targets: 2,
           searchable: false,
           visible: false
         },
@@ -59,14 +42,14 @@ $(function () {
 
         {
           // Name
-          targets: 3,
+          targets: 2,
           render: function (data, type, full, meta) {
             var $name = full['nama_layanan'];
-            return '<span class=" text-heading">' + $name + '</span>';
+            return '<span class="text-nowrap text-heading">' + $name + '</span>';
           }
         },
         {
-          targets: 4,
+          targets: 3,
           render: function (data, type, full, meta) {
             var formulirArray = full['formulir'];
             var colors = [
@@ -81,7 +64,11 @@ $(function () {
               .map(function (item) {
                 var randomColor = colors[Math.floor(Math.random() * colors.length)];
                 return (
-                  '<p class="badge rounded-pill ' + randomColor + '" text-capitalized="">' + item.formulir + '</p>'
+                  '<span class="badge rounded-pill ' +
+                  randomColor +
+                  '" text-capitalized="">' +
+                  item.formulir +
+                  '</span>'
                 );
               })
               .join(' '); // Gabungkan nilai formulir menjadi satu string, dipisahkan dengan koma
@@ -92,7 +79,7 @@ $(function () {
 
         {
           // file
-          targets: 5,
+          targets: 4,
           render: function (data, type, full, meta) {
             var $file = full['file'];
             if ($file == '1') {
@@ -103,7 +90,7 @@ $(function () {
           }
         },
         {
-          targets: 6,
+          targets: 5,
           orderable: false,
           render: function (data, type, full, meta) {
             var date = new Date(full['created_at']);
@@ -154,40 +141,6 @@ $(function () {
       },
       // Buttons with Dropdown
       buttons: [],
-      // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['nama_layanan'];
-            },
-            classes: 'modal-xl' // Ubah ukuran modal di sini, misalnya 'modal-lg' atau 'modal-xl'
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // Menghindari tampilan row dalam modal jika title kosong (misalnya untuk checkbox)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
 
       initComplete: function () {
         // Adding role filter once table initialized

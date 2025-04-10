@@ -14,10 +14,8 @@ $(function () {
       ajax: '/app/bidang/list', // JSON file to add data
       columns: [
         // columns according to JSON
-
-        { data: '' },
         { data: 'id' },
-
+        { data: '' },
         { data: 'nama_bidang' },
         { data: 'menu_bidang' },
         { data: 'created_at' },
@@ -25,14 +23,13 @@ $(function () {
       ],
       columnDefs: [
         {
-          targets: 1,
+          targets: 0,
           searchable: false,
           visible: false
         },
-
         {
           // Nomor Urut
-          targets: 0,
+          targets: 1,
           orderable: false,
           searchable: false,
           render: function (data, type, full, meta) {
@@ -45,7 +42,7 @@ $(function () {
           targets: 2,
           render: function (data, type, full, meta) {
             var $name = full['nama_bidang'];
-            return '<span class="text-nowrap text-heading">' + $name + '</span>';
+            return '<span class= text-heading">' + $name + '</span>';
           }
         },
         {
@@ -139,38 +136,7 @@ $(function () {
         }
       ],
       // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['name'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
 
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()

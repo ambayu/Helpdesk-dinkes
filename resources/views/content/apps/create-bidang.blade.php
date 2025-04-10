@@ -63,8 +63,8 @@
             <table class="datatables-permissions table">
                 <thead class="table-light">
                     <tr>
-                        <th width="10">No</th>
                         <th></th>
+                        <th width="10">No</th>
 
                         <th>Nama Bidang</th>
                         <th>Menu Bidang</th>

@@ -69,11 +69,17 @@ $(function () {
   // Full Star Ratings
   // --------------------------------------------------------------------
   if (fullStar) {
-    fullStar.rateYo({
-      rtl: isRtl,
+    fullStar
+      .rateYo({
+        rtl: isRtl,
 
-      rating: 2
-    });
+        rating: 2
+      })
+      .on('rateyo.set', function (e, data) {
+        var rating = data.rating;
+        $('#ratingstar').val(rating);
+        // Di sini Anda dapat melakukan apa pun dengan nilai rating yang didapatkan
+      });
   }
 
   // Read Only Ratings
@@ -101,7 +107,6 @@ $(function () {
 
   // onChange Event
   if (onChangeEvents) {
-    alert('asd');
     onChangeEvents
       .rateYo({
         rtl: isRtl

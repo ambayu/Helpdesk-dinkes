@@ -83,9 +83,10 @@
             <table class="datatables-permissions table">
                 <thead class="table-light">
                     <tr>
-                        <th>Edit</th>
-                        <th width="10">No</th>
+
                         <th></th>
+                        <th width="10">No</th>
+
                         <th>Nama Layanan</th>
                         <th>Inputan </th>
                         <th>File </th>

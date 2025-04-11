@@ -3,17 +3,33 @@
 @section('title', 'Roles - Apps')
 
 @section('vendor-style')
+    <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 
+    <!-- DataTables Bootstrap 5 core -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+
+    <!-- DataTables Responsive Bootstrap 5 -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+
+    <!-- DataTables Buttons Bootstrap 5 -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+
+    <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
+
+    <!-- Animate -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 
+    <!-- Form Validation -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 @endsection
 
+
 @section('vendor-script')
+<!-- jQuery -->
+<script src="/assets/vendor/libs/jquery/jquery.js"></script>
+
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>

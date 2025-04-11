@@ -11,103 +11,103 @@ $(function () {
   // Users List datatable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
-      ajax: '/app/access-permission-list', // JSON file to add data
+      ajax: '/app/kelola-layanan/list', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
         { data: 'id' },
-        { data: 'name' },
-        { data: 'assigned_to' },
-        { data: 'created_date' },
+
+        { data: '' },
+        { data: 'nama_layanan' },
+        { data: 'formulir' },
+        { data: 'file' },
+
+        { data: 'created_at' },
         { data: '' }
       ],
       columnDefs: [
         {
-          // Nomor Urut
           targets: 0,
+          searchable: false,
+          visible: false
+        },
+        {
+          // Nomor Urut
+          targets: 1,
           orderable: false,
           searchable: false,
           render: function (data, type, full, meta) {
             return meta.row + 1;
           }
         },
-        {
-          targets: 1,
-          searchable: false,
-          visible: false
-        },
+
         {
           // Name
           targets: 2,
           render: function (data, type, full, meta) {
-            var $name = full['name'];
+            var $name = full['nama_layanan'];
             return '<span class="text-nowrap text-heading">' + $name + '</span>';
           }
         },
         {
-          // User Role
           targets: 3,
-          orderable: false,
           render: function (data, type, full, meta) {
-            var $assignedTo = full['assigned_to'],
-              $output = '';
-            var roleBadgeObj = {
-              'Super Admin':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-primary m-1">Super Admin</span></a>',
-              'Admin Layanan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-warning m-1">Admin Layanan</span></a>',
-              Users:
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-success m-1">Users</span></a>',
-              'Admin Laporan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-info m-1">Admin Laporan</span></a>',
-              Administrator:
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-danger m-1">Administrator</span></a>'
-            };
+            var formulirArray = full['formulir'];
+            var colors = [
+              'bg-label-primary',
+              'bg-label-success',
+              'bg-label-danger',
+              'bg-label-warning',
+              'bg-label-info',
+              'bg-label-dark'
+            ];
+            var formulirText = formulirArray
+              .map(function (item) {
+                var randomColor = colors[Math.floor(Math.random() * colors.length)];
+                return (
+                  '<span class="badge rounded-pill ' +
+                  randomColor +
+                  '" text-capitalized="">' +
+                  item.formulir +
+                  '</span>'
+                );
+              })
+              .join(' '); // Gabungkan nilai formulir menjadi satu string, dipisahkan dengan koma
 
-            if ($assignedTo && Array.isArray($assignedTo)) {
-              for (var i = 0; i < $assignedTo.length; i++) {
-                var val = $assignedTo[i];
-                // Use roleBadgeObj[val] if it exists, otherwise use a default message
-                $output +=
-                  roleBadgeObj[val] ||
-                  '<a href="' +
-                    userList +
-                    full.id +
-                    '"><span class="badge rounded-pill bg-label-secondary m-1">' +
-                    val +
-                    '</span></a>';
-              }
+            return formulirText;
+          }
+        },
+
+        {
+          // file
+          targets: 4,
+          render: function (data, type, full, meta) {
+            var $file = full['file'];
+            if ($file == '1') {
+              return '<span class="text-nowrap text-heading">Aktif</span>';
             } else {
-              $output = '<span class="badge rounded-pill bg-label-secondary m-1">Unknown Role</span>';
+              return '<span class="text-nowrap text-heading">Tidak Aktif</span>';
             }
-
-            return '<span class="text-nowrap">' + $output + '</span>';
           }
         },
         {
-          // remove ordering from Name
-          targets: 4,
+          targets: 5,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $date = full['created_date'];
-            return '<span class="text-nowrap">' + $date + '</span>';
+            var date = new Date(full['created_at']);
+            if (!isNaN(date.getTime())) {
+              var formattedDate =
+                date.getFullYear() +
+                '-' +
+                ('0' + (date.getMonth() + 1)).slice(-2) +
+                '-' +
+                ('0' + date.getDate()).slice(-2);
+              return '<span class="text-nowrap">' + formattedDate + '</span>';
+            } else {
+              return '<span class="text-nowrap">Invalid Date</span>';
+            }
           }
         },
+
         {
           // Actions
           targets: -1,
@@ -116,13 +116,15 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<span class="text-nowrap"><button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2 edit-permission" ><i class="mdi mdi-pencil-outline mdi-20px"></i></button>' +
+              '<span class="text-nowrap"><button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon me-2 "  data-bs-toggle="modal" data-bs-target="#editLayanan' +
+              full.id +
+              '"><i class="mdi mdi-pencil-outline mdi-20px"></i></button>' +
               '<button class="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon delete-record"><i class="mdi mdi-delete-outline mdi-20px"></i></button></span>'
             );
           }
         }
       ],
-      order: [[0, 'asc']],
+      order: [[1, 'asc']],
       dom:
         '<"row mx-1"' +
         '<"col-sm-12 col-md-3" l>' +
@@ -138,19 +140,7 @@ $(function () {
         searchPlaceholder: 'Search..'
       },
       // Buttons with Dropdown
-      buttons: [
-        {
-          text: 'Add Permission',
-          className: 'add-new btn btn-primary mb-3 mb-md-0',
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#addPermissionModal'
-          },
-          init: function (api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
-      ],
+      buttons: [],
 
       initComplete: function () {
         // Adding role filter once table initialized
@@ -198,7 +188,7 @@ $(function () {
       if (result.isConfirmed) {
         // Perform your AJAX request to delete the data from the server here
         $.ajax({
-          url: '/app/access-permission-delete/' + rowData.id, // Adjust this to your needs
+          url: '/app/kelola-layanan/delete/' + rowData.id, // Adjust this to your needs
           method: 'DELETE',
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -210,7 +200,7 @@ $(function () {
               toast: true,
               position: 'top-end',
               icon: 'success',
-              title: 'The row has been deleted',
+              title: 'Layanan berhasil dihapus',
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -224,7 +214,7 @@ $(function () {
               toast: true,
               position: 'top-end',
               icon: 'error',
-              title: 'Failed to delete the row',
+              title: 'Gagal delete layanan',
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -236,31 +226,5 @@ $(function () {
         });
       }
     });
-  });
-
-  $('.datatables-permissions tbody').on('click', '.edit-permission', function () {
-    var row = $(this).closest('tr');
-    var rowData = dt_permission.row(row).data();
-    $('#addAssignedModal').modal('show');
-
-    $.ajax({
-      url: '/app/access-permission-list/' + rowData.id,
-      type: 'GET',
-      dataType: 'json',
-      success: function (data) {
-        // Memproses data yang diterima
-        data.assigned_to.forEach(function (role) {
-          // Menetapkan tanda centang ke kotak centang yang sesuai
-          $('.form-check-input[value="' + role + '"]').prop('checked', true);
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error('AJAX request failed:', error);
-      }
-    });
-
-    $('#editPermissionName').val(rowData.name);
-
-    $('#addAssigned').attr('action', '/app/access-permission/assigned/' + rowData.id);
   });
 });

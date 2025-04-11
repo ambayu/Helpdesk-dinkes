@@ -144,7 +144,7 @@
                             <tr>
 
                                 <th></th>
-                                <th>Nama Lengkap  </th>
+                                <th>Nama Lengkap </th>
                                 <th>Nama Pengguna</th>
                                 <th>Peran</th>
                                 <th>Bidang</th>

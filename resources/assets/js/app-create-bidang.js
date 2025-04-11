@@ -11,39 +11,38 @@ $(function () {
   // Users List datatable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
-      ajax: '/app/access-permission-list', // JSON file to add data
+      ajax: '/app/bidang/list', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
         { data: 'id' },
-        { data: 'name' },
-        { data: 'assigned_to' },
-        { data: 'created_date' },
+        { data: '' },
+        { data: 'nama_bidang' },
+        { data: 'menu_bidang' },
+        { data: 'created_at' },
         { data: '' }
       ],
       columnDefs: [
         {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
           targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
-        {
-          targets: 1,
           searchable: false,
           visible: false
         },
         {
+          // Nomor Urut
+          targets: 1,
+          orderable: false,
+          searchable: false,
+          render: function (data, type, full, meta) {
+            return meta.row + 1;
+          }
+        },
+
+        {
           // Name
           targets: 2,
           render: function (data, type, full, meta) {
-            var $name = full['name'];
-            return '<span class="text-nowrap text-heading">' + $name + '</span>';
+            var $name = full['nama_bidang'];
+            return '<span class= text-heading">' + $name + '</span>';
           }
         },
         {
@@ -51,54 +50,37 @@ $(function () {
           targets: 3,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $assignedTo = full['assigned_to'],
+            var $menu_bidang = full['menu_bidang'],
               $output = '';
-            var roleBadgeObj = {
-              'Super Admin':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-primary m-1">Super Admin</span></a>',
-              'Admin Layanan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-warning m-1">Admin Layanan</span></a>',
-              Users:
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-success m-1">Users</span></a>',
-              'Admin Laporan':
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-info m-1">Admin Laporan</span></a>',
-              Administrator:
-                '<a href="' +
-                userList +
-                full.id +
-                '"><span class="badge rounded-pill bg-label-danger m-1">Administrator</span></a>'
-            };
+            const colors = [
+              'bg-label-primary',
+              'bg-label-secondary',
+              'bg-label-success',
+              'bg-label-danger',
+              'bg-label-warning',
+              'bg-label-info'
+            ]; // Array of color classes
+            if ($menu_bidang && Array.isArray($menu_bidang)) {
+              for (var i = 0; i < $menu_bidang.length; i++) {
+                var val = $menu_bidang[i];
+                var colorClass = colors[i % colors.length]; // Cycle through colors
 
-            if ($assignedTo && Array.isArray($assignedTo)) {
-              for (var i = 0; i < $assignedTo.length; i++) {
-                var val = $assignedTo[i];
-                // Use roleBadgeObj[val] if it exists, otherwise use a default message
+                // Use menuBidang[val] if it exists, otherwise use a default message
                 $output +=
-                  roleBadgeObj[val] ||
                   '<a href="' +
-                    userList +
-                    full.id +
-                    '"><span class="badge rounded-pill bg-label-secondary m-1">' +
-                    val +
-                    '</span></a>';
+                  userList +
+                  full.id +
+                  '"><span class="badge rounded-pill ' +
+                  colorClass +
+                  ' m-1">' +
+                  val +
+                  '</span></a>';
               }
             } else {
               $output = '<span class="badge rounded-pill bg-label-secondary m-1">Unknown Role</span>';
             }
 
-            return '<span class="text-nowrap">' + $output + '</span>';
+            return '<span class="">' + $output + '</span>';
           }
         },
         {
@@ -106,7 +88,7 @@ $(function () {
           targets: 4,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $date = full['created_date'];
+            var $date = full['created_at'];
             return '<span class="text-nowrap">' + $date + '</span>';
           }
         },
@@ -142,11 +124,11 @@ $(function () {
       // Buttons with Dropdown
       buttons: [
         {
-          text: 'Add Permission',
+          text: 'Tambah Bidang',
           className: 'add-new btn btn-primary mb-3 mb-md-0',
           attr: {
             'data-bs-toggle': 'modal',
-            'data-bs-target': '#addPermissionModal'
+            'data-bs-target': '#addBidangModal'
           },
           init: function (api, node, config) {
             $(node).removeClass('btn-secondary');
@@ -154,38 +136,7 @@ $(function () {
         }
       ],
       // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['name'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
 
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
@@ -232,7 +183,7 @@ $(function () {
       if (result.isConfirmed) {
         // Perform your AJAX request to delete the data from the server here
         $.ajax({
-          url: '/app/access-permission-delete/' + rowData.id, // Adjust this to your needs
+          url: '/app/delete-bidang/' + rowData.id, // Adjust this to your needs
           method: 'DELETE',
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -244,7 +195,7 @@ $(function () {
               toast: true,
               position: 'top-end',
               icon: 'success',
-              title: 'The row has been deleted',
+              title: 'Bidang berhasil dihapus',
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -258,7 +209,7 @@ $(function () {
               toast: true,
               position: 'top-end',
               icon: 'error',
-              title: 'Failed to delete the row',
+              title: 'Gagal delete bidang',
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -272,20 +223,23 @@ $(function () {
     });
   });
 
+  //edit
+
   $('.datatables-permissions tbody').on('click', '.edit-permission', function () {
     var row = $(this).closest('tr');
     var rowData = dt_permission.row(row).data();
-    $('#addAssignedModal').modal('show');
+
+    $('#editBidangModal').modal('show');
 
     $.ajax({
-      url: '/app/access-permission-list/' + rowData.id,
+      url: '/app/bidang/list/' + rowData.id,
       type: 'GET',
       dataType: 'json',
       success: function (data) {
         // Memproses data yang diterima
-        data.assigned_to.forEach(function (role) {
+        data.id_bidang.forEach(function (id) {
           // Menetapkan tanda centang ke kotak centang yang sesuai
-          $('.form-check-input[value="' + role + '"]').prop('checked', true);
+          $('.form-check-input[value="' + id + '"]').prop('checked', true);
         });
       },
       error: function (xhr, status, error) {
@@ -293,8 +247,8 @@ $(function () {
       }
     });
 
-    $('#editPermissionName').val(rowData.name);
+    $('#namabidang').val(rowData.nama_bidang);
 
-    $('#addAssigned').attr('action', '/app/access-permission/assigned/' + rowData.id);
+    $('#editBidang').attr('action', '/app/update-bidang/' + rowData.id);
   });
 });

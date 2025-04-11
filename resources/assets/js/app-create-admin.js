@@ -297,4 +297,34 @@ $(function () {
 
     $('#addAssigned').attr('action', '/app/access-permission/assigned/' + rowData.id);
   });
+  $(function () {
+    // Select2
+    var select2 = $('.select2');
+    if (select2.length) {
+      select2.each(function () {
+        var $this = $(this);
+        select2Focus($this);
+        $this.wrap('<div class="position-relative"></div>').select2({
+          dropdownParent: $this.parent(),
+          placeholder: $this.data('placeholder'), // for dynamic placeholder
+          dropdownCss: {
+            minWidth: '350px' // set a minimum width for the dropdown
+          }
+        });
+      });
+      $('.select2-selection__rendered').addClass('');
+    }
+  });
+
+  $('#modalAddressCountry').on('change', function () {
+    var selectedRoleId = $(this).val();
+
+    var adminLayananRoleId = 4; // Ganti dengan ID yang sesuai untuk "Admin Layanan"
+
+    if (selectedRoleId == adminLayananRoleId) {
+      $('#bidangSelectContainer').show();
+    } else {
+      $('#bidangSelectContainer').hide();
+    }
+  });
 });

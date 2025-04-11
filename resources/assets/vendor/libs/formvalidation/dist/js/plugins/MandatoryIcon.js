@@ -1,3 +1,23 @@
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(self, function() {
+return /******/ (function() { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/assets/vendor/libs/formvalidation/dist/js/plugins/MandatoryIcon.js":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/vendor/libs/formvalidation/dist/js/plugins/MandatoryIcon.js ***!
+  \**************************************************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 /**
  * FormValidation (https://formvalidation.io), v1.10.0 (2236098)
  * The best validation library for JavaScript
@@ -5,17 +25,19 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.FormValidation = global.FormValidation || {}, global.FormValidation.plugins = global.FormValidation.plugins || {}, global.FormValidation.plugins.MandatoryIcon = factory()));
-})(this, (function () { 'use strict';
+  ( false ? 0 : _typeof(exports)) === 'object' && "object" !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : (0);
+})(this, function () {
+  'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -25,7 +47,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -34,7 +55,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -46,15 +66,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -67,14 +84,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -82,12 +97,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -95,44 +108,34 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -141,28 +144,21 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _createForOfIteratorHelper(o, allowArrayLike) {
     var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-
     if (!it) {
       if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
         if (it) o = it;
         var i = 0;
-
-        var F = function () {};
-
+        var F = function F() {};
         return {
           s: F,
-          n: function () {
+          n: function n() {
             if (i >= o.length) return {
               done: true
             };
@@ -171,56 +167,47 @@
               value: o[i++]
             };
           },
-          e: function (e) {
-            throw e;
+          e: function e(_e2) {
+            throw _e2;
           },
           f: F
         };
       }
-
       throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }
-
     var normalCompletion = true,
-        didErr = false,
-        err;
+      didErr = false,
+      err;
     return {
-      s: function () {
+      s: function s() {
         it = it.call(o);
       },
-      n: function () {
+      n: function n() {
         var step = it.next();
         normalCompletion = step.done;
         return step;
       },
-      e: function (e) {
+      e: function e(_e3) {
         didErr = true;
-        err = e;
+        err = _e3;
       },
-      f: function () {
+      f: function f() {
         try {
-          if (!normalCompletion && it.return != null) it.return();
+          if (!normalCompletion && it["return"] != null) it["return"]();
         } finally {
           if (didErr) throw err;
         }
       }
     };
   }
-
   var e = FormValidation.Plugin;
-
   var t = FormValidation.utils.classSet;
-
   var i = /*#__PURE__*/function (_e) {
     _inherits(i, _e);
-
     var _super = _createSuper(i);
-
     function i(e) {
       var _this;
-
       _classCallCheck(this, i);
-
       _this = _super.call(this, e);
       _this.removedIcons = {
         Invalid: "",
@@ -236,7 +223,6 @@
       _this.iconSetHandler = _this.onIconSet.bind(_assertThisInitialized(_this));
       return _this;
     }
-
     _createClass(i, [{
       key: "install",
       value: function install() {
@@ -252,26 +238,18 @@
       key: "onIconPlaced",
       value: function onIconPlaced(e) {
         var _this2 = this;
-
         var _i = this.core.getFields()[e.field].validators;
         var s = this.core.getElements(e.field);
-
         if (_i && _i["notEmpty"] && _i["notEmpty"].enabled !== false && s.length) {
           this.icons.set(e.element, e.iconElement);
-
           var _i7 = s[0].getAttribute("type");
-
           var _n = !_i7 ? "" : _i7.toLowerCase();
-
           var _l = "checkbox" === _n || "radio" === _n ? [s[0]] : s;
-
           var _iterator = _createForOfIteratorHelper(_l),
-              _step;
-
+            _step;
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var _i8 = _step.value;
-
               if (this.core.getElementValue(e.field, _i8) === "") {
                 t(e.iconElement, _defineProperty({}, this.opts.icon, true));
               }
@@ -282,7 +260,6 @@
             _iterator.f();
           }
         }
-
         this.iconClasses = e.classes;
         var n = this.opts.icon.split(" ");
         var l = {
@@ -292,14 +269,11 @@
         };
         Object.keys(l).forEach(function (e) {
           var t = [];
-
           var _iterator2 = _createForOfIteratorHelper(n),
-              _step2;
-
+            _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var _i9 = _step2.value;
-
               if (l[e].indexOf(_i9) === -1) {
                 t.push(_i9);
               }
@@ -309,7 +283,6 @@
           } finally {
             _iterator2.f();
           }
-
           _this2.removedIcons[e] = t.join(" ");
         });
       }
@@ -332,10 +305,8 @@
       key: "updateIconClasses",
       value: function updateIconClasses(e, _i5) {
         var s = this.icons.get(e);
-
         if (s && this.iconClasses && (this.iconClasses.valid || this.iconClasses.invalid || this.iconClasses.validating)) {
           var _t2;
-
           t(s, (_t2 = {}, _defineProperty(_t2, this.removedIcons[_i5], false), _defineProperty(_t2, this.opts.icon, false), _t2));
         }
       }
@@ -343,20 +314,55 @@
       key: "onIconSet",
       value: function onIconSet(e) {
         var _i6 = this.icons.get(e.element);
-
         if (!_i6) {
           return;
         }
-
         if (e.status === "NotValidated" && this.core.getElementValue(e.field, e.element) === "" || e.status === "Ignored") {
           t(_i6, _defineProperty({}, this.opts.icon, true));
         }
       }
     }]);
-
     return i;
   }(e);
-
   return i;
+});
 
-}));
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./resources/assets/vendor/libs/formvalidation/dist/js/plugins/MandatoryIcon.js");
+/******/ 	
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});

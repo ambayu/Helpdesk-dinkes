@@ -1,3 +1,23 @@
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(self, function() {
+return /******/ (function() { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/assets/vendor/libs/formvalidation/dist/js/plugins/Recaptcha.js":
+/*!**********************************************************************************!*\
+  !*** ./resources/assets/vendor/libs/formvalidation/dist/js/plugins/Recaptcha.js ***!
+  \**********************************************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 /**
  * FormValidation (https://formvalidation.io), v1.10.0 (2236098)
  * The best validation library for JavaScript
@@ -5,17 +25,19 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.FormValidation = global.FormValidation || {}, global.FormValidation.plugins = global.FormValidation.plugins || {}, global.FormValidation.plugins.Recaptcha = factory()));
-})(this, (function () { 'use strict';
+  ( false ? 0 : _typeof(exports)) === 'object' && "object" !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : (0);
+})(this, function () {
+  'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -25,7 +47,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -34,7 +55,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -46,15 +66,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -67,14 +84,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -82,12 +97,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -95,58 +108,42 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   var e = FormValidation.Plugin;
-
   var t = FormValidation.utils.fetch;
-
   var i = /*#__PURE__*/function (_e) {
     _inherits(i, _e);
-
     var _super = _createSuper(i);
-
     function i(e) {
       var _this;
-
       _classCallCheck(this, i);
-
       _this = _super.call(this, e);
       _this.widgetIds = new Map();
       _this.captchaStatus = "NotValidated";
@@ -156,15 +153,12 @@
       _this.iconPlacedHandler = _this.onIconPlaced.bind(_assertThisInitialized(_this));
       return _this;
     }
-
     _createClass(i, [{
       key: "install",
       value: function install() {
         var _this2 = this;
-
         this.core.on("core.field.reset", this.fieldResetHandler).on("plugins.icon.placed", this.iconPlacedHandler).registerFilter("validate-pre", this.preValidateFilter);
         var e = typeof window[i.LOADED_CALLBACK] === "undefined" ? function () {} : window[i.LOADED_CALLBACK];
-
         window[i.LOADED_CALLBACK] = function () {
           e();
           var s = {
@@ -172,34 +166,28 @@
             callback: function callback() {
               if (_this2.opts.backendVerificationUrl === "") {
                 _this2.captchaStatus = "Valid";
-
                 _this2.core.updateFieldStatus(i.CAPTCHA_FIELD, "Valid");
               }
             },
             "error-callback": function errorCallback() {
               _this2.captchaStatus = "Invalid";
-
               _this2.core.updateFieldStatus(i.CAPTCHA_FIELD, "Invalid");
             },
             "expired-callback": function expiredCallback() {
               _this2.captchaStatus = "NotValidated";
-
               _this2.core.updateFieldStatus(i.CAPTCHA_FIELD, "NotValidated");
             },
             sitekey: _this2.opts.siteKey,
             size: _this2.opts.size
           };
           var a = window["grecaptcha"].render(_this2.opts.element, s);
-
           _this2.widgetIds.set(_this2.opts.element, a);
-
           _this2.core.addField(i.CAPTCHA_FIELD, {
             validators: {
               promise: {
                 message: _this2.opts.message,
                 promise: function promise(e) {
                   var s = _this2.widgetIds.has(_this2.opts.element) ? window["grecaptcha"].getResponse(_this2.widgetIds.get(_this2.opts.element)) : e.value;
-
                   if (s === "") {
                     _this2.captchaStatus = "Invalid";
                     return Promise.resolve({
@@ -237,12 +225,9 @@
             }
           });
         };
-
         var s = this.getScript();
-
         if (!document.body.querySelector("script[src=\"".concat(s, "\"]"))) {
           var _e2 = document.createElement("script");
-
           _e2.type = "text/javascript";
           _e2.async = true;
           _e2.defer = true;
@@ -256,7 +241,6 @@
         if (this.timer) {
           clearTimeout(this.timer);
         }
-
         this.core.off("core.field.reset", this.fieldResetHandler).off("plugins.icon.placed", this.iconPlacedHandler).deregisterFilter("validate-pre", this.preValidateFilter);
         this.widgetIds.clear();
         var e = this.getScript();
@@ -276,16 +260,13 @@
       key: "preValidate",
       value: function preValidate() {
         var _this3 = this;
-
         if (this.opts.size === "invisible" && this.widgetIds.has(this.opts.element)) {
           var _e3 = this.widgetIds.get(this.opts.element);
-
           return this.captchaStatus === "Valid" ? Promise.resolve() : new Promise(function (t, _i) {
             window["grecaptcha"].execute(_e3).then(function () {
               if (_this3.timer) {
                 clearTimeout(_this3.timer);
               }
-
               _this3.timer = window.setTimeout(t, 1 * 1e3);
             });
           });
@@ -298,7 +279,6 @@
       value: function onResetField(e) {
         if (e.field === i.CAPTCHA_FIELD && this.widgetIds.has(this.opts.element)) {
           var _e4 = this.widgetIds.get(this.opts.element);
-
           window["grecaptcha"].reset(_e4);
         }
       }
@@ -310,7 +290,6 @@
             e.iconElement.style.display = "none";
           } else {
             var _t = document.getElementById(this.opts.element);
-
             if (_t) {
               _t.parentNode.insertBefore(e.iconElement, _t.nextSibling);
             }
@@ -318,7 +297,6 @@
         }
       }
     }]);
-
     return i;
   }(e);
   i.CAPTCHA_FIELD = "g-recaptcha-response";
@@ -329,7 +307,45 @@
     theme: "light"
   };
   i.LOADED_CALLBACK = "___reCaptchaLoaded___";
-
   return i;
+});
 
-}));
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./resources/assets/vendor/libs/formvalidation/dist/js/plugins/Recaptcha.js");
+/******/ 	
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});

@@ -112,7 +112,9 @@ mixAssetsDir('vendor/scss/**/!(_)*.scss', (src, dest) =>
 mixAssetsDir('vendor/js/**/*.js', (src, dest) => mix.js(src, dest));
 
 // Libs
-mixAssetsDir('vendor/libs/**/*.js', (src, dest) => mix.js(src, dest));
+// mixAssetsDir('vendor/libs/**/*.js', (src, dest) => mix.js(src, dest));
+mixAssetsDir('vendor/libs/**/*.js', (src, dest) => mix.copy(src, dest));
+
 mixAssetsDir('vendor/libs/**/!(_)*.scss', (src, dest) =>
   mix.sass(src, dest.replace(/\.scss$/, '.css'), { sassOptions })
 );

@@ -13,35 +13,19 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 @endsection
 
-
 @section('vendor-script')
     <!-- jQuery -->
-    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
 
-    <!-- SweetAlert2 -->
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
-    <!-- DataTables Core -->
-    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.min.js') }}"></script>
-
-    <!-- DataTables Bootstrap 5 -->
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 
-    <!-- DataTables Responsive -->
-    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.min.js') }}"></script>
 
-    <!-- DataTables Buttons -->
-    <script src="{{ asset('assets/vendor/libs/datatables-buttons-bs5/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.min.js') }}"></script>
-
-    <!-- Toastr -->
-    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
-
-    <!-- Form Validation -->
     <script src="{{ asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 @endsection
 
 @section('page-script')

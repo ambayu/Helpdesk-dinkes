@@ -16,8 +16,6 @@ use Illuminate\Validation\ValidationException;
 class LoginBasic extends Controller
 {
 
-
-
   public function index()
   {
     if (Auth::check()) {
@@ -129,12 +127,13 @@ class LoginBasic extends Controller
 
     return $this->loginMasuk($request);
   }
-
   private function getAccessToken($clientId, $userEmail, $userKey)
   {
     $client = new Client([
-      'verify' => false, // Menonaktifkan verifikasi SSL
+      'verify' => false,
+      'timeout' => 10, // Tambahkan timeout!
     ]);
+
     try {
       $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-user-sso', [
         'form_params' => [
@@ -146,19 +145,17 @@ class LoginBasic extends Controller
 
       $data = json_decode($response->getBody(), true);
 
-      if (isset($data['data'])) {
-        return $data;
-      }
-
-      return null;
+      return isset($data['data']) ? $data : ['status' => false, 'message' => 'Data tidak valid dari SSO'];
     } catch (\Exception $e) {
-      // Log error or handle it accordingly
-      $statusCode = $e->getCode(); // Kode status HTTP
-      $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : 'No response body';
-      $responseData = json_decode($responseBody, true);
+      Log::error('SSO access token error', [
+        'message' => $e->getMessage(),
+        'code' => $e->getCode(),
+      ]);
 
-      $errorMessage = $responseData;
-      return $errorMessage;
+      return [
+        'status' => false,
+        'message' => 'Tidak bisa konek ke SSO. Coba lagi nanti.',
+      ];
     }
   }
 

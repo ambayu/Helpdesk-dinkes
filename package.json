@@ -136,6 +136,7 @@
     "leaflet": "1.9.4",
     "mapbox-gl": "2.15.0",
     "masonry-layout": "4.2.2",
+    "Materialize": "file:",
     "moment": "2.29.4",
     "node-waves": "0.7.6",
     "nouislider": "15.7.1",

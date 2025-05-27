@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\authentications;
 
 use App\Models\User;
-use GuzzleHttp\Client;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
@@ -129,23 +130,21 @@ class LoginBasic extends Controller
   }
   private function getAccessToken($clientId, $userEmail, $userKey)
   {
-    $client = new Client([
-      'verify' => false,
-      'timeout' => 10, // Tambahkan timeout!
-    ]);
-
     try {
-      $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-user-sso', [
-        'form_params' => [
+      $response = Http::asForm()
+        ->timeout(10)
+        ->withOptions(['verify' => false])
+        ->post('https://sso.medan.go.id/api/website/v1/auth-user-sso', [
           'client_id' => $clientId,
           'user_email' => $userEmail,
           'user_key' => $userKey,
-        ],
-      ]);
+        ]);
 
-      $data = json_decode($response->getBody(), true);
+      $data = $response->json();
 
-      return isset($data['data']) ? $data : ['status' => false, 'message' => 'Data tidak valid dari SSO'];
+      return isset($data['data'])
+        ? $data
+        : ['status' => false, 'message' => 'Data tidak valid dari SSO'];
     } catch (\Exception $e) {
       Log::error('SSO access token error', [
         'message' => $e->getMessage(),
@@ -154,86 +153,77 @@ class LoginBasic extends Controller
 
       return [
         'status' => false,
-        'message' => 'Tidak bisa konek ke SSO. Coba lagi nanti.',
+        'message' => 'Tidak bisa menghubungi SSO.',
       ];
     }
   }
 
+
   private function getauthCallBack($clientId, $accessToken)
   {
-    $client = new Client([
-      'verify' => false, // Menonaktifkan verifikasi SSL
-    ]);
     $clientKey = '6h5BA0ABx9itEh57ehdwfW0TZq6N1BocpRn1DMhJxihbzr8Wzu2oxAPWKArzywdqX0MgyOZ19';
+
     try {
-      $response = $client->post('https://sso.medan.go.id/api/website/v1/auth-client-callback-opd-app', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $accessToken,
-          'Content-Type'  => 'application/x-www-form-urlencoded',
-        ],
-        'form_params' => [
+      $response = Http::asForm()
+        ->timeout(10)
+        ->withOptions(['verify' => false])
+        ->withToken($accessToken)
+        ->post('https://sso.medan.go.id/api/website/v1/auth-client-callback-opd-app', [
           'client_id' => $clientId,
           'client_key' => $clientKey,
+        ]);
 
-        ],
+      $data = $response->json();
+
+      return isset($data['data'])
+        ? $data
+        : ['status' => false, 'message' => 'Data callback tidak valid'];
+    } catch (\Exception $e) {
+      Log::error('SSO callback error', [
+        'message' => $e->getMessage(),
+        'code' => $e->getCode(),
       ]);
 
-      $data = json_decode($response->getBody(), true);
-
-      if (isset($data['data'])) {
-        return $data;
-      }
-
-      return null;
-    } catch (\Exception $e) {
-      // Log error or handle it accordingly
-      $statusCode = $e->getCode(); // Kode status HTTP
-      $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : 'No response body';
-      $responseData = json_decode($responseBody, true);
-
-      $errorMessage = $responseData;
-      return $errorMessage;
+      return [
+        'status' => false,
+        'message' => 'Gagal menghubungi SSO untuk callback.',
+      ];
     }
   }
-
 
   private function saveNewUsernameSSo($clientId, $accessToken, $username_app)
   {
-    $client = new Client([
-      'verify' => false, // Menonaktifkan verifikasi SSL
-    ]);
     $clientKey = '6h5BA0ABx9itEh57ehdwfW0TZq6N1BocpRn1DMhJxihbzr8Wzu2oxAPWKArzywdqX0MgyOZ19';
+
     try {
-      $response = $client->post('https://sso.medan.go.id/api/website/v1/save-new-username-opd-app', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $accessToken,
-          'Content-Type'  => 'application/x-www-form-urlencoded',
-        ],
-        'form_params' => [
+      $response = Http::asForm()
+        ->timeout(10)
+        ->withOptions(['verify' => false])
+        ->withToken($accessToken)
+        ->post('https://sso.medan.go.id/api/website/v1/save-new-username-opd-app', [
           'client_id' => $clientId,
           'client_key' => $clientKey,
           'username_app' => $username_app,
+        ]);
 
-        ],
+      $data = $response->json();
+
+      return isset($data['status']) && $data['status'] === true
+        ? $data
+        : ['status' => false, 'message' => 'Gagal menyimpan username ke SSO'];
+    } catch (\Exception $e) {
+      Log::error('SSO save username error', [
+        'message' => $e->getMessage(),
+        'code' => $e->getCode(),
       ]);
 
-      $data = json_decode($response->getBody(), true);
-
-      if (isset($data) && $data['status'] == true) {
-        return $data;
-      }
-
-      return null;
-    } catch (\Exception $e) {
-      // Log error or handle it accordingly
-      $statusCode = $e->getCode(); // Kode status HTTP
-      $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : 'No response body';
-      $responseData = json_decode($responseBody, true);
-
-      $errorMessage = $responseData;
-      return $errorMessage;
+      return [
+        'status' => false,
+        'message' => 'Gagal menghubungi SSO untuk simpan username.',
+      ];
     }
   }
+
 
 
   public function downloadAvatar($url)

@@ -1,7 +1,7 @@
 @foreach ($menus as $menu)
     <!-- Add Permission Modal -->
     <div class="modal fade" id="editLayanan{{ $menu->id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body p-md-0">
@@ -27,28 +27,9 @@
                                 @enderror
                             </div>
 
-                            <div class="mt-4">
-                                <label class="switch">
-                                    <input type="checkbox" name="file" class="switch-input"
-                                        {{ $menu->file == 1 ? 'checked' : '' }}>
-                                    <span class="switch-toggle-slider">
-                                        <span class="switch-on"></span>
-                                        <span class="switch-off"></span>
-                                    </span>
-                                    <span class="switch-label">Izinkan kirim file</span>
-                                </label>
-
-                            </div>
 
 
-                            <div style="width: 100%; height:150px; border:solid 3px;" class="text-danger mb-3 p-2">
-                                Perhatian!! <br>
-                                Jika memilih opsi <strong>PILIHAN</strong> pada Nama inputan untuk Nama
-                                pilihan pisahkan dengan ":" dan pilihan pisahkan
-                                dengan " , " <br>
-                                <strong>Contoh =</strong> Warna: Merah, Biru, Kuning, Coklat <br>
-                                Ini akan membuat opsi Warna dengan pilihan Merah, Biru, Kuning, Coklat
-                            </div>
+
                             @foreach ($menu->formulir as $formulir)
                                 <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item="">
                                     <div class="d-flex border rounded position-relative pe-0">
@@ -60,28 +41,53 @@
                                                     placeholder="Alamat Lengkap">
                                             </div>
 
-                                            <div class="col-md-5 col-12 mb-md-0 mb-3">
+                                            <div class="col-md-5 col-12 mb-md-0 mb-3 ">
                                                 <h6 class="mb-2 repeater-title fw-medium">Input Type</h6>
 
                                                 <div class="form-check form-check-inline">
-                                                    <input name="input_type" class="form-check-input" type="radio"
-                                                        value="1" id="textarea"
-                                                        {{ $formulir->type_formulir == 1 ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="textarea">Text</label>
+                                                    <input name="input_type" class="form-check-input input-type" checked
+                                                        type="radio" value="1" id="text">
+                                                    <label class="form-check-label" for="text">Text</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input name="input_type" class="form-check-input" type="radio"
-                                                        value="2" id="textarea"
-                                                        {{ $formulir->type_formulir == 2 ? 'checked' : '' }}>
+                                                    <input name="input_type" class="form-check-input input-type"
+                                                        type="radio" value="2" id="textarea">
                                                     <label class="form-check-label" for="textarea">Textarea</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input name="input_type" class="form-check-input" type="radio"
-                                                        value="3" id="pilihan"
-                                                        {{ $formulir->type_formulir == 3 ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="textarea">Pilihan</label>
+                                                    <input name="input_type" class="form-check-input input-type"
+                                                        type="radio" value="3" id="choice">
+                                                    <label class="form-check-label" for="choice">Pilihan</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input name="input_type" class="form-check-input input-type"
+                                                        type="radio" value="4" id="file">
+                                                    <label class="form-check-label" for="file">File</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input name="input_type" class="form-check-input input-type"
+                                                        type="radio" value="5" id="file">
+                                                    <label class="form-check-label" for="file">Kelompok</label>
+                                                </div>
+
+                                                <!-- Tempat untuk opsi pilihan -->
+                                                <div class="choice-options mt-3" style="display: none;">
+                                                    <h6 class="mb-2">Tambahkan Pilihan</h6>
+                                                    <div data-repeater-list="pilihan">
+                                                        <div data-repeater-item class="d-flex mb-2">
+                                                            <input type="text" name="nama_pilihan"
+                                                                class="form-control me-2" placeholder="Isi pilihan" />
+                                                            <button type="button" data-repeater-delete
+                                                                class="btn btn-sm btn-danger">X</button>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" data-repeater-create
+                                                        class="btn btn-sm btn-success mt-2">
+                                                        + Tambah Pilihan
+                                                    </button>
                                                 </div>
                                             </div>
+
 
                                         </div>
                                         <div

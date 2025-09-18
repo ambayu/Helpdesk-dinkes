@@ -16,22 +16,65 @@
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
-
 @endsection
 
 @section('page-script')
-
     <script src="{{ asset('assets/js/app-invoice-add.js') }}"></script>
     <script src="{{ asset('assets/js/forms-tagify.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle input tambahan sesuai tipe
+            $(document).on('change', '.input-type', function() {
+                let wrapper = $(this).closest('.col-md-5');
 
+                wrapper.find('.choice-options').hide();
+                wrapper.find('.kelompok-options').hide();
+
+                if ($(this).val() == '3') { // Pilihan
+                    wrapper.find('.choice-options').show();
+                }
+                if ($(this).val() == '5') { // Kelompok
+                    wrapper.find('.kelompok-options').show();
+                }
+            });
+
+            // Repeater untuk opsi Pilihan
+            $('.choice-options').repeater({
+                initEmpty: true,
+                defaultValues: {
+                    'nama_pilihan': ''
+                },
+                show: function() {
+                    $(this).slideDown();
+                },
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                }
+            });
+
+            // Repeater untuk Field Kelompok
+            $('.kelompok-options').repeater({
+                initEmpty: true,
+                defaultValues: {
+                    'field_label': '',
+                    'field_type': 'text'
+                },
+                show: function() {
+                    $(this).slideDown();
+                },
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                }
+            });
+        });
+    </script>
 @endsection
 
 @section('content')
     <h4 class="py-3 mb-2">Tambah Layanan </h4>
+
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     @if ($errors->any())
@@ -47,34 +90,14 @@
     <p class="mb-4">Tambahkan layanan yang ingin ditambahkan serta inputan yang diisi</p>
 
     <div class="row invoice-add">
-        <!-- Invoice Add-->
-        <div class="col-lg-12 col-12 mb-lg-0 mb-4">
+        <div class="col-lg-12">
             <div class="card invoice-preview-card">
-                <div class="card-body">
-                    <div class="row mx-0">
-                        <div class="col-md-7 mb-md-0 mb-4 ps-0">
-                            <div class="d-flex svg-illustration align-items-center gap-2 mb-4">
-
-                                <span class="h4 mb-0 app-brand-text fw-bold"> Layanan</span>
-                            </div>
-                            {{-- <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                            <p class="mb-1">San Diego County, CA 91905, USA</p>
-                            <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p> --}}
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <hr class="my-0" />
-
                 <div class="card-body">
                     <form class="source-item pt-1" action="{{ route('create-layanan.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
 
-                        <div class="mb-3" data-repeater-list="inputan">
-
+                        <div class="mb-3">
                             <div class="form-floating form-floating-outline">
                                 <input type="text" id="nama_layanan" name="nama_layanan" class="form-control"
                                     placeholder="Layanan Aplikasi">
@@ -84,111 +107,128 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                        </div>
 
-                            <div class="mt-4">
-                                <label class="switch">
-                                    <input type="checkbox" name="file" class="switch-input">
-                                    <span class="switch-toggle-slider">
-                                        <span class="switch-on"></span>
-                                        <span class="switch-off"></span>
-                                    </span>
-                                    <span class="switch-label">Izinkan kirim file</span>
-                                </label>
-                            </div>
+                        <h4 class="mt-4">Tambahkan Input Yang diinginkan</h4>
 
-
-                            <h4 class="mt-4">
-                                Tambahkan Input Yang diinginkan
-                            </h4>
-                            <div style="width: 100%; height:100px; border:solid 3px;" class="text-danger mb-3 p-2">
-                                Perhatian!! <br>
-                                Jika memilih opsi <strong>PILIHAN</strong> pada Nama inputan untuk Nama
-                                pilihan pisahkan dengan ":" dan pilihan pisahkan
-                                dengan " , " <br>
-                                <strong>Contoh =</strong> Warna: Merah, Biru, Kuning, Coklat <br>
-                                Ini akan membuat opsi Warna dengan pilihan Merah, Biru, Kuning, Coklat
-                            </div>
-
-                            <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item="main">
+                        <div data-repeater-list="inputan">
+                            <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item>
                                 <div class="d-flex border rounded position-relative pe-0">
                                     <div class="row w-100 p-3">
-
                                         <div class="col-md-7 col-12 mb-md-0 mb-2 mt-1 ">
-
                                             <h6 class="mb-2 repeater-title fw-medium">Nama Inputan</h6>
-                                            <div id="input-container" class="form-floating form-floating-outline">
-                                                <input type="text" id="collapsible-label_name" name="name_label"
-                                                    class="form-control" placeholder="Deskripsi">
-                                                <label for="collapsible-label_name">Nama Inputan</label>
-
+                                            <div class="form-floating form-floating-outline">
+                                                <input type="text" name="name_label" class="form-control"
+                                                    placeholder="contoh: Nama Lengkap">
+                                                <label>Nama Inputan</label>
                                             </div>
-                                            <!-- Basic -->
-
                                         </div>
-
 
                                         <div class="col-md-5 col-12 mb-md-0 mb-3 ">
                                             <h6 class="mb-2 repeater-title fw-medium">Input Type</h6>
 
                                             <div class="form-check form-check-inline">
-                                                <input name="input_type" class="form-check-input" checked type="radio"
-                                                    value="1" id="text">
-                                                <label class="form-check-label" for="text">Text</label>
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="1">
+                                                <label class="form-check-label">Text</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input name="input_type" class="form-check-input" type="radio"
-                                                    value="2" id="textarea">
-                                                <label class="form-check-label" for="textarea">Textarea</label>
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="2">
+                                                <label class="form-check-label">Textarea</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input name="input_type" class="form-check-input" type="radio"
-                                                    value="3" id="choice">
-                                                <label class="form-check-label" for="choice">Pilihan</label>
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="3">
+                                                <label class="form-check-label">Pilihan</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="4">
+                                                <label class="form-check-label">File</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="5">
+                                                <label class="form-check-label">Kelompok</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="6">
+                                                <label class="form-check-label">Tanggal</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="input_type" class="form-check-input input-type" type="radio"
+                                                    value="7">
+                                                <label class="form-check-label">Tanggal Maju</label>
                                             </div>
 
-                                            <!-- Button to add additional input fields, hidden by default -->
-                                            {{-- <div id="add-input-btn" class="mt-3" style="display: none;">
-                                                <button type="button" class="btn btn-sm btn-secondary"
-                                                    onclick="addInputField()">Tambah Pilihan</button>
-                                            </div> --}}
+                                            <!-- Pilihan -->
+                                            <div class="choice-options mt-3" style="display:none;">
+                                                <h6>Tambahkan Pilihan</h6>
+                                                <div data-repeater-list="pilihan">
+                                                    <div data-repeater-item class="d-flex mb-2">
+                                                        <input type="text" name="nama_pilihan" class="form-control me-2"
+                                                            placeholder="Isi pilihan" />
+                                                        <button type="button" data-repeater-delete
+                                                            class="btn btn-sm btn-danger">X</button>
+                                                    </div>
+                                                </div>
+                                                <button type="button" data-repeater-create
+                                                    class="btn btn-sm btn-success mt-2">+ Tambah Pilihan</button>
+                                            </div>
 
-
+                                            <!-- Kelompok -->
+                                            <div class="kelompok-options mt-3" style="display:none;">
+                                                <h6>Field dalam Kelompok</h6>
+                                                <div data-repeater-list="fields">
+                                                    <div data-repeater-item class="row mb-2">
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="field_label" class="form-control"
+                                                                placeholder="Nama kolom (contoh: NIP)">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select name="field_type" class="form-select">
+                                                                <option value="text">Text</option>
+                                                                <option value="textarea">Textarea</option>
+                                                                <option value="file">File</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button" data-repeater-delete
+                                                                class="btn btn-sm btn-danger">X</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" data-repeater-create
+                                                    class="btn btn-sm btn-success mt-2">+ Tambah Field</button>
+                                            </div>
                                         </div>
-
                                     </div>
+
                                     <div
                                         class="d-flex flex-column align-items-center justify-content-between border-start p-2">
-                                        <i class="mdi mdi-close cursor-pointer" data-repeater-delete="inputan"></i>
-
+                                        <i class="mdi mdi-close cursor-pointer" data-repeater-delete></i>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
 
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-12">
-                                <button type="button" class="btn btn-sm btn-primary" data-repeater-create="main"><i
-                                        class="mdi mdi-plus me-1"></i> Add Inputan</button>
+                                <button type="button" class="btn btn-sm btn-primary" data-repeater-create>
+                                    <i class="mdi mdi-plus me-1"></i> Add Inputan
+                                </button>
                             </div>
                         </div>
 
                         <div class="mt-4">
                             <button type="submit" class="btn btn-primary">SIMPAN</button>
-
                         </div>
                     </form>
                 </div>
-
-
             </div>
         </div>
-        <!-- /Invoice Add-->
-
-        <!-- Invoice Actions -->
-
-        <!-- /Invoice Actions -->
     </div>
 
     @include('_partials/_offcanvas/offcanvas-send-invoice')

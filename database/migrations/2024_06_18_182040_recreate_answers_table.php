@@ -14,7 +14,7 @@ class RecreateAnswersTable extends Migration
       $table->bigIncrements('id'); // ID yang otomatis bertambah
       $table->unsignedBigInteger('id_menu')->nullable(); // Kolom unsigned bigint
       $table->string('id_formulir'); // Kolom string (ubah ke integer jika perlu)
-      $table->unsignedBigInteger('id_tiket');
+      $table->unsignedBigInteger('id_ticket');
       $table->timestamp('tanggal_kirim'); // Kolom timestamp
       $table->timestamps(); // Kolom created_at dan updated_at otomatis
     });

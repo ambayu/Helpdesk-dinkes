@@ -87,7 +87,7 @@
                             <input type="hidden" name="type[{{ $loop->index }}][id_formulir]"
                                 value="{{ $formulir->id }}">
                             @php
-                                $isPilihan = $formulir->inputan->nama_type == 'pilihan';
+                                $isPilihan = optional($formulir->inputan)->nama_type === 'pilihan';
                                 // Extract options from the 'formulir' value
                                 $options = [];
                                 $label = '';
@@ -101,7 +101,7 @@
                                 }
                             @endphp
 
-                            @if ($formulir->inputan->nama_type == 'pilihan')
+                            @if (optional($formulir->inputan)->nama_type === 'pilihan')
                                 <select class="form-control @error('type.' . $loop->index . '.respon') is-invalid @enderror"
                                     id="{{ $formulir->formulir }}" name="type[{{ $loop->index }}][respon]" autofocus>
                                     <option value="">Pilih {{ $label }} </option>
@@ -114,7 +114,7 @@
                                 </select>
                                 <label for="{{ $label }}">{{ $label }}</label>
                             @else
-                                <input type="{{ $formulir->inputan->nama_type }}"
+                                <input type="{{ $formulir?->inputan?->nama_type }}"
                                     class="form-control @error('type.' . $loop->index . '.respon') is-invalid @enderror"
                                     id="{{ $formulir->formulir }}" name="type[{{ $loop->index }}][respon]"
                                     placeholder="Masukkan {{ $formulir->formulir }}" autofocus

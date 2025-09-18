@@ -49,6 +49,33 @@
     <script src="{{ asset('assets/js/app-invoice-add.js') }}"></script>
 
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Tampilkan input pilihan kalau "Pilihan" dipilih
+            $(document).on('change', '.input-type', function() {
+                let wrapper = $(this).closest('.row');
+                if ($(this).val() == '3') { // pilihan
+                    wrapper.find('.choice-options').show();
+                } else {
+                    wrapper.find('.choice-options').hide();
+                }
+            });
+
+            // Aktifkan repeater untuk pilihan
+            $('.choice-options').repeater({
+                initEmpty: true,
+                defaultValues: {
+                    'nama_pilihan': ''
+                },
+                show: function() {
+                    $(this).slideDown();
+                },
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                }
+            });
+        });
+    </script>
 
     <script src="{{ asset('assets/js/app-manage-layanan.js') }}"></script>
 @endsection

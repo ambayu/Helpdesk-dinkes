@@ -202,79 +202,39 @@ class CreateLayanan extends Controller
 
   public function store(Request $request)
   {
-
-
+    return $request;
     $validatedData = $request->validate([
       'nama_layanan' => 'required|string|max:255|unique:menu,nama_layanan',
     ]);
-    // return $request;
-    $inputan = $request->input('inputan');
 
-    // Custom validation rules for 'inputan'
+    $inputan = $request->input('inputan', []);
+
     Validator::make($inputan, [
       '*.input_type' => 'required|integer',
-      '*.name_label' => function ($attribute, $value, $fail) use ($inputan) {
-        $index = explode('.', $attribute)[0];  // Mendapatkan indeks dalam array
-
-        // Memastikan kunci 'input_type' ada sebelum memeriksa nilainya
-        if (!array_key_exists('input_type', $inputan[$index])) {
-          $fail('Tipe input tidak ditemukan.');
-          return;
-        }
-
-        // Jika input_type null, berikan pesan kesalahan
-        if (is_null($inputan[$index]['input_type'])) {
-          $fail('Tipe input tidak boleh null.');
-        }
-
-        // Jika input_type adalah 1 atau 2, name_label tidak boleh null
-        if (($inputan[$index]['input_type'] == 1 || $inputan[$index]['input_type'] == 2) && is_null($value)) {
-          $fail('Label tidak boleh kosong jika tipe input adalah text atau textarea.');
-        }
-
-        // Jika input_type adalah 3, name_label harus mengandung ":" dan ","
-        if ($inputan[$index]['input_type'] == 3) {
-          if (!str_contains($value, ':') || !str_contains($value, ',')) {
-            $fail('Label harus mengandung ":" dan "," jika tipe input adalah pilihan. Contoh: "Warna: merah,kuning,biru".');
-          }
-        }
-      },
+      '*.name_label' => 'nullable|string|max:255',
     ])->validate();
-
-    // return $request;
 
     $menu = new Menu();
     $menu->nama_layanan = $request->nama_layanan;
     $menu->slug = str_replace([' ', '/'], ['-', '--'], $request->nama_layanan);
     $menu->id_user = auth()->user()->id;
-
-    if (isset($request->file)) {
-      $menu->file = '1';
-    } else {
-      $menu->file = '0';
-    }
-
     $menu->save();
 
-    if (is_array($request->inputan) && !empty($request->inputan)) {
-
-      foreach ($request->inputan as $input) {
-
-        if ($input['name_label'] != null) {
-          $formulir = new Formulir();
-          $formulir->id_menu = $menu->id;
-          $formulir->type_formulir = $input['input_type'];
-          $formulir->formulir = $input['name_label'];
-          $formulir->id_user = '1';
-          $formulir->save();
-        }
+    foreach ($inputan as $input) {
+      if (!empty($input['name_label'])) {
+        $formulir = new Formulir();
+        $formulir->id_menu = $menu->id;
+        $formulir->type_formulir = $input['input_type'];
+        $formulir->formulir = $input['name_label'];
+        $formulir->id_user = auth()->id();
+        $formulir->save();
       }
     }
 
-
-
-    return redirect()->route('app-layanan-create-layanan.index')->with('success', 'Layanan Telah Berhasil Dibuat');
+    return redirect()->route('app-layanan-create-layanan.index')
+      ->with('success', 'Layanan Telah Berhasil Dibuat');
   }
+
 
   public function update(Request $request, Permission $role)
   {

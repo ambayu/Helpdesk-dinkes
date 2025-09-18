@@ -1,14 +1,14 @@
 <?php
 // Variables
 return [
-  "creatorName" => "Dinas Komunikasi dan Informatika Pemerintah Kota Medan",
-  "creatorUrl" => "https://diskominfo.medan.go.id/",
+  "creatorName" => "Dinas Kesehatan Kota Medan",
+  "creatorUrl" => "https://helpdesksdkdiskeskotamedan.medan.go.id/",
   "templateName" => "",
-  "templateSuffix" => "DISKOMINFO",
+  "templateSuffix" => "helpdesksdkdiskeskotamedan",
   "templateVersion" => "1.3.0",
   "templateFree" => false,
-  "templateDescription" => "Aplikasi Help Desk Diskominfo Pemerintah Kota Medan",
-  "templateKeyword" => "help-desk, medan, diskominfo, dinas komunikasi, kota medan",
+  "templateDescription" => "Aplikasi Help Desk helpdesksdkdiskeskotamedan Pemerintah Kota Medan",
+  "templateKeyword" => "help-desk, medan, helpdesksdkdiskeskotamedan, Dinas Kesehatan, kota medan",
   "licenseUrl" => "https://helpdesk.medan.go.id/",
   "livePreview" => "https://helpdesk.medan.go.id/",
   "productPage" => "https://helpdesk.medan.go.id/",
@@ -18,7 +18,7 @@ return [
   "generator" => "",
   "changelog" => "https://helpdesk.medan.go.id/",
   "repository" => "https://helpdesk.medan.go.id/",
-  "gitRepo" => "help-desk-diskominfo",
+  "gitRepo" => "help-desk-helpdesksdkdiskeskotamedan",
   "gitRepoAccess" => "https://helpdesk.medan.go.id/",
   "facebookUrl" => "https://helpdesk.medan.go.id/",
   "twitterUrl" => "https://helpdesk.medan.go.id/",

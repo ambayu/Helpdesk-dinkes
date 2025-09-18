@@ -483,11 +483,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 text-center">
                     <h4 class="display-6">Masih butuh bantuan ?</h4>
-                    <p>Silahkan hubungi Dinas Komunikasi dan Informatika Pemerintah Kota Medan atau klik tombol dibawah
+                    <p>Silahkan hubungi Dinas Kesehatan Kota Medan atau klik tombol dibawah
                         untuk informasi lebih lanjut</p>
                     <div class="d-flex justify-content-center flex-wrap gap-3">
 
-                        <a href="https://diskominfo.pemkomedan.go.id/" class="btn btn-primary">Hubungi Kami</a>
+                        <a href="https://helpdesksdkdinkeskotamedan.pemkomedan.go.id/" class="btn btn-primary">Hubungi Kami</a>
                     </div>
                 </div>
             </div>

@@ -53,7 +53,6 @@
         .tutorial-image {
             width: 100%;
             max-width: 500px;
-            /* Tambahan untuk max width */
             height: auto;
             max-height: 300px;
             margin: 15px 0;
@@ -61,11 +60,8 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             object-fit: contain;
             display: block;
-            /* Tambahan untuk memastikan margin auto bekerja */
             margin-left: auto;
-            /* Tambahan untuk center image */
             margin-right: auto;
-            /* Tambahan untuk center image */
         }
 
         .step-number {
@@ -74,7 +70,7 @@
             left: -15px;
             width: 30px;
             height: 30px;
-            background: #696cff;
+            background: #198754;
             color: white;
             border-radius: 50%;
             display: flex;
@@ -122,21 +118,20 @@
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div style="max-width:90%;" class="authentication-inner py-4 mt-5">
 
-                <!-- Login -->
+                <!-- Card -->
                 <div class="card p-2">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
                         <a href="{{ url('/') }}" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])</span>
-                            <span
-                                class="app-brand-text demo text-heading fw-bold">{{ config('variables.templateName') }}</span>
+                            <span class="app-brand-text demo text-heading fw-bold">{{ config('variables.templateName') }}</span>
                         </a>
                     </div>
                     <!-- /Logo -->
 
                     <div class="card-body mt-2">
-                        <h4 class="mb-2">Tata Cara Penggunaan👋 </h4>
-                        <p class="mb-4">Berikut Merupakan tata cara penggunaan aplikasi help desk DISKOMINFO MEDAN</p>
+                        <h4 class="mb-2">Tata Cara Penggunaan 👋 </h4>
+                        <p class="mb-4">Berikut merupakan tata cara penggunaan aplikasi Helpdesk Dinas Kesehatan Pemerintah Kota Medan</p>
 
                         <div class="py-5">
                             <div class="timeline">
@@ -145,15 +140,16 @@
                                     <div class="timeline-content timeline-left">
                                         <div class="step-number">1</div>
                                         <h3>Tentang Aplikasi</h3>
-                                        <p>Help Desk DISKOMINFO adalah aplikasi berbasis website yang disediakan oleh
-                                            DISKOMINFO Pemerintah Kota Medan untuk memudahkan masyarakat dalam menyampaikan
-                                            aspirasi, keluhan, dan permohonan terkait pelayanan publik.</p>
-                                        <img src="{{ asset('assets/img/tutorial/1.png') }}" alt="Login SSO"
+                                        <p>Helpdesk Dinas Kesehatan adalah aplikasi berbasis website yang disediakan oleh
+                                            Pemerintah Kota Medan melalui Dinas Kesehatan.
+                                            Aplikasi ini memudahkan masyarakat, tenaga kesehatan,
+                                            maupun fasilitas kesehatan dalam menyampaikan laporan,
+                                            permohonan, maupun keluhan terkait pelayanan kesehatan.</p>
+                                        <img src="{{ asset('assets/img/tutorial/1.png') }}" alt="Beranda"
                                             class="tutorial-image" />
-                                        <p>Untuk menggunakan aplikasi:</p>
+                                        <p>Untuk mulai menggunakan aplikasi:</p>
                                         <ul>
-                                            <li>Silahkan klik tombol MASUK yang terdapat disudut atas ataupun ditengah dari
-                                                halaman</li>
+                                            <li>Klik tombol <strong>MASUK</strong> di bagian atas atau tengah halaman</li>
                                         </ul>
                                     </div>
                                     <div class="timeline-content timeline-right">
@@ -164,8 +160,8 @@
                                         <p>Untuk mengakses sistem:</p>
                                         <ul>
                                             <li>Buka halaman login</li>
-                                            <li>Masuk menggunakan akun yang sudah ada</li>
-                                            <li>Atau login menggunakan SSO</li>
+                                            <li>Masuk menggunakan akun yang sudah terdaftar</li>
+                                            <li>Atau login menggunakan akun <strong>SSO Pemko Medan</strong></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -179,9 +175,9 @@
                                             class="tutorial-image" />
                                         <p>Dengan SSO, pengguna dapat:</p>
                                         <ul>
-                                            <li>Membuat akun baru</li>
-                                            <li>Menggunakan satu akun untuk semua aplikasi Pemkot Medan</li>
-                                            <li>Melengkapi data profil</li>
+                                            <li>Menggunakan satu akun untuk seluruh aplikasi Pemko Medan</li>
+                                            <li>Membuat akun baru dengan mudah</li>
+                                            <li>Melengkapi profil untuk keperluan layanan</li>
                                         </ul>
                                     </div>
                                     <div class="timeline-content timeline-right">
@@ -189,8 +185,8 @@
                                         <h3>Dashboard</h3>
                                         <img src="{{ asset('assets/img/tutorial/4.png') }}" alt="Dashboard"
                                             class="tutorial-image" />
-                                        <p>Setelah login berhasil, pengguna akan melihat dashboard yang menampilkan
-                                            informasi utama dan menu navigasi.</p>
+                                        <p>Setelah login berhasil, pengguna akan diarahkan ke dashboard
+                                           yang menampilkan informasi utama dan menu layanan Helpdesk.</p>
                                     </div>
                                 </div>
 
@@ -198,25 +194,25 @@
                                 <div class="timeline-item">
                                     <div class="timeline-content timeline-left">
                                         <div class="step-number">5</div>
-                                        <h3>Pilih Permintaan</h3>
+                                        <h3>Pilih Jenis Permintaan</h3>
                                         <img src="{{ asset('assets/img/tutorial/5.png') }}" alt="Pilih Permintaan"
                                             class="tutorial-image" />
-                                        <p>Langkah pertama mengirim permintaan:</p>
+                                        <p>Langkah pertama membuat permintaan:</p>
                                         <ul>
-                                            <li>Pilih kategori permintaan yang sesuai</li>
-                                            <li>Sistem akan menampilkan form yang sesuai</li>
+                                            <li>Pilih kategori permintaan yang sesuai (izin, keluhan, laporan kesehatan, dll.)</li>
+                                            <li>Sistem akan menampilkan form sesuai jenis permintaan</li>
                                         </ul>
                                     </div>
                                     <div class="timeline-content timeline-right">
                                         <div class="step-number">6</div>
-                                        <h3>Form Pengisian Permintaan</h3>
+                                        <h3>Isi Form Permintaan</h3>
                                         <img src="{{ asset('assets/img/tutorial/6.png') }}" alt="Form Permintaan"
                                             class="tutorial-image" />
                                         <p>Panduan pengisian form:</p>
                                         <ul>
-                                            <li>Isi semua field yang wajib diisi</li>
-                                            <li>Untuk field yang tidak diperlukan, isi dengan (-)</li>
-                                            <li>Pastikan semua informasi terisi dengan benar</li>
+                                            <li>Isi semua field wajib dengan benar</li>
+                                            <li>Gunakan tanda (-) untuk field yang tidak relevan</li>
+                                            <li>Pastikan informasi sesuai dengan data sebenarnya</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -230,24 +226,18 @@
                                             class="tutorial-image" />
                                         <p>Status permintaan dapat dicek melalui:</p>
                                         <ul>
-                                            <li>Menu Cek Permintaan di dashboard</li>
-                                            <li>Halaman Cek Status dengan memasukkan nomor tiket</li>
-                                            <li>Status yang mungkin muncul:</li>
-                                            <ul>
-                                                <li>"Menunggu diproses" - masih bisa diedit/hapus</li>
-                                                <li>"Menunggu balasan admin" - sedang diproses</li>
-                                                <li>"Menunggu balasan User" - perlu tanggapan</li>
-                                            </ul>
+                                            <li>Menu "Cek Permintaan" di dashboard</li>
+                                            <li>Halaman status dengan nomor tiket</li>
                                         </ul>
                                     </div>
                                     <div class="timeline-content timeline-right">
                                         <div class="step-number">8</div>
-                                        <h3>Menanggapi Respon Admin</h3>
-                                        <img src="{{ asset('assets/img/tutorial/8.png') }}" alt="Kirim Respon"
+                                        <h3>Respon Admin</h3>
+                                        <img src="{{ asset('assets/img/tutorial/8.png') }}" alt="Respon Admin"
                                             class="tutorial-image" />
                                         <p>Cara menanggapi:</p>
                                         <ul>
-                                            <li>Klik tombol balas pada permintaan</li>
+                                            <li>Klik tombol balas pada detail permintaan</li>
                                             <li>Isi form tanggapan</li>
                                             <li>Lampirkan file jika diperlukan</li>
                                         </ul>
@@ -261,10 +251,10 @@
                                         <h3>Status Akhir Permintaan</h3>
                                         <img src="{{ asset('assets/img/tutorial/9.png') }}" alt="Status Selesai"
                                             class="tutorial-image" />
-                                        <p>Setelah permintaan diproses:</p>
+                                        <p>Setelah diproses:</p>
                                         <ul>
                                             <li>Status akan berubah menjadi "Selesai"</li>
-                                            <li>Permintaan telah selesai diproses</li>
+                                            <li>Pengguna bisa mengunduh lampiran jika tersedia</li>
                                         </ul>
                                     </div>
                                     <div class="timeline-content timeline-right">
@@ -272,40 +262,14 @@
                                         <h3>Memberikan Feedback</h3>
                                         <img src="{{ asset('assets/img/tutorial/10.png') }}" alt="Feedback"
                                             class="tutorial-image" />
-                                        <p>Akhir proses:</p>
+                                        <p>Langkah terakhir:</p>
                                         <ul>
-                                            <li>Berikan feedback tentang layanan</li>
-                                            <li>Nilai kinerja admin</li>
-                                            <li>Proses selesai</li>
+                                            <li>Berikan penilaian terhadap layanan</li>
+                                            <li>Tulis masukan untuk perbaikan</li>
+                                            <li>Proses permintaan dinyatakan selesai</li>
                                         </ul>
                                     </div>
                                 </div>
-
-                                <!-- Row 5 -->
-                                <div class="timeline-item">
-                                    <div class="timeline-content timeline-left">
-                                        <div class="step-number">11</div>
-                                        <h3>Cek Status Permintaan</h3>
-                                        <img src="{{ asset('assets/img/tutorial/11.png') }}" alt="Status Selesai"
-                                            class="tutorial-image" />
-                                        <p>Status permintaan juga dapat dilihat di menu dashboard Cek Status Permintaan</p>
-
-                                    </div>
-                                    <div class="timeline-content timeline-right">
-                                        <div class="step-number">12</div>
-                                        <h3>Keseluruhan permintaan juga dapat dilihat di menu dashboard Cek Status
-                                            Permintaan</h3>
-                                        <img src="{{ asset('assets/img/tutorial/12.png') }}" alt="Feedback"
-                                            class="tutorial-image" />
-                                        <p>Akhir proses:</p>
-                                        <ul>
-                                            <li>Berikan feedback tentang layanan</li>
-                                            <li>Nilai kinerja admin</li>
-                                            <li>Proses selesai</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -320,7 +284,7 @@
                     @endif
                 </div>
             </div>
-            <!-- /Login -->
+            <!-- /Card -->
             <img alt="mask"
                 src="{{ asset('assets/img/illustrations/auth-basic-login-mask-' . $configData['style'] . '.png') }}"
                 class="authentication-image d-none d-lg-block"

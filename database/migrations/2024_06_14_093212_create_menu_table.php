@@ -21,6 +21,7 @@ return new class extends Migration
       $table->string('id_user');
       $table->string('status');
       $table->timestamps();
+      $table->softDeletes(); // <── tambahkan ini
     });
   }
 

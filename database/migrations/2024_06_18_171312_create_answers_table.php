@@ -6,32 +6,37 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
-  public function up(): void
-  {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('answers', function (Blueprint $table) {
+            $table->id();
 
-    Schema::create('answers', function (Blueprint $table) {
-      $table->id();
-      $table->unsignedBigInteger('id_menu')->after('id');
-      $table->foreign('id_menu')->references('id')->on('menu')->onDelete('cascade');
+            // Relasi ke menu
+            $table->unsignedBigInteger('id_menu');
+            $table->foreign('id_menu')->references('id')->on('menu')->onDelete('cascade');
 
-      $table->string('id_formulir');
-      $table->foreign('id_formulir')->references('id')->on('formulir_layanan')->onDelete('cascade');
-      $table->unsignedBigInteger('nomor_tiket')->after('respon')->nullable();
-      $table->string('respon');
+            // Relasi ke formulir_layanan
+            $table->unsignedBigInteger('id_formulir');
+            $table->foreign('id_formulir')->references('id')->on('formulir_layanan')->onDelete('cascade');
 
-      $table->timestamps('tanggal_kirim');
-      $table->timestamps();
-    });
-  }
+            $table->unsignedBigInteger('nomor_tiket')->nullable();
+            $table->string('respon');
 
-  /**
-   * Reverse the migrations.
-   */
-  public function down(): void
-  {
-    Schema::dropIfExists('answers');
-  }
+            // Custom kolom tanggal kirim
+            $table->timestamp('tanggal_kirim')->nullable();
+
+            $table->timestamps(); // created_at & updated_at
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('answers');
+    }
 };

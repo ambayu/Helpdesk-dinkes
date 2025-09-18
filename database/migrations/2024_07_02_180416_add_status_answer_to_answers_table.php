@@ -12,10 +12,10 @@ return new class extends Migration
   public function up(): void
   {
     Schema::table('answers', function (Blueprint $table) {
-      //
-      $table->integer('status_answer')->default('0')->after('deskripsi'); // Ganti 'some_column' dengan kolom yang ada di tabel Anda.
+      $table->integer('status_answer')->default(0);
     });
   }
+
 
   /**
    * Reverse the migrations.
@@ -23,7 +23,6 @@ return new class extends Migration
   public function down(): void
   {
     Schema::table('answers', function (Blueprint $table) {
-      //
       $table->dropColumn('status_answer');
     });
   }

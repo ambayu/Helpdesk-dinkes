@@ -23,16 +23,14 @@ $(function () {
       ],
       columnDefs: [
         {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
           targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
+          searchable: false,
+          orderable: false,
+          render: function (data, type, row, meta) {
+            return meta.row + 1; // otomatis angka urut
           }
         },
+
         {
           targets: 1,
           searchable: false,

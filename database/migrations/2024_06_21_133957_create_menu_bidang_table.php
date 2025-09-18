@@ -14,20 +14,20 @@ return new class extends Migration
     Schema::create('menu_bidang', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('id_menu');
-      $table->string('nama_bidang'); // Tambahkan kolom nama_bidang
+      $table->string('nama_bidang');
       $table->timestamps();
-      $table->softDeletes(); // Menambahkan kolom deleted_at
+      $table->softDeletes(); // kolom deleted_at
 
       $table->foreign('id_menu')->references('id')->on('menu')->onDelete('cascade');
     });
 
     Schema::table('formulir_layanan', function (Blueprint $table) {
-      $table->softDeletes(); // Menambahkan kolom deleted_at
+      if (!Schema::hasColumn('formulir_layanan', 'deleted_at')) {
+        $table->softDeletes();
+      }
     });
 
-    Schema::table('menu', function (Blueprint $table) {
-      $table->softDeletes(); // Menambahkan kolom deleted_at
-    });
+    // 🚫 tidak perlu apa-apa untuk tabel `menu` karena sudah punya deleted_at
   }
 
   /**
@@ -38,11 +38,11 @@ return new class extends Migration
     Schema::dropIfExists('menu_bidang');
 
     Schema::table('formulir_layanan', function (Blueprint $table) {
-      $table->dropSoftDeletes(); // Menghapus kolom deleted_at
+      if (Schema::hasColumn('formulir_layanan', 'deleted_at')) {
+        $table->dropSoftDeletes();
+      }
     });
 
-    Schema::table('menu', function (Blueprint $table) {
-      $table->dropSoftDeletes(); // Menghapus kolom deleted_at
-    });
+    // 🚫 jangan dropSoftDeletes di menu, karena tidak ada add di up()
   }
 };

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Menu;
 use App\Models\Notifikasi;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class MenuServiceProvider extends ServiceProvider
 {
@@ -30,8 +31,10 @@ class MenuServiceProvider extends ServiceProvider
 
     $menuName = "Kirim Permintaan";
 
-    $menu = Menu::all(); // Assuming $menu is the collection of Menu objects
-
+    $menu = [];
+    if (Schema::hasTable('menu')) {
+      $menu = Menu::all();
+    }
 
     $newSubmenu = [];
 

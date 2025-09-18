@@ -371,11 +371,12 @@
                     @endif
                     <div class="bg-label-info text-center mb-3 pt-2 rounded-3">
                         <img class="img-fluid"
-                            src="  {{ $news->foto ? Storage::url($news->foto) : asset('assets/img/illustrations/card-ratings-illustration.png') }}"
+                            src="{{ $news?->foto ? Storage::url($news->foto) : asset('assets/img/illustrations/card-ratings-illustration.png') }}"
                             alt="Boy card image" width="130" />
+
                     </div>
-                    <h5 class="mb-2 pb-1">{{ $news->judul }}</h5>
-                    <p>{{ $news->deskripsi }}</p>
+                    <h5 class="mb-2 pb-1">{{ $news?->judul }}</h5>
+                    <p>{{ $news?->deskripsi }}</p>
                     <div class="row mb-3 g-3">
                         <div class="col-6">
                             <div class="d-flex">
@@ -384,7 +385,7 @@
                                             class="mdi mdi-calendar-blank mdi-24px"></i></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0 text-nowrap">{{ $news->tanggal }}</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $news?->tanggal }}</h6>
                                     <small>Tanggal</small>
                                 </div>
                             </div>
@@ -396,13 +397,13 @@
                                             class="mdi mdi-timer-outline mdi-24px"></i></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0 text-nowrap">{{ $news->durasi }}</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $news?->durasi }}</h6>
                                     <small>Durasi</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="{{ $news->link }}" class="btn btn-primary w-100">Gabung Webminar</a>
+                    <a href="{{ $news?->link }}" class="btn btn-primary w-100">Gabung Webminar</a>
                     @if (auth()->user()->roles[0]->name != 'User')
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editNews"
                             class="btn btn-danger w-100 mt-2 ">Edit</a>
